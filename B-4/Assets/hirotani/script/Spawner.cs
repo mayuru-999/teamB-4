@@ -13,6 +13,10 @@ public class Spawner : MonoBehaviour
     [Header("一度に生成する数")]
     public int spawnCount = 5; // ここで個数を指定
 
+
+    public Transform target;   // 回転させたいオブジェクト
+    public float speed = 100f; // 回転スピード
+
     private float timer;
 
     void Update()
@@ -27,6 +31,11 @@ public class Spawner : MonoBehaviour
                 SpawnTarget();
             }
             timer = 0;
+        }
+        if (target != null)
+        {
+            // 2DではZ軸（forward）を中心に回転
+            target.RotateAround(transform.position, Vector3.forward, speed * Time.deltaTime);
         }
     }
 
