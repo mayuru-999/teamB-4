@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363c528ab53793940ab645dfbf8f54d6, type: 3}
-  m_Name: skillData
-  m_EditorClassIdentifier: Assembly-CSharp::skillData
+  m_Name: SkillData
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
   id: 1
-  skillName: 
-  skillDescription: 
+  skillName: aa
+  skillDescription: aa
   effect:
     value: 0
