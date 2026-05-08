@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5239186599606320658}
   - component: {fileID: 455875560062634970}
   - component: {fileID: -7442127565019461890}
+  - component: {fileID: 444196425233882520}
   m_Layer: 0
   m_Name: Target1
   m_TagString: Target
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7497224336600706365}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.79, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8961848, w: -0.44368097}
+  m_LocalPosition: {x: 2.5708308, y: -0.2606473, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -142,3 +143,16 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 1
+--- !u!114 &444196425233882520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497224336600706365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4df0d046d77da4184c5e3dccd3c956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetHP
+  maxHP: 3
