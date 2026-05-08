@@ -2,40 +2,50 @@
 
 public class Spawner : MonoBehaviour
 {
+    [Header("生成設定")]
     public GameObject targetPrefab;
     public Transform player;
+
     public float spawnInterval = 2.0f;
 
-    [Header("生成範囲の設定")]
+    [Header("生成範囲")]
     public float minRadius = 2.0f;
     public float maxRadius = 10.0f;
 
-    [Header("一度に生成する数")]
-    public int spawnCount = 5; // ここで個数を指定
+    [Header("生成数")]
+    public int minSpawnCount = 5;
+    public int maxSpawnCount = 10;
 
-
-    public Transform target;   // 回転させたいオブジェクト
-    public float speed = 100f; // 回転スピード
+    [Header("回転設定")]
+    public Transform target;
+    public float speed = 100f;
 
     private float timer;
 
     void Update()
     {
         timer += Time.deltaTime;
+
         if (timer >= spawnInterval)
         {
-            // 5個から10個の間でランダムに生成
             int randomCount = Random.Range(5, 11);
+
             for (int i = 0; i < randomCount; i++)
             {
                 SpawnTarget();
             }
+
             timer = 0;
         }
-        if (target != null)
+
+        // プレイヤー中心で回転
+        if (target != null && player != null)
         {
-            // 2DではZ軸（forward）を中心に回転
-            target.RotateAround(transform.position, Vector3.forward, speed * Time.deltaTime);
+            target.RotateAround(
+                player.position,
+                Vector3.forward,
+                speed * Time.deltaTime
+            );
         }
     }
 
@@ -43,7 +53,6 @@ public class Spawner : MonoBehaviour
     {
         if (player == null) return;
 
-        // ランダムな角度と距離を計算
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
         float randomDistance = Random.Range(minRadius, maxRadius);
 
@@ -55,6 +64,18 @@ public class Spawner : MonoBehaviour
 
         spawnPosition += player.position;
 
-        Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
+        GameObject obj = Instantiate(
+            targetPrefab,
+            spawnPosition,
+            Quaternion.identity
+        );
+
+        // 生成したオブジェクトへ player を渡す
+        OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
+
+        if (orbit != null)
+        {
+            orbit.player = player;
+        }
     }
 }
