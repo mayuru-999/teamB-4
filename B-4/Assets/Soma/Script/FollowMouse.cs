@@ -3,13 +3,15 @@ using UnityEngine.InputSystem;
 
 public class FollowMouse : MonoBehaviour
 {
-    public float radius = 3.0f;
+    
+
+    public float radius = 1.0f;
 
     void Start()
     {
         // Spriteのサイズを爆発半径に合わせる
         // 本来のCircleの直径が1ユニットなので、半径×2をスケールに代入
-        transform.localScale = new Vector3(radius * 2, radius * 2, 1);
+        transform.localScale = new Vector3(radius , radius );
     }
 
     void Update()

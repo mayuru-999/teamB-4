@@ -1,44 +1,70 @@
+ï»¿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // V‚µ‚¢Input System‚ğg‚¤ê‡
+using UnityEngine.InputSystem;
 
 public class TargetClearer : MonoBehaviour
 {
-    public float explosionRadius = 3.0f; // Á‹‚·‚é”ÍˆÍ‚Ì”¼Œa
+    public int attackPower = 1;
+    public float explosionRadius = 1.0f;
+    public float attackInterval = 1.8f;
+
+    private float lastAttackTime = 0f;
 
     void Update()
     {
-        // ƒ}ƒEƒX¶ƒNƒŠƒbƒN”»’èiV‚µ‚¢Input System—pj
-        if (Pointer.current != null && Pointer.current.press.wasPressedThisFrame)
-        {
-            ClearArea();
-        }
-    }
+        if (Pointer.current == null || Camera.main == null) return;
 
-    void ClearArea()
-    {
-        // 1. ƒ}ƒEƒX‚ÌˆÊ’u‚ğƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
 
-        // 2. w’è‚µ‚½‰~‚Ì”ÍˆÍ“à‚É‚ ‚éu‚·‚×‚Ä‚ÌvƒRƒ‰ƒCƒ_[‚ğæ“¾
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(mousePos, explosionRadius);
 
-        // 3. Œ©‚Â‚©‚Á‚½ƒRƒ‰ƒCƒ_[‚ğ‡”Ô‚Éˆ—
+        HashSet<GameObject> currentTargets = new HashSet<GameObject>();
+
         foreach (Collider2D hit in hitColliders)
         {
-            // ƒ^ƒO‚ªTarget‚È‚çÁ‚·
             if (hit.CompareTag("Target"))
             {
-                Destroy(hit.gameObject);
+                currentTargets.Add(hit.gameObject);
             }
         }
 
-        Debug.Log(hitColliders.Length + " ŒÂ‚Ì‘ÎÛ‚ğ”ÍˆÍ“à‚ÅŒŸ’m‚µ‚Ü‚µ‚½");
+        //  ä¸€å®šé–“éš”æ”»æ’ƒ
+        if (currentTargets.Count > 0)
+        {
+            if (Time.time - lastAttackTime >= attackInterval)
+            {
+                Debug.Log("æ”»æ’ƒ");
+                Attack(currentTargets);
+                lastAttackTime = Time.time;
+            }
+        }
+        else
+        {
+            // æ•µãŒã„ãªã„ã¨ãã¯ã‚¿ã‚¤ãƒãƒ¼ãƒªã‚»ãƒƒãƒˆ
+            lastAttackTime = Time.time;
+        }
     }
 
-    // ”ÍˆÍ‚ğ‰Â‹‰»iScene‰æ–Ê‚ÅÂ‚¢‰~‚ª•\¦‚³‚ê‚Ü‚·j
+    // âœ… å¤–ã«å‡ºã™
+    void Attack(HashSet<GameObject> targets)
+    {
+        foreach (GameObject obj in targets)
+        {
+            TargetHP hp = obj.GetComponent<TargetHP>();
+            if (hp != null)
+            {
+                hp.TakeDamage(attackPower);
+            }
+        }
+
+        Debug.Log(targets.Count + " å€‹ã®Targetã«ãƒ€ãƒ¡ãƒ¼ã‚¸");
+    }
+
+    //  å¤–ã«å‡ºã™
     void OnDrawGizmos()
     {
-        if (Pointer.current == null) return;
+        if (Pointer.current == null || Camera.main == null) return;
+
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(mousePos, explosionRadius);
