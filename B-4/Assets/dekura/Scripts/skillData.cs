@@ -6,6 +6,7 @@ public class SkillEffect
     public int value;
 }
 
+//Scriptable Objects(スキルを入れるデータファイル)の作成
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : ScriptableObject
 {
