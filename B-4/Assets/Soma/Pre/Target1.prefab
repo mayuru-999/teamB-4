@@ -156,3 +156,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetHP
   maxHP: 3
+  scoreValue: 1
+  scoreManager: {fileID: 0}

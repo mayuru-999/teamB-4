@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/saitou/demotitle.unity
     guid: cc8c0cf444e85db4b812383b6b514e87
+  - enabled: 1
+    path: Assets/Soma/Sence/souma.sence.unity
+    guid: adb3db60c3eeb9e4c884d91917815f54
+  - enabled: 1
+    path: Assets/Soma/Sence/A.unity
+    guid: a99e96b6e85fd6742bea86a44254fe02
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

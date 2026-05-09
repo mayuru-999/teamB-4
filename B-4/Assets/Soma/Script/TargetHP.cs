@@ -5,19 +5,26 @@ public class TargetHP : MonoBehaviour
     public int maxHP = 3;
     private int currentHP;
 
+    public int scoreValue = 1;      // 倒したときのスコア
+    public ScoreManager scoreManager; // Inspectorでセット
+
     void Start()
     {
         currentHP = maxHP;
+
+        if (scoreManager == null)
+        {
+            scoreManager = FindObjectOfType<ScoreManager>();
+        }
     }
 
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
 
-        Debug.Log(gameObject.name + " 残りHP: " + currentHP);
-
         if (currentHP <= 0)
         {
+            scoreManager.AddScore(scoreValue); // ←ここでスコア加算
             Die();
         }
     }
