@@ -2,49 +2,39 @@ using UnityEngine;
 
 public class OrbitTarget : MonoBehaviour
 {
+    [Header("回転設定")]
     public Transform player;
     public float speed = 100f;
+   
 
-    void Update()
+    /*[Header("体力")]
+    public int maxHP = 3;
+
+    private int currentHP;
+    private float angle;
+    
+    void Start()
     {
+        // 初期体力
+        currentHP = maxHP;
+    }
+    */
+    void Update() {
         if (player != null)
-        {
-            transform.RotateAround(
-                player.position,
-                Vector3.forward,
-                speed * Time.deltaTime
-            );
-        }
+        { transform.RotateAround(player.position, Vector3.forward, speed * Time.deltaTime); }
     }
-   /* void SpawnTarget()
+    /*
+    public void TakeDamage(int damage)
     {
-        if (player == null) return;
+        currentHP -= damage;
 
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        float randomDistance = Random.Range(minRadius, maxRadius);
+        Debug.Log(gameObject.name + " HP : " + currentHP);
 
-        Vector3 spawnPosition = new Vector3(
-            Mathf.Cos(angle) * randomDistance,
-            Mathf.Sin(angle) * randomDistance,
-            0
-        );
-
-        spawnPosition += player.position;
-
-        GameObject obj = Instantiate(
-            targetPrefab,
-            spawnPosition,
-            Quaternion.identity
-        );
-
-        // 生成したオブジェクトへ player を渡す
-        OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
-
-        if (orbit != null)
+        if (currentHP <= 0)
         {
-            orbit.player = player;
+            Destroy(gameObject);
         }
     }
-   */
+    */
 }
 
