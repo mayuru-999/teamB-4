@@ -17,16 +17,16 @@ public class TextColor : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 30; i++)
             {
                 colorText.color = colorText.color - new Color32(0, 0, 0, 10);
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.03f);
             }
 
-            for (int k = 0; k < 20; k++)
+            for (int k = 0; k < 30; k++)
             {
                 colorText.color = colorText.color + new Color32(0, 0, 0, 10);
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
     }
