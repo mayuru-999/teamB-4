@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 807910162}
-  - component: {fileID: 807910161}
+  - component: {fileID: 807910164}
   - component: {fileID: 807910163}
   m_Layer: 0
   m_Name: GameObject
@@ -365,24 +365,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &807910161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 807910160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee365ef2f5a323a43af822c71fa9d45f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  targetPrefab: {fileID: 7497224336600706365, guid: 442ba0ed6989c4f46a7c4f3cd1cc708c, type: 3}
-  player: {fileID: 128041297}
-  spawnInterval: 0.3
-  minRadius: 1
-  maxRadius: 5
-  spawnCount: 5
 --- !u!4 &807910162
 Transform:
   m_ObjectHideFlags: 0
@@ -410,7 +392,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed4ad83f2d93f947b2248affc335714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetClicker
+  attackPower: 1
   explosionRadius: 1
+  attackInterval: 1.8
+--- !u!114 &807910164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807910160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6eac3b66069ed84e9297d7ced3e3e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawner1
+  targetPrefab: {fileID: 7497224336600706365, guid: 442ba0ed6989c4f46a7c4f3cd1cc708c, type: 3}
+  player: {fileID: 128041297}
+  spawnInterval: 0.3
+  minRadius: 1
+  maxRadius: 5
+  minSpawnCount: 5
+  maxSpawnCount: 10
+  target: {fileID: 0}
+  speed: 100
 --- !u!1 &954310728
 GameObject:
   m_ObjectHideFlags: 0
