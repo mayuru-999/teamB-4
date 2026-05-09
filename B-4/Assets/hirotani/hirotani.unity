@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 1301961281}
   - component: {fileID: 1301961280}
   - component: {fileID: 1301961279}
+  - component: {fileID: 1301961282}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -149,7 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed4ad83f2d93f947b2248affc335714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetClicker
+  attackPower: 1
   explosionRadius: 1
+  attackInterval: 1.8
 --- !u!114 &1301961280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +189,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1301961282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301961278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20c9af46b7750649a9a78fac4cb325b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::attak
+  attackVisual: {fileID: 0}
+  attackPower: 1
+  explosionRadius: 1
+  attackInterval: 1.8
 --- !u!1 &1550298891
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +481,7 @@ GameObject:
   - component: {fileID: 1572065943}
   - component: {fileID: 1572065942}
   - component: {fileID: 1572065941}
+  - component: {fileID: 1572065944}
   m_Layer: 0
   m_Name: RangeIndicator
   m_TagString: Untagged
@@ -556,6 +576,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1572065944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572065940}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20c9af46b7750649a9a78fac4cb325b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::attak
+  attackVisual: {fileID: 0}
+  attackPower: 1
+  explosionRadius: 1
+  attackInterval: 1.8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
