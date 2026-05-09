@@ -144,7 +144,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301961278}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed4ad83f2d93f947b2248affc335714, type: 3}
   m_Name: 
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301961278}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee365ef2f5a323a43af822c71fa9d45f, type: 3}
   m_Name: 
@@ -167,7 +167,8 @@ MonoBehaviour:
   spawnInterval: 0.3
   minRadius: 1
   maxRadius: 5
-  spawnCount: 5
+  minSpawnCount: 5
+  maxSpawnCount: 10
   target: {fileID: 8353450804118857997, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
   speed: 100
 --- !u!4 &1301961281
@@ -196,9 +197,10 @@ GameObject:
   - component: {fileID: 1550298893}
   - component: {fileID: 1550298892}
   - component: {fileID: 1550298894}
+  - component: {fileID: 1550298895}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,6 +292,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::burakku
   target: {fileID: 8353450804118857997, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
+  speed: 100
+--- !u!114 &1550298895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550298891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee365ef2f5a323a43af822c71fa9d45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawner
+  targetPrefab: {fileID: 3265467721359446812, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
+  player: {fileID: 1550298893}
+  spawnInterval: 2
+  minRadius: 2
+  maxRadius: 10
+  minSpawnCount: 5
+  maxSpawnCount: 10
+  target: {fileID: 0}
   speed: 100
 --- !u!1 &1570454864
 GameObject:
@@ -397,7 +420,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
