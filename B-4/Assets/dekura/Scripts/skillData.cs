@@ -1,8 +1,18 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+
 public class SkillEffect
 {
+    public enum Type
+    {
+        Attack,
+        Speed,
+        Range
+    }
+    public Type type;
     public int value;
 }
 
@@ -10,9 +20,12 @@ public class SkillEffect
 [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
 public class SkillData : ScriptableObject
 {
-    public int id;
     public string skillName;
     public string skillDescription;
+
+    public int needPoint;
+    public List <SkillData> needSkillData;
+    //public SkillData needSkillData;
 
     public SkillEffect effect;
 }

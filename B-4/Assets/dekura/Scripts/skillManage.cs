@@ -3,40 +3,76 @@ using System.Collections.Generic;
 
 public class SkillManage : MonoBehaviour
 {
-    //スキル情報(.asset)を入れるリスト
-    public List<SkillData> skills;
-
     //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
-
+    //のちに他からスキルポイントを取得する予定
+    public int skillPoint= 1000000;
 
     //スキル取得時の処理
     public void getSkill(SkillData skill)
     {
-        //既に開放済みならreturn
-        if (isUnlocked(skill))
-        {
-            Debug.Log("解放済みです。");
-            return;
-        }
-        //スキルIDを参照して解放できるかどうか確認
-        if (!unlockedSkills.Exists(skill => skill.id == (skill.id - 1))) 
+        //必要なスキルが解放されていないならreturn
+        if (!canUnlock(skill))
         {
             Debug.Log("まだ解放できません。");
             return;
         }
+        if(skillPoint< skill.needPoint)
+        {
+            Debug.Log("ポイントが足りません。");
+            return;
+        }
+
         Debug.Log("解放しました。");
         unlockedSkills.Add(skill);
+        skillPoint -= skill.needPoint;
     }
 
     //すでに開放済みか
     public bool isUnlocked(SkillData skill)
     {
-        if (unlockedSkills.Contains(skill))
+        if (unlockedSkills.Contains(skill)|| skill == null)
         {
             return true;
         }
         return false;
+    }
+
+    //解放可能かどうか
+    public bool canUnlock(SkillData skill)
+    {
+        if (skill.needSkillData.Count == 0)
+        {
+            return true;
+        }
+        foreach (SkillData needSkill in skill.needSkillData)
+        {
+            if (!isUnlocked(needSkill))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //同じtypeのスキルの効果量を合計して返す
+    public int getEffect(SkillEffect.Type type)
+    {
+        int effectValue = 0;
+        foreach (SkillData skill in unlockedSkills)
+        {
+            if (skill.effect.type == type)
+            {
+                effectValue += skill.effect.value;
+            }
+        }
+        Debug.Log($"{type}の効果量:{effectValue}");
+        return effectValue;
+    }
+
+    public void ResetUnlockedSkill()
+    {
+        unlockedSkills.Clear();
     }
 }
