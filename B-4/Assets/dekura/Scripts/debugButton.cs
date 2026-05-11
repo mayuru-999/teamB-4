@@ -1,0 +1,23 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class debugButton : MonoBehaviour
+{
+    private SkillManage skillManage;
+
+    void Start()
+    {
+        //マネージャの割り当て
+        //skillManage = FindObjectByType<SkillManage>(); <古いらしい
+        skillManage = FindAnyObjectByType<SkillManage>();
+    }
+    //クリック時の処理
+    public void OnClick()
+    {
+        Debug.Log($"Attackのvalueは{skillManage.getEffect(SkillEffect.Type.Attack)}");
+        Debug.Log($"Speedのvalueは{skillManage.getEffect(SkillEffect.Type.Speed)}");
+        Debug.Log($"Rangeのvalueは{skillManage.getEffect(SkillEffect.Type.Range)}");
+        Debug.Log($"所持中のコストは{skillManage.skillPoint}");
+    }
+}
