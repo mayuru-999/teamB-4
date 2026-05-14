@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/saitou/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/saitou/demotitle.unity
+    path: Assets/saitou/Scenes/TitleScene.unity
     guid: cc8c0cf444e85db4b812383b6b514e87
   - enabled: 1
     path: Assets/Soma/Sence/souma.sence.unity
