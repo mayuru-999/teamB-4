@@ -9,7 +9,7 @@ public class SceneChange : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // ƒV[ƒ“Ø‚è‘Ö‚¦
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("souma.sence");
         }
     }
 }
