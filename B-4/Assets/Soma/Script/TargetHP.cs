@@ -5,7 +5,7 @@ public class TargetHP : MonoBehaviour
     public int maxHP = 3;
     private int currentHP;
 
-    public int scoreValue = 1;      // 倒したときのスコア
+    public int skillPointValue = 1;      // 倒したときのスコア
     public ScoreManager scoreManager; // Inspectorでセット
 
     void Start()
@@ -24,7 +24,7 @@ public class TargetHP : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            scoreManager.AddScore(scoreValue); // ←ここでスコア加算
+            scoreManager.AddScore(skillPointValue); // ←ここでスコア加算
             Die();
         }
     }
