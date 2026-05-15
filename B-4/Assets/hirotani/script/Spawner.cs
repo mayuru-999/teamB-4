@@ -3,7 +3,8 @@
 public class Spawner : MonoBehaviour
 {
     [Header("生成設定")]
-    public GameObject targetPrefab;
+    public GameObject[] targetPrefabs;
+
     public Transform player;
 
     public float spawnInterval = 2.0f;
@@ -28,7 +29,10 @@ public class Spawner : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            int randomCount = Random.Range(5, 11);
+            int randomCount =
+                Random.Range(
+                    minSpawnCount,
+                    maxSpawnCount + 1);
 
             for (int i = 0; i < randomCount; i++)
             {
@@ -38,8 +42,9 @@ public class Spawner : MonoBehaviour
             timer = 0;
         }
 
-        // プレイヤー中心で回転
-        if (target != null && player != null)
+        // 回転
+        if (target != null &&
+            player != null)
         {
             target.RotateAround(
                 player.position,
@@ -53,25 +58,43 @@ public class Spawner : MonoBehaviour
     {
         if (player == null) return;
 
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        float randomDistance = Random.Range(minRadius, maxRadius);
+        float angle =
+            Random.Range(0f, 360f)
+            * Mathf.Deg2Rad;
 
-        Vector3 spawnPosition = new Vector3(
-            Mathf.Cos(angle) * randomDistance,
-            Mathf.Sin(angle) * randomDistance,
-            0
-        );
+        float randomDistance =
+            Random.Range(
+                minRadius,
+                maxRadius);
+
+        Vector3 spawnPosition =
+            new Vector3(
+                Mathf.Cos(angle) * randomDistance,
+                Mathf.Sin(angle) * randomDistance,
+                0
+            );
 
         spawnPosition += player.position;
 
-        GameObject obj = Instantiate(
-            targetPrefab,
-            spawnPosition,
-            Quaternion.identity
-        );
+        // ランダムPrefab選択
+        int randomIndex =
+            Random.Range(
+                0,
+                targetPrefabs.Length);
 
-        // 生成したオブジェクトへ player を渡す
-        OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
+        GameObject randomPrefab =
+            targetPrefabs[randomIndex];
+
+        GameObject obj =
+            Instantiate(
+                randomPrefab,
+                spawnPosition,
+                Quaternion.identity
+            );
+
+        // player渡す
+        OrbitTarget orbit =
+            obj.GetComponent<OrbitTarget>();
 
         if (orbit != null)
         {

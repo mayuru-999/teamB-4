@@ -90,8 +90,8 @@ public class Attack : MonoBehaviour
 
         foreach (GameObject obj in targets)
         {
-            TargetHP hp =
-                obj.GetComponent<TargetHP>();
+            TargettHP hp =
+                obj.GetComponent<TargettHP>();
 
             if (hp != null)
             {
