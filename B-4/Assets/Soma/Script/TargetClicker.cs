@@ -15,6 +15,7 @@ public class TargetClearer : MonoBehaviour
     {
         if (Pointer.current == null || Camera.main == null) return;
 
+        // マウス座標取得
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
 
         // 位置追従
@@ -23,6 +24,7 @@ public class TargetClearer : MonoBehaviour
             attackVisual.position = mousePos;
         }
 
+        // 範囲内の当たり取得
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(mousePos, explosionRadius);
 
         HashSet<GameObject> currentTargets = new HashSet<GameObject>();
@@ -35,40 +37,27 @@ public class TargetClearer : MonoBehaviour
             }
         }
 
-        // 進行度（0 → 1）
+        // チャージ進行度（0〜1）
         float progress = (Time.time - lastAttackTime) / attackInterval;
         progress = Mathf.Clamp01(progress);
 
-        // スケール更新
+        // 見た目スケール更新
         if (attackVisual != null)
         {
             float scale = explosionRadius * 2f * progress;
             attackVisual.localScale = new Vector3(scale, scale, 1f);
         }
 
-        // 攻撃
-        if (currentTargets.Count > 0)
+        // 時間で必ず攻撃（ターゲットがいなくても発動）
+        if (progress >= 1f)
         {
-            if (progress >= 1f)
-            {
-                Debug.Log("攻撃");
-                Attack(currentTargets);
-                lastAttackTime = Time.time;
-            }
-        }
-        else
-        {
+            Debug.Log("攻撃");
+            Attack(currentTargets);
             lastAttackTime = Time.time;
-
-            // リセット（0に戻す）
-            if (attackVisual != null)
-            {
-                attackVisual.localScale = Vector3.zero;
-            }
         }
     }
 
-    //  外に出す
+    // ダメージ処理
     void Attack(HashSet<GameObject> targets)
     {
         foreach (GameObject obj in targets)
@@ -83,12 +72,13 @@ public class TargetClearer : MonoBehaviour
         Debug.Log(targets.Count + " 個のTargetにダメージ");
     }
 
-    //  外に出す
+    // ギズモ表示
     void OnDrawGizmos()
     {
         if (Pointer.current == null || Camera.main == null) return;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
+
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(mousePos, explosionRadius);
     }

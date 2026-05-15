@@ -34,7 +34,7 @@ public class SenceChang : MonoBehaviour
         {
             remainingTime = 0;
             isFinished = true;
-            SceneManager.LoadScene("A");
+            SceneManager.LoadScene("demo");
         }
 
         // •\¦XV
