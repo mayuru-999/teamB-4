@@ -3,7 +3,7 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int score = 0;
+    public int skillPoint = 0;
     public TMP_Text scoreText;
 
     void Start()
@@ -18,12 +18,12 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int value)
     {
-        score += value;
+        skillPoint += value;
         UpdateUI();
     }
 
     void UpdateUI()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "skillPoint: " + skillPoint;
     }
 }
