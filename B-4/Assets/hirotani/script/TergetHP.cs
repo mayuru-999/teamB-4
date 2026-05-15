@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class TargettHP : MonoBehaviour
 {
+    [Header("HP")]
     public int maxHP = 3;
 
     private int currentHP;
+
+    [Header("ドロップアイテム")]
+    public GameObject dropItemPrefab;
 
     void Start()
     {
@@ -16,11 +20,26 @@ public class TargettHP : MonoBehaviour
         currentHP -= damage;
 
         Debug.Log(gameObject.name + " HP : " + currentHP);
-        
 
         if (currentHP <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    void Die()
+    {
+        // アイテムドロップ
+        if (dropItemPrefab != null)
+        {
+            Instantiate(
+                dropItemPrefab,
+                transform.position,
+                Quaternion.identity
+            );
+        }
+
+        // 自分を削除
+        Destroy(gameObject);
     }
 }
