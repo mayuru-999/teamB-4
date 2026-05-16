@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1631589813043581755}
   - component: {fileID: -3396738109430364363}
   - component: {fileID: -8596593957651803818}
+  - component: {fileID: 4802450942218838911}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Target
@@ -161,10 +162,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3265467721359446812}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d5f54b58acbe5046b05150ff002b13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargettHP
-  maxHP: 3
+  dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+--- !u!114 &4802450942218838911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265467721359446812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TergetHP1
+  hp: 3
   dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}

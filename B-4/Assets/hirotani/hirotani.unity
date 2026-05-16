@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1301961281}
-  - component: {fileID: 1301961280}
   - component: {fileID: 1301961279}
   - component: {fileID: 1301961282}
   m_Layer: 0
@@ -154,27 +153,6 @@ MonoBehaviour:
   attackPower: 1
   explosionRadius: 1
   attackInterval: 1.8
---- !u!114 &1301961280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301961278}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee365ef2f5a323a43af822c71fa9d45f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  targetPrefabs: []
-  player: {fileID: 1550298893}
-  spawnInterval: 0.3
-  minRadius: 1
-  maxRadius: 5
-  minSpawnCount: 5
-  maxSpawnCount: 10
-  target: {fileID: 8353450804118857997, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
-  speed: 100
 --- !u!4 &1301961281
 Transform:
   m_ObjectHideFlags: 0
@@ -216,7 +194,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1550298893}
   - component: {fileID: 1550298892}
-  - component: {fileID: 1550298894}
   - component: {fileID: 1550298895}
   m_Layer: 0
   m_Name: Player
@@ -299,20 +276,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1550298894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550298891}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b9865d754aea2841a85be145c139961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::burakku
-  target: {fileID: 8353450804118857997, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
-  speed: 100
 --- !u!114 &1550298895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +448,6 @@ GameObject:
   - component: {fileID: 1572065943}
   - component: {fileID: 1572065942}
   - component: {fileID: 1572065941}
-  - component: {fileID: 1572065944}
   m_Layer: 0
   m_Name: RangeIndicator
   m_TagString: Untagged
@@ -580,22 +542,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1572065944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572065940}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c20c9af46b7750649a9a78fac4cb325b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::attak
-  attackVisual: {fileID: 0}
-  attackPower: 1
-  explosionRadius: 1
-  attackInterval: 1.8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

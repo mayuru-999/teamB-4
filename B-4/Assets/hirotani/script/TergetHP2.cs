@@ -1,21 +1,20 @@
 using UnityEngine;
 
-public class TargettHP : MonoBehaviour
+public class TergetHP2 : MonoBehaviour
 {
-    /*
     [Header("HP")]
     public int maxHP = 3;
 
     private int currentHP;
-    */
+
     [Header("ドロップアイテム")]
     public GameObject dropItemPrefab;
-    /*
+
     void Start()
     {
         currentHP = maxHP;
     }
-    
+
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
@@ -27,7 +26,7 @@ public class TargettHP : MonoBehaviour
             Die();
         }
     }
-    */
+
     void Die()
     {
         // アイテムドロップ
