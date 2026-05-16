@@ -66,9 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c23a7a8690f4142b294f44f04d769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseAttackController
-  player: {fileID: 1353745103487247794, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
+  player: {fileID: 4507022024376777965, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
   attackRangeVisual: {fileID: 0}
   cooldownVisual: {fileID: 0}
-  attackRadius: 0.5
-  attackInterval: 1.8
-  attackPower: 1
