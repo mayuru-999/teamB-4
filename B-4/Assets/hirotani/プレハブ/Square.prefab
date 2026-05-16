@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5f54b58acbe5046b05150ff002b13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargettHP
-  maxHP: 2
+  maxHP: 6
   dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
 --- !u!61 &-5323788343675855040
 BoxCollider2D:
