@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 52068229371041681}
   - component: {fileID: 986387638528863226}
   - component: {fileID: 7487298074833746359}
-  - component: {fileID: 24750763358751786}
   - component: {fileID: -5323788343675855040}
+  - component: {fileID: -7219290049649845346}
+  - component: {fileID: 5572010011998886095}
   m_Layer: 0
   m_Name: Square
   m_TagString: Target
@@ -108,20 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OrbitTarget
   player: {fileID: 0}
   speed: 35
---- !u!114 &24750763358751786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4408318888051034521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d5f54b58acbe5046b05150ff002b13b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargettHP
-  maxHP: 2
-  dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
 --- !u!61 &-5323788343675855040
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,3 +155,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7219290049649845346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408318888051034521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TergetHP1
+  hp: 6
+  dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+--- !u!114 &5572010011998886095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4408318888051034521}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5f54b58acbe5046b05150ff002b13b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargettHP
+  dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
