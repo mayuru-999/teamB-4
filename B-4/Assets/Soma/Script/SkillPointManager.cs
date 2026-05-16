@@ -1,10 +1,16 @@
 using UnityEngine;
 using TMPro;
 
-public class ScoreManager : MonoBehaviour
+public class SkillPointManager : MonoBehaviour
 {
     public int skillPoint = 0;
     public TMP_Text scoreText;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
 
     void Start()
     {
