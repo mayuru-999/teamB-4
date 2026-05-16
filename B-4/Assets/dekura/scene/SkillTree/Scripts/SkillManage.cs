@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class SkillManage : MonoBehaviour
 {
+    //void Awake()
+    //{
+    //    DontDestroyOnLoad(this.gameObject);
+    //}
     //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
@@ -57,9 +61,9 @@ public class SkillManage : MonoBehaviour
     }
 
     //同じtypeのスキルの効果量を合計して返す
-    public int getEffect(SkillEffect.Type type)
+    public float getEffect(SkillEffect.Type type)
     {
-        int effectValue = 0;
+        float effectValue = 0;
         foreach (SkillData skill in unlockedSkills)
         {
             if (skill.effect.type == type)

@@ -13,7 +13,7 @@ public class SkillEffect
         Range
     }
     public Type type;
-    public int value;
+    public float value;
 }
 
 //Scriptable Objects(スキルを入れるデータファイル)の作成
