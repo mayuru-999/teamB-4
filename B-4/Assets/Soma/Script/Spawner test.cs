@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class Spawner1 : MonoBehaviour
 {
-    [Header("¶¬Ý’è")]
+    [Header("ç”Ÿæˆè¨­å®š")]
     public GameObject targetPrefab;
     public Transform player;
 
     public float spawnInterval = 2.0f;
 
-    [Header("¶¬”ÍˆÍ")]
+    [Header("ç”Ÿæˆç¯„å›²")]
     public float minRadius = 2.0f;
     public float maxRadius = 10.0f;
 
-    [Header("¶¬”")]
+    [Header("ç”Ÿæˆæ•°")]
     public int minSpawnCount = 5;
     public int maxSpawnCount = 10;
 
-    [Header("‰ñ“]Ý’è")]
+    [Header("å›žè»¢è¨­å®š")]
     public Transform target;
     public float speed = 100f;
 
@@ -28,7 +28,7 @@ public class Spawner1 : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            int randomCount = Random.Range(5, 11);
+            int randomCount = Random.Range(minSpawnCount, maxSpawnCount + 1);
 
             for (int i = 0; i < randomCount; i++)
             {
@@ -38,7 +38,7 @@ public class Spawner1 : MonoBehaviour
             timer = 0;
         }
 
-        // ƒvƒŒƒCƒ„[’†S‚Å‰ñ“]
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ä¸­å¿ƒã«å›žè»¢
         if (target != null && player != null)
         {
             target.RotateAround(
@@ -70,9 +70,8 @@ public class Spawner1 : MonoBehaviour
             Quaternion.identity
         );
 
-        // ¶¬‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ö player ‚ð“n‚·
+        // ç”Ÿæˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã« player ã‚’æ¸¡ã™
         OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
-
         if (orbit != null)
         {
             orbit.player = player;
