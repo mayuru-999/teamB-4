@@ -124,6 +124,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5629463712442305531, guid: def1d45a809f74b4db4e06e35b47eb28, type: 3}
   m_PrefabInstance: {fileID: 8138398080449312644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &131506507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.35206
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.64715
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714860053683948339, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943921613507984488, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+      propertyPath: m_Name
+      value: Spawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3310384469903697736, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 56519e6b56f9321488e378183c8e29cb, type: 3}
 --- !u!1 &507375787
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +636,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 128041297}
+    - target: {fileID: 4515129985372821356, guid: f82667b89226e7b428865a2692722fa4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6071098183443542680, guid: f82667b89226e7b428865a2692722fa4, type: 3}
       propertyPath: cooldownVisual
       value: 
@@ -1053,7 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 576274837}
     - target: {fileID: 2303526980372913229, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: m_Name
-      value: ScoerManager
+      value: SkillPointManager
       objectReference: {fileID: 0}
     - target: {fileID: 7245767828291183160, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1108,6 +1170,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3113782590146390730, guid: def1d45a809f74b4db4e06e35b47eb28, type: 3}
+      propertyPath: baseAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113782590146390730, guid: def1d45a809f74b4db4e06e35b47eb28, type: 3}
+      propertyPath: skillManage
+      value: 
+      objectReference: {fileID: 681106462}
     - target: {fileID: 5629463712442305531, guid: def1d45a809f74b4db4e06e35b47eb28, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.23634994
@@ -1182,3 +1252,4 @@ SceneRoots:
   - {fileID: 891917380}
   - {fileID: 681106461}
   - {fileID: 571364693}
+  - {fileID: 131506507}
