@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public class SkillManage : MonoBehaviour
 {
-    //void Awake()
-    //{
-    //    DontDestroyOnLoad(this.gameObject);
-    //}
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
@@ -71,7 +72,7 @@ public class SkillManage : MonoBehaviour
                 effectValue += skill.effect.value;
             }
         }
-        Debug.Log($"{type}の効果量:{effectValue}");
+        //Debug.Log($"{type}の効果量:{effectValue}");
         return effectValue;
     }
 

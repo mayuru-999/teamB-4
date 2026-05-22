@@ -15,8 +15,7 @@ MonoBehaviour:
   skillName: "\u7BC4\u56F2\u2160"
   skillDescription: "\u653B\u6483\u7BC4\u56F2+10"
   needPoint: 0
-  needSkillData:
-  - {fileID: 11400000, guid: f48da4d4e98378842aa2acd40361e29c, type: 2}
+  needSkillData: []
   effect:
     type: 2
-    value: 0
+    value: 10

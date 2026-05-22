@@ -19,6 +19,12 @@ public class SkillButton : MonoBehaviour
     {
         //component‚Ì•ÏX
         //‰ğ•úÏ‚İ‚È‚ç
+        if (skill == null)
+        {
+            GetComponent<Button>().enabled = true;
+            GetComponent<Image>().color = Color.black;
+            return;
+        }
         if (skillManage.isUnlocked(skill))
         {
             GetComponent<Button>().enabled = false;

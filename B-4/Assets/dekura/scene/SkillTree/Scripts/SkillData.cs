@@ -8,9 +8,12 @@ public class SkillEffect
 {
     public enum Type
     {
-        Attack,
-        Speed,
-        Range
+        Attack,         //UŒ‚—Í
+        Speed,          //UŒ‚‘¬“x
+        Range,          //¡Œ‚”ÍˆÍ
+        SpecialAttack,  //ƒXƒLƒ‹UŒ‚—Í
+        PlaneVolume,    //˜f¯—Ê‘‰Á
+        PlaneSize       //˜f¯ƒTƒCƒY‘‰Á
     }
     public Type type;
     public float value;
