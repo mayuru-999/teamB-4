@@ -17,7 +17,6 @@ MonoBehaviour:
   needPoint: 100
   needSkillData:
   - {fileID: 11400000, guid: ba30467d6d0689c47bd668f68a8b4d5f, type: 2}
-  - {fileID: 11400000, guid: 20603199c3b745a40a8bb31099952531, type: 2}
   effect:
     type: 0
     value: 30

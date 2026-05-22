@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363c528ab53793940ab645dfbf8f54d6, type: 3}
-  m_Name: attack_lv2
+  m_Name: range_lv6
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillName: "\u653B\u6483\u2161"
-  skillDescription: "\u653B\u6483\u529B+10"
+  skillName: "\u7BC4\u56F2\u2161"
+  skillDescription: "\u653B\u6483\u7BC4\u56F2+10"
   needPoint: 0
   needSkillData:
-  - {fileID: 11400000, guid: f48da4d4e98378842aa2acd40361e29c, type: 2}
+  - {fileID: 11400000, guid: 908d9838de5a4dd46844fce0ef3308fb, type: 2}
   effect:
-    type: 0
-    value: 10
+    type: 2
+    value: 100

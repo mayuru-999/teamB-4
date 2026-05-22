@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class debugButton : MonoBehaviour
 {
@@ -19,5 +20,13 @@ public class debugButton : MonoBehaviour
         Debug.Log($"Speed‚Ìvalue‚Í{skillManage.getEffect(SkillEffect.Type.Speed)}");
         Debug.Log($"Range‚Ìvalue‚Í{skillManage.getEffect(SkillEffect.Type.Range)}");
         Debug.Log($"Š’†‚ÌƒRƒXƒg‚Í{skillManage.skillPoint}");
+    }
+    public void MainScene()
+    {
+        SceneManager.LoadScene("souma.sence");
+    }
+    public void ResetClick()
+    {
+        skillManage.ResetUnlockedSkill();
     }
 }
