@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/saitou/Scenes/ResultScene.unity
     guid: 285ab0db131f5a040bf9bd71af8d6826
   - enabled: 1
-    path: Assets/dekura/scene/demo.unity
+    path: Assets/dekura/scene/SkillTree/SkillTree.unity
     guid: aa163a4a645245a45b0c35404ca67bc3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
