@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
                 + skillManage.getEffect(SkillEffect.Type.Attack);
         }
     }
-
+    //攻撃インターバル
     public float AttackInterval
     {
         get
@@ -35,13 +35,19 @@ public class Player : MonoBehaviour
 
             if (skillManage != null)
             {
-                interval -= skillManage.getEffect(SkillEffect.Type.Speed);
+                float percent = Mathf.Clamp(
+                    skillManage.getEffect(SkillEffect.Type.Speed),
+                    0f,
+                    0.95f
+                );
+
+                interval *= (1 - percent);
             }
 
-            // 最低値制限（バグ防止）
             return Mathf.Max(interval, 0.05f);
         }
     }
+
 
 
     // 攻撃範囲
@@ -51,8 +57,11 @@ public class Player : MonoBehaviour
         {
             if (skillManage == null) return baseAttackRange;
 
-            return baseAttackRange
-                + skillManage.getEffect(SkillEffect.Type.Range);
+            float percent =
+                skillManage.getEffect(SkillEffect.Type.Range);
+
+            return baseAttackRange * (1 + percent);
         }
     }
+
 }
