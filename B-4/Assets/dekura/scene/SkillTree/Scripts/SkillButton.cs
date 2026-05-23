@@ -6,13 +6,9 @@ public class SkillButton : MonoBehaviour
 {
     //割り当てたスキル(.asset)
     public SkillData skill;
-    private SkillManage skillManage;
 
-    void Awake()
+    void Start()
     {
-        //マネージャの割り当て
-        //skillManage = FindObjectByType<SkillManage>(); <古いらしい
-        skillManage = FindAnyObjectByType<SkillManage>();
     }
 
     void Update()
@@ -25,13 +21,13 @@ public class SkillButton : MonoBehaviour
             GetComponent<Image>().color = Color.black;
             return;
         }
-        if (skillManage.isUnlocked(skill))
+        if (SkillManage.Instance.isUnlocked(skill))
         {
             GetComponent<Button>().enabled = false;
             GetComponent<Image>().color = Color.white;
         }
         //解放可能なら
-        else if (skillManage.canUnlock(skill))
+        else if (SkillManage.Instance.canUnlock(skill))
         {
             GetComponent<Button>().enabled = true;
             GetComponent<Image>().color = Color.orange;
@@ -48,6 +44,6 @@ public class SkillButton : MonoBehaviour
     public void OnClick()
     {
         //マネージャ側で処理
-        skillManage.getSkill(skill);
+        SkillManage.Instance.getSkill(skill);
     }
 }

@@ -6,8 +6,16 @@ public class SkillPointManager : MonoBehaviour
     public int skillPoint = 0;
     public TMP_Text scoreText;
 
+    public static SkillPointManager Instance { get; private set; }
+
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 

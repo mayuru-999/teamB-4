@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public SkillManage skillManage;
 
     [Header("Base Stats")]
     public float baseAttack = 1f;
@@ -12,7 +11,6 @@ public class Player : MonoBehaviour
    
     void Start()
     {
-        skillManage = FindObjectOfType<SkillManage>();
     }
 
     // 攻撃力
@@ -20,10 +18,10 @@ public class Player : MonoBehaviour
     {
         get
         {
-            if (skillManage == null) return baseAttack;
+            if (SkillManage.Instance == null) return baseAttack;
 
             return baseAttack
-                + skillManage.getEffect(SkillEffect.Type.Attack);
+                + SkillManage.Instance.getEffect(SkillEffect.Type.Attack);
         }
     }
     //攻撃インターバル
@@ -33,10 +31,10 @@ public class Player : MonoBehaviour
         {
             float interval = baseAttackInterval;
 
-            if (skillManage != null)
+            if (SkillManage.Instance != null)
             {
                 float percent = Mathf.Clamp(
-                    skillManage.getEffect(SkillEffect.Type.Speed),
+                    SkillManage.Instance.getEffect(SkillEffect.Type.Speed)*0.01f,
                     0f,
                     0.95f
                 );
@@ -55,10 +53,10 @@ public class Player : MonoBehaviour
     {
         get
         {
-            if (skillManage == null) return baseAttackRange;
+            if (SkillManage.Instance == null) return baseAttackRange;
 
             float percent =
-                skillManage.getEffect(SkillEffect.Type.Range);
+                SkillManage.Instance.getEffect(SkillEffect.Type.Range) * 0.01f ;
 
             return baseAttackRange * (1 + percent);
         }
