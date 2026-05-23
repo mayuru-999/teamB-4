@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Soma/Sence/souma.sence.unity
     guid: adb3db60c3eeb9e4c884d91917815f54
-  - enabled: 1
+  - enabled: 0
     path: Assets/Soma/Sence/A.unity
     guid: a99e96b6e85fd6742bea86a44254fe02
   - enabled: 1
@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/dekura/scene/SkillTree/SkillTree.unity
     guid: aa163a4a645245a45b0c35404ca67bc3
+  - enabled: 1
+    path: Assets/saitou/Scenes/Result test.unity
+    guid: bebf538345fce6348afc8c44df03c8bf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
