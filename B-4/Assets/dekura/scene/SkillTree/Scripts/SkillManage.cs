@@ -3,16 +3,22 @@ using System.Collections.Generic;
 
 public class SkillManage : MonoBehaviour
 {
-    void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
+    public static SkillManage Instance { get; private set; }
 
     //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
-    //のちに他からスキルポイントを取得する予定
-    public int skillPoint= 1000000;
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     //スキル取得時の処理
     public void getSkill(SkillData skill)
@@ -23,7 +29,7 @@ public class SkillManage : MonoBehaviour
             Debug.Log("まだ解放できません。");
             return;
         }
-        if(skillPoint< skill.needPoint)
+        if (SkillPointManager.Instance.skillPoint < skill.needPoint)
         {
             Debug.Log("ポイントが足りません。");
             return;
@@ -31,13 +37,13 @@ public class SkillManage : MonoBehaviour
 
         Debug.Log("解放しました。");
         unlockedSkills.Add(skill);
-        skillPoint -= skill.needPoint;
+        SkillPointManager.Instance.skillPoint -= skill.needPoint;
     }
 
     //すでに開放済みか
     public bool isUnlocked(SkillData skill)
     {
-        if (unlockedSkills.Contains(skill)|| skill == null)
+        if (unlockedSkills.Contains(skill) || skill == null)
         {
             return true;
         }

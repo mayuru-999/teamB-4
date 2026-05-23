@@ -232,7 +232,7 @@ PrefabInstance:
     - target: {fileID: 4507022024376777965, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
       propertyPath: skillManage
       value: 
-      objectReference: {fileID: 681106462}
+      objectReference: {fileID: 0}
     - target: {fileID: 4507022024376777965, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
       propertyPath: baseAttackInterval
       value: 1.8
@@ -595,51 +595,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 576274834}
   m_CullTransparentMesh: 1
---- !u!1 &681106460
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 681106461}
-  - component: {fileID: 681106462}
-  m_Layer: 0
-  m_Name: SkillManage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &681106461
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681106460}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.17675, y: -3.48136, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &681106462
+--- !u!114 &603524689 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4507022024376777965, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
+  m_PrefabInstance: {fileID: 394428968}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681106460}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2092fb62402ca440813c8d99259f5bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c519c076da19c34bac46a76f2f5cdf6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillManage
-  skillPoint: 1000000
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!1001 &891917380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -700,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6071098183443542680, guid: f82667b89226e7b428865a2692722fa4, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 603524689}
     - target: {fileID: 6071098183443542680, guid: f82667b89226e7b428865a2692722fa4, type: 3}
       propertyPath: cooldownVisual
       value: 
@@ -1053,7 +1023,7 @@ PrefabInstance:
       objectReference: {fileID: 1101398237}
     - target: {fileID: 2848450939546133450, guid: 726d9faf5d4e7814383816529940a5b9, type: 3}
       propertyPath: changeTime
-      value: 120
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5133607979139994034, guid: 726d9faf5d4e7814383816529940a5b9, type: 3}
       propertyPath: m_Name
@@ -1248,7 +1218,6 @@ SceneRoots:
   - {fileID: 1707986780}
   - {fileID: 7530574840625689192}
   - {fileID: 891917380}
-  - {fileID: 681106461}
   - {fileID: 571364693}
   - {fileID: 3728306531475030372}
   - {fileID: 131506507}
