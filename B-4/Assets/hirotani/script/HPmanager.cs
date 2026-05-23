@@ -1,13 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class HPmanager : MonoBehaviour
 {
     public int hp = 100;
-
     private int currentHP;
 
-    [Header("ƒhƒƒbƒvƒAƒCƒeƒ€")]
-    public GameObject dropItemPrefab;
+    [Header("ãƒ‰ãƒ­ãƒƒãƒ—ã‚¢ã‚¤ãƒ†ãƒ ")]
+    public DropItemData[] dropItems;
 
     void Start()
     {
@@ -28,13 +27,19 @@ public class HPmanager : MonoBehaviour
 
     void Die()
     {
-        if (dropItemPrefab != null)
+        foreach (var item in dropItems)
         {
-            Instantiate(
-                dropItemPrefab,
-                transform.position,
-                Quaternion.identity
-            );
+            if (item != null && item.prefab != null)
+            {
+                for (int i = 0; i < item.count; i++)
+                {
+                    Instantiate(
+                        item.prefab,
+                        transform.position,
+                        Quaternion.identity
+                    );
+                }
+            }
         }
 
         Destroy(gameObject);

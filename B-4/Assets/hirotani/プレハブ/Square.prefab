@@ -109,20 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OrbitTarget
   player: {fileID: 0}
   speed: 35
---- !u!114 &24750763358751786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4408318888051034521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d5f54b58acbe5046b05150ff002b13b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargettHP
-  maxHP: 6
-  dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
 --- !u!61 &-5323788343675855040
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,8 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TergetHP1
-  hp: 6
-  dropItemPrefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+  hp: 1
+  dropItems:
+  - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+    count: 2
 --- !u!114 &5572010011998886095
 MonoBehaviour:
   m_ObjectHideFlags: 0

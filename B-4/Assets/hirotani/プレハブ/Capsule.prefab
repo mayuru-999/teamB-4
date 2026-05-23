@@ -104,4 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3691eb563d3c44682af2d3bcd22122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItem
-  moveSpeed: 20
+  moveSpeed: 15
