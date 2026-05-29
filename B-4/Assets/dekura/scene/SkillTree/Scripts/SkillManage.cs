@@ -8,6 +8,13 @@ public class SkillManage : MonoBehaviour
     //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
+    private Vector3[] PlaneSizeLv = new Vector3[]
+    {
+        new Vector3 (0.0f, 0.0f, 0.0f),
+        new Vector3 (0.0f, 0.0f, 0.0f),
+        new Vector3 (0.0f, 0.0f, 0.0f),
+    };
+
     void Awake()
     {
         if (Instance != null)
@@ -71,6 +78,19 @@ public class SkillManage : MonoBehaviour
     public float getEffect(SkillEffect.Type type)
     {
         float effectValue = 0;
+        if (type == SkillEffect.Type.PlaneSize)
+        {
+            effectValue = 1;
+            foreach (SkillData skill in unlockedSkills)
+            {
+                if (skill.effect.type == SkillEffect.Type.PlaneSize)
+                {
+                    effectValue = Mathf.Max(skill.effect.value, effectValue);
+                }
+            }
+            return 0;
+        }
+
         foreach (SkillData skill in unlockedSkills)
         {
             if (skill.effect.type == type)
