@@ -134,6 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3214164234558818518}
   - component: {fileID: 4657055714151362400}
+  - component: {fileID: 4598161527334962832}
   m_Layer: 0
   m_Name: cooldown
   m_TagString: Untagged
@@ -215,3 +216,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!222 &4598161527334962832
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387479284988399094}
+  m_CullTransparentMesh: 1
