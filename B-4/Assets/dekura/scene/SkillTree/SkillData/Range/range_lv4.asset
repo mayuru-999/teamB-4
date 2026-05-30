@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363c528ab53793940ab645dfbf8f54d6, type: 3}
   m_Name: range_lv4
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillName: "\u7BC4\u56F2\u2161"
-  skillDescription: "\u653B\u6483\u7BC4\u56F2+10"
+  skillName: "\u7BC4\u56F2\u2163"
+  skillDescription: "\u653B\u6483\u7BC4\u56F2+10%"
   needPoint: 0
   needSkillData:
   - {fileID: 11400000, guid: 3d1adcb5488c9fb42bc1a1baa6d5e685, type: 2}
   effect:
     type: 2
-    value: 50
+    value: 10
