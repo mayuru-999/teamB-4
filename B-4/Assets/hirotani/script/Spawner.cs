@@ -81,7 +81,15 @@ public class Spawner : MonoBehaviour
                 GameObject randomPrefab = targetPrefabs[randomIndex];
 
                 GameObject obj =
-                    Instantiate(randomPrefab, spawnPosition, Quaternion.identity);
+                Instantiate( randomPrefab, spawnPosition, Quaternion.identity
+                );
+
+                HPmanager hp = obj.GetComponent<HPmanager>();
+
+                if (hp != null)
+                {
+                    hp.isSpecial = Random.value < 0.1f;
+                }
 
                 // リストに追加
                 spawnedObjects.Add(obj);

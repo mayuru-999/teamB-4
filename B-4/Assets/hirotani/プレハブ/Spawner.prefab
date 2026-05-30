@@ -44,12 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee365ef2f5a323a43af822c71fa9d45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  targetPrefabs: []
+  targetPrefabs:
+  - {fileID: 3265467721359446812, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
+  - {fileID: 4408318888051034521, guid: 9d5c91ed98724294e951581143ed88a0, type: 3}
+  - {fileID: 2501827109323866006, guid: d4b520e559b84f34687513ae990d7b5f, type: 3}
   player: {fileID: 0}
   spawnInterval: 2
   minRadius: 2
   maxRadius: 10
   minSpawnCount: 5
   maxSpawnCount: 10
-  target: {fileID: 0}
-  speed: 100
+  maxAliveCount: 30
+  checkRadius: 1
