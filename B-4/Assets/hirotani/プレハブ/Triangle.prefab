@@ -184,3 +184,5 @@ MonoBehaviour:
   dropItems:
   - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
     count: 1
+  chainDamagePrefab: {fileID: 0}
+  chainDropRate: 0.1
