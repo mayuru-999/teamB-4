@@ -8,12 +8,13 @@ public class SkillEffect
 {
     public enum Type
     {
-        Attack,         //攻撃力
-        Speed,          //攻撃速度
-        Range,          //今撃範囲
-        SpecialAttack,  //スキル攻撃力
-        PlaneVolume,    //惑星量増加
-        PlaneSize       //惑星サイズ増加
+        Attack,             //攻撃力
+        Speed,              //攻撃速度
+        Range,              //今撃範囲
+        ColorChainAttack,   //スキル攻撃力
+        SlipAriaAttack,     //スキル攻撃力
+        PlaneVolume,        //惑星量増加
+        PlaneLv             //惑星サイズ増加
     }
     public Type type;
     public float value;
