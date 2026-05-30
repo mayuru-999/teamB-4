@@ -186,3 +186,4 @@ MonoBehaviour:
     count: 1
   chainDamagePrefab: {fileID: 0}
   chainDropRate: 0.1
+  isSpecial: 0

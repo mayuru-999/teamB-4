@@ -119,6 +119,62 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &93782445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 93782446}
+  - component: {fileID: 93782447}
+  m_Layer: 0
+  m_Name: Spawner raiseiVer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &93782446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93782445}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &93782447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93782445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee365ef2f5a323a43af822c71fa9d45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawner
+  targetPrefabs:
+  - {fileID: 3265467721359446812, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
+  - {fileID: 4408318888051034521, guid: 9d5c91ed98724294e951581143ed88a0, type: 3}
+  - {fileID: 2501827109323866006, guid: d4b520e559b84f34687513ae990d7b5f, type: 3}
+  player: {fileID: 1798109350}
+  spawnInterval: 2
+  minRadius: 2
+  maxRadius: 5
+  minSpawnCount: 5
+  maxSpawnCount: 10
+  maxAliveCount: 30
+  checkRadius: 1
 --- !u!1001 &394428968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -772,7 +828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4515129985372821356, guid: f82667b89226e7b428865a2692722fa4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6071098183443542680, guid: f82667b89226e7b428865a2692722fa4, type: 3}
       propertyPath: player
@@ -1161,59 +1217,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101398235}
   m_CullTransparentMesh: 1
---- !u!1 &1216523746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1216523748}
-  - component: {fileID: 1216523747}
-  m_Layer: 0
-  m_Name: Spawner1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1216523747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216523746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6eac3b66069ed84e9297d7ced3e3e06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spawner1
-  targetPrefab: {fileID: 7497224336600706365, guid: 442ba0ed6989c4f46a7c4f3cd1cc708c, type: 3}
-  player: {fileID: 1798109350}
-  spawnInterval: 2
-  minRadius: 2
-  maxRadius: 5
-  minSpawnCount: 5
-  maxSpawnCount: 10
-  target: {fileID: 0}
-  speed: 100
---- !u!4 &1216523748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216523746}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.05281, y: -0.86501, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563019996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,10 +2069,10 @@ SceneRoots:
   - {fileID: 394428968}
   - {fileID: 7530574840625689192}
   - {fileID: 891917380}
-  - {fileID: 571364693}
   - {fileID: 3728306531475030372}
-  - {fileID: 1216523748}
   - {fileID: 1707986780}
   - {fileID: 1828030754}
   - {fileID: 888161485}
   - {fileID: 1813732942}
+  - {fileID: 93782446}
+  - {fileID: 571364693}
