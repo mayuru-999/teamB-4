@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillName: "\u653B\u6483\u2160"
   skillDescription: "\u653B\u6483\u529B+3"
-  needPoint: 0
+  needPoint: 5
   needSkillData: []
   effect:
     type: 0
