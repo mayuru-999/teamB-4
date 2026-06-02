@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class SkillManage : MonoBehaviour
 {
     public static SkillManage Instance { get; private set; }
+    private TreeOperation treeOperation;
+    private SkillButton[] skillButtons;
 
     //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
@@ -26,26 +28,28 @@ public class SkillManage : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+        treeOperation = FindAnyObjectByType<TreeOperation>();
+        skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
     }
 
     //スキル取得時の処理
     public void getSkill(SkillData skill)
     {
-        //必要なスキルが解放されていないならreturn
-        if (!canUnlock(skill))
-        {
-            Debug.Log("まだ解放できません。");
-            return;
-        }
         if (SkillPointManager.Instance.skillPoint < skill.needPoint)
         {
-            Debug.Log("ポイントが足りません。");
+            Debug.Log($"ポイントが足りません。:{SkillPointManager.Instance.skillPoint - skill.needPoint}");
             return;
         }
 
-        Debug.Log("解放しました。");
+        //解放処理
         unlockedSkills.Add(skill);
         SkillPointManager.Instance.skillPoint -= skill.needPoint;
+        Debug.Log($"解放しました。：{skill}");
+        Debug.Log($"スキルポイント：{SkillPointManager.Instance.skillPoint}");
+
+        //UIの更新
+        if (treeOperation != null) treeOperation.CenterOnSkill();
+        foreach (SkillButton button in skillButtons) button.ButtonUpdate();
     }
 
     /// <summary>
@@ -67,20 +71,13 @@ public class SkillManage : MonoBehaviour
     /// </summary>
     /// <param name="skill"></param>
     /// <returns></returns>
-    public bool canUnlock(SkillData skill)
+    public bool canUnlock(SkillData needSkills)
     {
-        if (skill.needSkillData.Count == 0)
+        if (isUnlocked(needSkills)|| needSkills == null)
         {
             return true;
         }
-        foreach (SkillData needSkill in skill.needSkillData)
-        {
-            if (!isUnlocked(needSkill))
-            {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 
     /// <summary>
@@ -90,17 +87,23 @@ public class SkillManage : MonoBehaviour
     /// <returns></returns>
     public float getEffect(SkillEffect.Type type)
     {
-        if (type == null || type == SkillEffect.Type.PlaneLv) return 0;
-
         float effectValue = 0;
         foreach (SkillData skill in unlockedSkills)
         {
             if (skill.effect.type == type)
             {
-                effectValue += skill.effect.value;
+                if (type == SkillEffect.Type.PlaneLv)
+                {
+                    effectValue = Mathf.Max(skill.effect.value, effectValue);
+                }
+                else
+                {
+                    effectValue += skill.effect.value;
+                }
             }
         }
-        //Debug.Log($"{type}の効果量:{effectValue}");
+        if (type == SkillEffect.Type.PlaneLv) 
+            return effectValue = Mathf.Max(effectValue, 1);
         return effectValue;
     }
     
@@ -125,5 +128,6 @@ public class SkillManage : MonoBehaviour
     public void ResetUnlockedSkill()
     {
         unlockedSkills.Clear();
+        foreach (SkillButton button in skillButtons) button.ButtonUpdate();
     }
 }

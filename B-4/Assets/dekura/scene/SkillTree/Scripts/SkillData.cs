@@ -28,8 +28,6 @@ public class SkillData : ScriptableObject
     public string skillDescription;
 
     public int needPoint;
-    public List <SkillData> needSkillData;
-    //public SkillData needSkillData;
 
     public SkillEffect effect;
 }

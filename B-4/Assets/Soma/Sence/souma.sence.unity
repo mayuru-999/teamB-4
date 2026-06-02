@@ -2012,6 +2012,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 576274837}
+    - target: {fileID: 1965068652352745750, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
+      propertyPath: skillPoint
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 2303526980372913229, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: m_Name
       value: SkillPointManager

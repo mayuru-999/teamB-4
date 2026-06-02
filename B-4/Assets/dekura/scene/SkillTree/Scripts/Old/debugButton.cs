@@ -15,14 +15,6 @@ public class debugButton : MonoBehaviour
         skillManage = FindAnyObjectByType<SkillManage>();
         skillPointManager = FindAnyObjectByType<SkillPointManager>();
     }
-    //クリック時の処理
-    public void OnClick()
-    {
-        Debug.Log($"Attackのvalueは{skillManage.getEffect(SkillEffect.Type.Attack)}");
-        Debug.Log($"Speedのvalueは{skillManage.getEffect(SkillEffect.Type.Speed)}");
-        Debug.Log($"Rangeのvalueは{skillManage.getEffect(SkillEffect.Type.Range)}");
-        Debug.Log($"所持中のコストは{skillPointManager.skillPoint}");
-    }
     public void MainScene()
     {
         SceneManager.LoadScene("souma.sence");
