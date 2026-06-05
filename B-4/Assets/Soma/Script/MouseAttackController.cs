@@ -82,7 +82,8 @@ public class MouseAttackController : MonoBehaviour
         {
             if (hit.CompareTag("Target"))
             {
-                TargetHP hp = hit.GetComponent<TargetHP>();
+                HPmanager hp = hit.GetComponent<HPmanager>();
+
                 if (hp != null)
                 {
                     hp.TakeDamage(power);
