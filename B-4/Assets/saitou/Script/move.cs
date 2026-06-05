@@ -1,36 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class ArrowMove : MonoBehaviour
+
+public class move : MonoBehaviour
 {
-    public RectTransform arrow;
-    private int counter = 0;
-    private float move = 0.04f;
-    private bool stop = false;
+    [SerializeField] private RectTransform content;
+    void Start()
+    {
+        content.DOAnchorPosY(content.anchoredPosition.y + 50f, 2.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+    }
 
+    // Update is called once per frame
     void Update()
     {
-        if (!stop)
-        {
-            arrow.position += new Vector3(0, move, 0);
-            counter++;
-            if (counter == 500)
-            {
-                counter = 0;
-                move *= -1;
-                stop = true;
-            }
-        }
-        if (stop)
-        {
-            counter++;
-            if(counter == 45)
-            {
-                counter = 0;
-                stop = false;
-            }
-        }
-      
+        
     }
 }
