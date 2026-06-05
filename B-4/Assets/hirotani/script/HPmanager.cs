@@ -2,6 +2,8 @@
 
 public class HPmanager : MonoBehaviour
 {
+    private float pointMultiplier = 1f;
+
     public int hp = 100;
     private int currentHP;
 
@@ -28,10 +30,12 @@ public class HPmanager : MonoBehaviour
             }
         }
     }
-
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, float pointMultiplier = 1f)
     {
         currentHP -= damage;
+
+        // 倒れる直前に倍率を保持しておく
+        this.pointMultiplier = pointMultiplier;
 
         Debug.Log(gameObject.name + " HP : " + currentHP);
 
