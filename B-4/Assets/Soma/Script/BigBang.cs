@@ -4,13 +4,13 @@ public class DeleteByTag : MonoBehaviour
 {
     public string targetTag = "Target";
     public int damage = 10;
-    public float attackInterval = 2f; // ’·‰Ÿ‚µ’†‚ÌUŒ‚ŠÔŠu
+    public float attackInterval = 2f;
 
     private float timer = 0f;
 
     void Update()
     {
-        if (Input.GetMouseButton(0)) // ¶ƒNƒŠƒbƒN’·‰Ÿ‚µ
+        if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;
 
@@ -37,10 +37,15 @@ public class DeleteByTag : MonoBehaviour
 
             if (hp != null)
             {
-                hp.TakeDamage(damage);
+                hp.TakeDamage(damage, 2f);
             }
         }
 
         Debug.Log("’·‰Ÿ‚µUŒ‚I");
+
+        if (SkillManage.Instance != null)
+        {
+            SkillManage.Instance.ClearSkillData();
+        }
     }
 }

@@ -130,4 +130,11 @@ public class SkillManage : MonoBehaviour
         unlockedSkills.Clear();
         foreach (SkillButton button in skillButtons) button.ButtonUpdate();
     }
+
+    // データだけクリア
+    public void ClearSkillData()
+    {
+        unlockedSkills.Clear();
+    }
+
 }
