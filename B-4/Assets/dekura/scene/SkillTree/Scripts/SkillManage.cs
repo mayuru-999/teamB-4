@@ -8,6 +8,7 @@ public class SkillManage : MonoBehaviour
     private SkillButton[] skillButtons;
 
     //既に解放したスキル情報を入れるリスト
+    private int gameLv = 1;
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
     //PlaneSizeの値をここに記入
@@ -16,6 +17,33 @@ public class SkillManage : MonoBehaviour
         new Vector3 (1.0f, 0.0f, 0.0f),
         new Vector3 (0.7f, 0.3f, 0.0f),
         new Vector3 (0.4f, 0.3f, 0.3f),
+    };
+
+    private Vector3[] PlaneHealth = new Vector3[]
+    {
+        new Vector3 (3, 6, 9),
+        new Vector3 (13, 16, 19),
+        new Vector3 (23, 26, 29),
+        new Vector3 (33, 36, 39),
+        new Vector3 (43, 46, 49),
+    };
+
+    private Vector3[] Crystalvol = new Vector3[]
+    {
+        new Vector3 (3, 6, 9),
+        new Vector3 (13, 16, 19),
+        new Vector3 (23, 26, 29),
+        new Vector3 (33, 36, 39),
+        new Vector3 (43, 46, 49),
+    };
+
+    private Vector3[] StarDastsPar = new Vector3[]
+    {
+        new Vector3 (3, 6, 9),
+        new Vector3 (13, 16, 19),
+        new Vector3 (23, 26, 29),
+        new Vector3 (33, 36, 39),
+        new Vector3 (43, 46, 49),
     };
 
     void Awake()
@@ -140,4 +168,13 @@ public class SkillManage : MonoBehaviour
         unlockedSkills.Clear();
     }
 
+    public void LvUpdate()
+    {
+        if (gameLv <= 5) gameLv++;
+    }
+
+    public Vector3 LvtoPlaneData()
+    {
+        return new Vector3(1, 1, 1);
+    }
 }
