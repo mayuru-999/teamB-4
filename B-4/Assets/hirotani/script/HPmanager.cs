@@ -45,8 +45,41 @@ public class HPmanager : MonoBehaviour
         }
     }
 
+
     void Die()
     {
+        // 3%で特殊ドロップ
+        if (Random.value < 0.03f)
+        {
+            if (chainDamagePrefab != null)
+            {
+                Instantiate(
+                    chainDamagePrefab,
+                    transform.position,
+                    Quaternion.identity
+                );
+            }
+        }
+        // 97%で通常ドロップ
+        else
+        {
+            foreach (var item in dropItems)
+            {
+                if (item != null && item.prefab != null)
+                {
+                    for (int i = 0; i < item.count; i++)
+                    {
+                        Instantiate(
+                            item.prefab,
+                            transform.position,
+                            Quaternion.identity
+                        );
+                    }
+                }
+            }
+        }
+
+        //特殊敵の爆発処理（そのまま維持）
         if (isSpecial)
         {
             Collider2D[] hits =
@@ -72,21 +105,8 @@ public class HPmanager : MonoBehaviour
             }
         }
 
-        foreach (var item in dropItems)
-        {
-            if (item != null && item.prefab != null)
-            {
-                for (int i = 0; i < item.count; i++)
-                {
-                    Instantiate(
-                        item.prefab,
-                        transform.position,
-                        Quaternion.identity
-                    );
-                }
-            }
-        }
-
         Destroy(gameObject);
     }
+
+    
 }
