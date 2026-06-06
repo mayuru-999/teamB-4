@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DeleteByTag : MonoBehaviour
 {
+    public WhiteFadeManager fadeManager;
     public string targetTag = "Target";
     public int damage = 10;
     public float attackInterval = 2f;
@@ -46,6 +47,12 @@ public class DeleteByTag : MonoBehaviour
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.ClearSkillData();
+        }
+
+        
+        if (fadeManager != null)
+        {
+            fadeManager.StartFade();
         }
     }
 }

@@ -35,6 +35,9 @@ public class SkillManage : MonoBehaviour
     //スキル取得時の処理
     public void getSkill(SkillData skill)
     {
+        treeOperation = FindAnyObjectByType<TreeOperation>();
+        skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
+
         if (SkillPointManager.Instance.skillPoint < skill.needPoint)
         {
             Debug.Log($"ポイントが足りません。:{SkillPointManager.Instance.skillPoint - skill.needPoint}");
