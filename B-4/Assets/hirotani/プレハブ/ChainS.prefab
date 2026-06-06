@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 587733706513184313}
   m_Layer: 0
   m_Name: ChainS
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 22.97, y: 27.561155}
+    oldSize: {x: 2.2970002, y: 2.7561157}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -152,9 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPmanager
-  hp: 100
-  dropItems: []
-  chainDamagePrefab: {fileID: 4191262463269016263}
+  hp: 1
+  dropItems:
+  - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+    count: 2
+  chainDamagePrefab: {fileID: 5671203868425182518, guid: 2ca04a9fbfa15814e90d776ddc7fd9a6, type: 3}
   chainDropRate: 0.1
   isSpecial: 0
 --- !u!114 &587733706513184313
@@ -169,6 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a0fafb21ffd904b9f8efad6e5bcbc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChainDamage
-  hp: 10
+  hp: 1
   radius: 5
   damage: 20

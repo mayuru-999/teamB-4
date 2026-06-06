@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4776374988504296966}
   m_Layer: 0
   m_Name: ChainC
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &6733990815605536605
 MonoBehaviour:
@@ -153,9 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPmanager
-  hp: 100
-  dropItems: []
-  chainDamagePrefab: {fileID: 6022739567130765024}
+  hp: 1
+  dropItems:
+  - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+    count: 3
+  chainDamagePrefab: {fileID: 5671203868425182518, guid: 2ca04a9fbfa15814e90d776ddc7fd9a6, type: 3}
   chainDropRate: 1
   isSpecial: 0
 --- !u!114 &399885710569771650
@@ -170,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a0fafb21ffd904b9f8efad6e5bcbc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChainDamage
-  hp: 10
+  hp: 1
   radius: 5
   damage: 20
 --- !u!114 &-4776374988504296966
@@ -180,7 +182,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6022739567130765024}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5773524280b16364bba86b0ea1ac7191, type: 3}
   m_Name: 
