@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillName: "\u7BC4\u56F2\u2161"
   skillDescription: "\u653B\u6483\u7BC4\u56F2+10%"
-  needPoint: 0
-  needSkillData:
-  - {fileID: 11400000, guid: bb431d5ae7daef147ad45c2febd8465b, type: 2}
+  needPoint: 150
   effect:
     type: 2
     value: 10

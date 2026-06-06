@@ -8,10 +8,12 @@ public class SkillButton : MonoBehaviour
     //割り当てたスキル(.asset)
     [SerializeField] public SkillData skill;
     [SerializeField] public SkillData needSkill;
+    [SerializeField] public int needPoint;
 
     void Start()
     {
         ButtonUpdate();
+        skill.needPoint = needPoint;
     }
 
     //クリック時の処理
