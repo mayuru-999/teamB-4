@@ -1,0 +1,30 @@
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,IPointerDownHandler
+{
+    [SerializeField] private TreeOperation treeOperation;
+    void Start()
+    {
+        treeOperation = FindAnyObjectByType<TreeOperation>();
+        treeOperation.CenterOnSkill();
+    }
+
+    //ホイールスクロールでズームイン、アウト
+    public void OnScroll(PointerEventData eventData)
+    {
+        treeOperation.TreeZoom(eventData);
+    }
+
+    //クリックでスキルのセンタリング
+    //Downも宣言しないとUpが反応しないため、両方宣言
+    public void OnPointerDown(PointerEventData eventData)
+    {
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        treeOperation.CenterOnSkill();
+    }
+}

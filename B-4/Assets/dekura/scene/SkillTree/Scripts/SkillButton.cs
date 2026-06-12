@@ -13,7 +13,7 @@ public class SkillButton : MonoBehaviour
     void Start()
     {
         ButtonUpdate();
-        skill.needPoint = needPoint;
+        if(skill != null) skill.needPoint = needPoint;
     }
 
     //ƒNƒŠƒbƒN‚Ìˆ—

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TreeOperation : MonoBehaviour, IScrollHandler, IPointerDownHandler, IPointerUpHandler
+public class TreeOperation : MonoBehaviour
 {
     [SerializeField] private RectTransform viewport;
     [SerializeField] private RectTransform content;
@@ -16,15 +16,13 @@ public class TreeOperation : MonoBehaviour, IScrollHandler, IPointerDownHandler,
     [SerializeField] private float zoomSpeed = 0.1f;
 
     //スキルツリー完成フラグ
-    private bool isCompleted = false;
+    protected bool isCompleted = false;
     //拡大率
     private float currentZoom = 1.0f;
     //スキルの表示位置
     private Vector2 currentPosition = new Vector2(-390, 0);
-    private Vector2 pointerDownPosition;
 
-    //ホイールスクロールでズームイン、アウト
-    public void OnScroll(PointerEventData eventData)
+    public void TreeZoom(PointerEventData eventData)
     {
         if (isCompleted) return;
         float scroll = eventData.scrollDelta.y;
@@ -32,29 +30,9 @@ public class TreeOperation : MonoBehaviour, IScrollHandler, IPointerDownHandler,
         content.localScale = Vector3.one * currentZoom;
     }
 
-    private void Start()
-    {
-        //初期位置にセンタリング
-        CenterOnSkill();
-    }
-
-    //ドラッグ開始
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //pointerDownPosition = eventData.position;
-    }
-
-    //ドラッグ終了
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        //ドラッグしていない場合は、解放可能なスキルを探して、そこにセンタリングする
-        //if (eventData.position != pointerDownPosition) return;
-        if(isCompleted) return;
-        CenterOnSkill();
-    }
-
     public void CenterOnSkill()
     {
+        if (isCompleted) return;
         //SkillButtonを全て探す。
         //解放可能なスキルがあれば、そのSkillButtonをtgに格納。
         SkillButton[] skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
