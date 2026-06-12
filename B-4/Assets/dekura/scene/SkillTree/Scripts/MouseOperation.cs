@@ -1,11 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,IPointerDownHandler
+public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,IPointerDownHandler,IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private TreeOperation treeOperation;
+    private TreeOperation treeOperation;
     void Start()
     {
         treeOperation = FindAnyObjectByType<TreeOperation>();
@@ -15,16 +16,30 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
     //ホイールスクロールでズームイン、アウト
     public void OnScroll(PointerEventData eventData)
     {
-        treeOperation.TreeZoom(eventData);
+        if(gameObject.name == "Orion") treeOperation.TreeZoom(eventData);
     }
 
     //クリックでスキルのセンタリング
     //Downも宣言しないとUpが反応しないため、両方宣言
-    public void OnPointerDown(PointerEventData eventData)
-    {
-    }
+    public void OnPointerDown(PointerEventData eventData) { }
     public void OnPointerUp(PointerEventData eventData)
     {
-        treeOperation.CenterOnSkill();
+        if(gameObject.name == "Orion") treeOperation.CenterOnSkill();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (gameObject.name == "ToMainButton") treeOperation.ChangeDescription("メインゲームへ");
+        if (gameObject.name == "ToCreateButton") treeOperation.ChangeDescription("惑星作成へ");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        treeOperation.ResetDescription();
+    }
+
+    public void ToMainButton()
+    {
+        SceneManager.LoadScene("souma.sence");
     }
 }

@@ -49,7 +49,7 @@ public class SenceChang : MonoBehaviour
         {
             remainingTime = 0;
             isFinished = true;
-            SceneManager.LoadScene("SkillTree_debug");
+            SceneManager.LoadScene("SkillTree");
         }
 
         // •\Ž¦

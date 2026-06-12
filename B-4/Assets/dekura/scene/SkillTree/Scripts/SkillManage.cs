@@ -93,6 +93,7 @@ public class SkillManage : MonoBehaviour
         Debug.Log($"スキルポイント：{SkillPointManager.Instance.skillPoint}");
 
         //UIの更新
+        SkillPointManager.Instance.UpdateUI();
         if (treeOperation != null) treeOperation.CenterOnSkill();
         foreach (SkillButton button in skillButtons) button.ButtonUpdate();
     }

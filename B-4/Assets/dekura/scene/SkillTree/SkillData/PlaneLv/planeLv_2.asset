@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: planeLv_2
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillName: "\u60D1\u661FLvUp \u2160"
-  skillDescription: "\u60D1\u661FLv\u30A2\u30C3\u30D7 1 \u25B6 2"
-  needPoint: 0
-  needSkillData: []
+  skillDescription: "\u60D1\u661FLv\u30A2\u30C3\u30D7 1 > 2"
+  needPoint: 5800
   effect:
     type: 6
     value: 2
