@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
+using System.Drawing;
+using UnityEditor.PackageManager;
+using UnityEngine;
 
 public class SkillManage : MonoBehaviour
 {
@@ -7,8 +9,9 @@ public class SkillManage : MonoBehaviour
     private TreeOperation treeOperation;
     private SkillButton[] skillButtons;
 
-    //既に解放したスキル情報を入れるリスト
+    //ゲーム全体の段階(Lv）
     private int gameLv = 1;
+    //既に解放したスキル情報を入れるリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
     //PlaneSizeの値をここに記入
@@ -19,6 +22,12 @@ public class SkillManage : MonoBehaviour
         new Vector3 (0.4f, 0.3f, 0.3f),
     };
 
+    //--以下、ゲームLvに応じた、各大きさの惑星ステータス--//
+    //例)
+    //ゲームLv1(大きさ1,大きさ2,大きさ3)
+    //ゲームLv2(大きさ1,大きさ2,大きさ3)...
+
+    //惑星の体力
     private Vector3[] PlaneHealth = new Vector3[]
     {
         new Vector3 (3, 6, 9),
@@ -28,23 +37,28 @@ public class SkillManage : MonoBehaviour
         new Vector3 (43, 46, 49),
     };
 
+    //惑星の量
     private Vector3[] Crystalvol = new Vector3[]
     {
-        new Vector3 (3, 6, 9),
-        new Vector3 (13, 16, 19),
-        new Vector3 (23, 26, 29),
-        new Vector3 (33, 36, 39),
-        new Vector3 (43, 46, 49),
+        new Vector3 (1, 3, 5),
+        new Vector3 (10, 12, 15),
+        new Vector3 (20, 22, 25),
+        new Vector3 (30, 32, 35),
+        new Vector3 (40, 42, 45),
     };
 
+    //惑星のダスト泥率
+    //vector3にする必要はない、後から大きさごとに変えれるように一応vec3
     private Vector3[] StarDastsPar = new Vector3[]
     {
-        new Vector3 (3, 6, 9),
-        new Vector3 (13, 16, 19),
-        new Vector3 (23, 26, 29),
-        new Vector3 (33, 36, 39),
-        new Vector3 (43, 46, 49),
+        new Vector3 (5, 5, 5),
+        new Vector3 (6, 6, 6),
+        new Vector3 (8, 8, 8),
+        new Vector3 (9, 9, 9),
+        new Vector3 (10, 10, 10),
     };
+
+    //---------------------------------------------------//
 
     void Awake()
     {
@@ -79,6 +93,7 @@ public class SkillManage : MonoBehaviour
         Debug.Log($"スキルポイント：{SkillPointManager.Instance.skillPoint}");
 
         //UIの更新
+        SkillPointManager.Instance.UpdateUI();
         if (treeOperation != null) treeOperation.CenterOnSkill();
         foreach (SkillButton button in skillButtons) button.ButtonUpdate();
     }
@@ -168,13 +183,28 @@ public class SkillManage : MonoBehaviour
         unlockedSkills.Clear();
     }
 
+    /// <summary>
+    /// ゲームLvを上げる関数
+    /// </summary>
     public void LvUpdate()
     {
-        if (gameLv <= 5) gameLv++;
+        if (gameLv <= 5)
+        {
+            gameLv++;
+            Debug.Log($"Level Up!：{gameLv}");
+        }
+        else Debug.LogWarning("Warning: Level Max!");
     }
 
-    public Vector3 LvtoPlaneData()
+    /// <summary>
+    /// ゲームLvに応じた、各大きさの惑星ステータスを返す
+    /// </summary>
+    /// <returns></returns>
+    public (Vector3, Vector3, Vector3) LvtoPlaneData() //タプルっていうらしい
     {
-        return new Vector3(1, 1, 1);
+        //toそうま先輩
+        //var(health,size,dastpar)=LvtoPlaneData();
+        //みたいな感じで受け取れます。
+        return (PlaneHealth[gameLv - 1], Crystalvol[gameLv - 1], StarDastsPar[gameLv - 1]);  
     }
 }

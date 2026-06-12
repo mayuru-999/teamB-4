@@ -36,8 +36,9 @@ public class SkillPointManager : MonoBehaviour
         UpdateUI();
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
+        if (scoreText == null) return;
         scoreText.text = "skillPoint: " + skillPoint;
     }
 }
