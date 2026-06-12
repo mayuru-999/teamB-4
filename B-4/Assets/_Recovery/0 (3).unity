@@ -169,7 +169,7 @@ MonoBehaviour:
   - {fileID: 2501827109323866006, guid: d4b520e559b84f34687513ae990d7b5f, type: 3}
   player: {fileID: 1798109350}
   keepAliveCount: 20
-  minRadius: 0.5
+  minRadius: 2
   maxRadius: 5
   checkRadius: 1
 --- !u!1001 &394428968
@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClickToDestroyTarget
   fadeManager: {fileID: 3728306531475030374}
   targetTag: Target
-  damage: 100
+  damage: 10
   attackInterval: 2
 --- !u!58 &1798109353
 CircleCollider2D:

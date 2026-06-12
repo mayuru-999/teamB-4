@@ -7,7 +7,7 @@ public class SceneChangeByKey : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("SkillTree");
+            SceneManager.LoadScene("SkillTree_debug");
         }
     }
 }
