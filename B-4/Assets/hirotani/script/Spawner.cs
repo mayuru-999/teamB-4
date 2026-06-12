@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour
@@ -8,57 +7,69 @@ public class Spawner : MonoBehaviour
     public GameObject[] targetPrefabs;
     public Transform player;
 
-    public float spawnInterval = 2.0f;
+    [Header("生成数維持")]
+    public int keepAliveCount = 20;   // 常に保つ数
 
     [Header("生成範囲")]
     public float minRadius = 2.0f;
     public float maxRadius = 10.0f;
 
-    [Header("生成数")]
-    public int minSpawnCount = 5;
-    public int maxSpawnCount = 10;
-
-    [Header("最大生成数")]
-    public int maxAliveCount = 30;  //  上限
-
     [Header("重なり防止")]
-    public float checkRadius = 1.0f; //  最低距離
+    public float checkRadius = 1.0f;
 
-    private float timer;
-
-    // 🔥 生成物管理リスト
+    // 生成物管理リスト
     private List<GameObject> spawnedObjects = new List<GameObject>();
+
+    void Start()
+    {
+        // ゲーム開始時に即20個生成
+        SpawnUntilKeepCount();
+    }
 
     void Update()
     {
-        // ✅ 削除されたものをリストから除去
+        // 削除されたものをリストから除去
         spawnedObjects.RemoveAll(obj => obj == null);
 
-        timer += Time.deltaTime;
+        // 足りなければ即補充
+        SpawnUntilKeepCount();
+    }
 
-        if (timer >= spawnInterval)
+
+    void SpawnUntilKeepCount()
+    {
+        int targetCount = keepAliveCount;
+
+        if (SkillManage.Instance != null)
         {
-            // 🔥 上限チェック
-            if (spawnedObjects.Count >= maxAliveCount) return;
+            targetCount += Mathf.RoundToInt(
+                SkillManage.Instance.getEffect(SkillEffect.Type.PlaneVolume)
+            );
+        }
 
-            int randomCount = Random.Range(minSpawnCount, maxSpawnCount + 1);
+        int failCount = 0;
 
-            for (int i = 0; i < randomCount; i++)
-            {
-                if (spawnedObjects.Count >= maxAliveCount) break;
+        while (spawnedObjects.Count < targetCount)
+        {
+            int before = spawnedObjects.Count;
 
-                SpawnTarget();
-            }
+            SpawnTarget();
 
-            timer = 0;
+            if (spawnedObjects.Count == before)
+                failCount++;
+            else
+                failCount = 0;
+
+            if (failCount > 10)
+                break;
         }
     }
 
     void SpawnTarget()
     {
-        if (player == null) return;
+        if (player == null || targetPrefabs.Length == 0) return;
 
-        // 🔥 最大試行回数（無限ループ防止）
+        // 最大試行回数（無限ループ防止）
         for (int attempt = 0; attempt < 20; attempt++)
         {
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
@@ -71,42 +82,56 @@ public class Spawner : MonoBehaviour
                     0
                 ) + player.position;
 
-            // 🔥 重なりチェック
-            Collider2D hit = Physics2D.OverlapCircle(spawnPosition, checkRadius);
+            // 重なりチェック
+            Collider2D hit =
+                Physics2D.OverlapCircle(spawnPosition, checkRadius);
 
             if (hit == null)
             {
-                // prefab選択
-                int randomIndex = Random.Range(0, targetPrefabs.Length);
-                GameObject randomPrefab = targetPrefabs[randomIndex];
+                int randomIndex =
+                    Random.Range(0, targetPrefabs.Length);
 
                 GameObject obj =
-                Instantiate( randomPrefab, spawnPosition, Quaternion.identity
-                );
+                    Instantiate(
+                        targetPrefabs[randomIndex],
+                        spawnPosition,
+                        Quaternion.identity
+                    );
 
+
+                if (SkillManage.Instance != null)
+                {
+                    obj.transform.localScale =
+                        SkillManage.Instance.getPlaneSizeLv();
+                }
+                else
+                {
+                    obj.transform.localScale =
+                        Vector3.one * 0.4f;
+                }
+
+
+                // HP設定
                 HPmanager hp = obj.GetComponent<HPmanager>();
-
                 if (hp != null)
                 {
                     hp.isSpecial = Random.value < 0.1f;
                 }
 
-                // リストに追加
-                spawnedObjects.Add(obj);
-
-                // player渡す
-                OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
+                // プレイヤー設定
+                OrbitTarget orbit =
+                    obj.GetComponent<OrbitTarget>();
                 if (orbit != null)
                 {
                     orbit.player = player;
                 }
 
-                return; // 成功したら終了
+                spawnedObjects.Add(obj);
+                return;
             }
         }
     }
 
-    // 🔵 可視化（エディタ用）
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;

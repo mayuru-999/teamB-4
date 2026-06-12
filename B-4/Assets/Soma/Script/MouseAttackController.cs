@@ -15,7 +15,7 @@ public class MouseAttackController : MonoBehaviour
     public float rangeScaleMultiplier = 0.9f; 
     
     [Tooltip("クールタイム（内側ゲージ）の見た目の大きさ倍率。小さくしたい場合は数値を下げます")]
-    public float cooldownScaleMultiplier = 1.0f; // ★最初から少し小さめ（0.8倍）に設定
+    public float cooldownScaleMultiplier = 1.0f; // 最初から少し小さめ（0.8倍）に設定
 
     private float lastAttackTime = 0f;
 
@@ -51,7 +51,7 @@ public class MouseAttackController : MonoBehaviour
         {
             cooldownVisual.transform.position = worldPos;
             
-            // ★クールタイム専用のサイズ計算（cooldownScaleMultiplier を掛ける）
+            // クールタイム専用のサイズ計算（cooldownScaleMultiplier を掛ける）
             float cooldownVisualSize = (attackRadius * 2f) * cooldownScaleMultiplier;
             cooldownVisual.rectTransform.localScale = 
                 new Vector3(cooldownVisualSize, cooldownVisualSize, 1f);
