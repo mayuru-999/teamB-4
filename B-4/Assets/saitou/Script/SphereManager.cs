@@ -10,7 +10,7 @@ public class SphereManager : MonoBehaviour
 
     public Ball[] balls;
 
-    public float radius = 250f;
+    public float radius = 250f;//変更前250f
     public float speed = 1f;
 
     public float minScale = 0.5f;
