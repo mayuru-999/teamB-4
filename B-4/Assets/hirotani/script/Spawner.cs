@@ -35,6 +35,28 @@ public class Spawner : MonoBehaviour
         SpawnUntilKeepCount();
     }
 
+    System.Collections.IEnumerator ScaleUp(Transform t, Vector3 target)
+    {
+        float time = 0f;
+        float duration = 0.4f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float ratio = time / duration;
+
+            // ポッと出る感じ（バウンド）
+            float scale = Mathf.Sin(ratio * Mathf.PI * 0.5f)
+                        + Mathf.Sin(ratio * Mathf.PI) * 0.15f;
+
+            t.localScale = target * scale;
+
+            yield return null;
+        }
+
+        t.localScale = target;
+    }
+
 
     void SpawnUntilKeepCount()
     {
@@ -98,17 +120,22 @@ public class Spawner : MonoBehaviour
                         Quaternion.identity
                     );
 
+                Vector3 targetScale;
 
                 if (SkillManage.Instance != null)
                 {
-                    obj.transform.localScale =
-                        SkillManage.Instance.getPlaneSizeLv();
+                    targetScale = SkillManage.Instance.getPlaneSizeLv();
                 }
                 else
                 {
-                    obj.transform.localScale =
-                        Vector3.one * 0.4f;
+                    targetScale = Vector3.one * 0.4f;
                 }
+
+                // 最初は0にする
+                obj.transform.localScale = Vector3.zero;
+
+                // コルーチンでアニメーション
+                StartCoroutine(ScaleUp(obj.transform, targetScale));
 
 
                 // HP設定

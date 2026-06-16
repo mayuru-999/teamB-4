@@ -7,20 +7,20 @@ public class SenceChang : MonoBehaviour
 {
     public float changeTime = 30f;
     public TMP_Text timeText;
-    public Image targetImage; // F•ÏX—p
+    public Image targetImage; // ï¿½Fï¿½ÏXï¿½p
 
     public Transform scaleImage;
     private Vector3 initialScale;
 
-    // ’Ç‰ÁF‰‚Ì‰æ‘œ4‚Â
+    // ï¿½Ç‰ï¿½ï¿½Fï¿½ï¿½ï¿½Ì‰æ‘œ4ï¿½ï¿½
     public Image[] borderImages;
 
     private float remainingTime;
     private bool isFinished = false;
 
-    // “_–Å—p
+    // ï¿½_ï¿½Å—p
 
-    private float blinkInterval = 0.2f; // “_–ÅŠÔŠu
+    private float blinkInterval = 0.2f; // ï¿½_ï¿½ÅŠÔŠu
     private float blinkCounter = 0f;
     private bool isBlinkVisible = true;
 
@@ -31,7 +31,7 @@ public class SenceChang : MonoBehaviour
         remainingTime = changeTime;
         initialScale = scaleImage.localScale;
 
-        // Å‰‚Í”ñ•\¦
+        // ï¿½Åï¿½ï¿½Í”ï¿½\ï¿½ï¿½
         foreach (Image img in borderImages)
         {
             img.enabled = false;
@@ -49,19 +49,19 @@ public class SenceChang : MonoBehaviour
         {
             remainingTime = 0;
             isFinished = true;
-            SceneManager.LoadScene("SkillTree");
+            SceneManager.LoadScene("SkillTree_debug");
         }
 
-        // •\¦
+        // ï¿½\ï¿½ï¿½
         timeText.text = remainingTime.ToString("F1") + "s";
 
-        // c‚è2•b‚ÅÔ
+        // ï¿½cï¿½ï¿½2ï¿½bï¿½Åï¿½
         if (remainingTime <= 2f)
         {
             timeText.color = Color.red;
             targetImage.color = Color.red;
 
-            // “_–Åˆ—
+            // ï¿½_ï¿½Åï¿½ï¿½ï¿½
             BlinkBorders();
         }
         else
@@ -69,14 +69,14 @@ public class SenceChang : MonoBehaviour
             timeText.color = Color.white;
             targetImage.color = Color.white;
 
-            // í‚É”ñ•\¦‚É‚·‚é
+            // ï¿½ï¿½É”ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
             foreach (Image img in borderImages)
             {
                 img.enabled = false;
             }
         }
 
-        // ƒXƒP[ƒ‹k¬
+        // ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½kï¿½ï¿½
         float rate = remainingTime / changeTime;
         Vector3 newScale = initialScale;
         newScale.x = initialScale.x * rate;
@@ -91,7 +91,7 @@ public class SenceChang : MonoBehaviour
         if (blinkCounter >= blinkInterval)
         {
             blinkCounter = 0f;
-            isBlinkVisible = !isBlinkVisible; // ON/OFFØ‚è‘Ö‚¦
+            isBlinkVisible = !isBlinkVisible; // ON/OFFï¿½Ø‚ï¿½Ö‚ï¿½
         }
 
         foreach (Image img in borderImages)
