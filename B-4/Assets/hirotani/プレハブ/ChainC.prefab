@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6733990815605536605}
   - component: {fileID: 399885710569771650}
   - component: {fileID: -4776374988504296966}
+  - component: {fileID: -1826687634870825642}
   m_Layer: 0
   m_Name: ChainC
   m_TagString: Target
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6959757910935084395, guid: b685979ef17f839439786a21ac176411, type: 3}
+  m_Sprite: {fileID: -9036580759649443205, guid: 66d8a615880c4c14a98c8a762a4550d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,7 +134,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.45, y: 2.7561157}
+    oldSize: {x: 2.45, y: 2.909122}
     newSize: {x: 2.45, y: 2.7561157}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -190,3 +191,17 @@ MonoBehaviour:
   spriteA: {fileID: 6959757910935084395, guid: b685979ef17f839439786a21ac176411, type: 3}
   spriteB: {fileID: -5432577111654197879, guid: 5b8e39d5527bda74f9b6652766b0ef0a, type: 3}
   switchInterval: 0.1
+--- !u!114 &-1826687634870825642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6022739567130765024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6282abf24a3183848b6cd274ddf46d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitTarget
+  player: {fileID: 0}
+  speed: 35
