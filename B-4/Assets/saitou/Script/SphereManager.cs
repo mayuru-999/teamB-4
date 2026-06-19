@@ -8,6 +8,7 @@ public class SphereManager : MonoBehaviour
         public RectTransform rect;
     }
 
+    public RectTransform image;
     public Ball[] balls;
     public float radius = 250f; // 変更前250f
     public float verticalRatio = 0.5f; // 縦方向の圧縮率（1にすると真円に近づく）
