@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8296109513298386764}
   - component: {fileID: -852446259935436061}
   - component: {fileID: 587733706513184313}
+  - component: {fileID: -8503337389758086926}
   m_Layer: 0
   m_Name: ChainS
   m_TagString: Target
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6552565893195103309, guid: d4d16609da8afb542a9eb42bcda11704, type: 3}
+  m_Sprite: {fileID: -7246014163110289561, guid: 8752457a2877ed849b490862405e2051, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,7 +133,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2970002, y: 2.7561157}
+    oldSize: {x: 22.97, y: 29.091219}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -174,3 +175,17 @@ MonoBehaviour:
   hp: 1
   radius: 5
   damage: 20
+--- !u!114 &-8503337389758086926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191262463269016263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6282abf24a3183848b6cd274ddf46d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitTarget
+  player: {fileID: 0}
+  speed: 35

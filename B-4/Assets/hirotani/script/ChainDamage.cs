@@ -14,13 +14,14 @@ public class ChainDamage : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-
+        /*
         if (sr != null)
         {
             sr.color = Color.yellow; // 特殊オブジェクトなので黄色
         }
+        */
     }
-
+        
     public void TakeDamage(int dmg)
     {
         hp -= dmg;

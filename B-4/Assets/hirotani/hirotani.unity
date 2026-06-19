@@ -407,14 +407,14 @@ MonoBehaviour:
   targetPrefabs:
   - {fileID: 3265467721359446812, guid: 007f56472f4e4fd4e8bb5a9dd509b4ee, type: 3}
   - {fileID: 4408318888051034521, guid: 9d5c91ed98724294e951581143ed88a0, type: 3}
+  - {fileID: 8594206201621396238, guid: c9b038dd9486f314ea464e7f90124173, type: 3}
   - {fileID: 2501827109323866006, guid: d4b520e559b84f34687513ae990d7b5f, type: 3}
+  - {fileID: 4191262463269016263, guid: 66afdfe209409784fb79aaca5d0eafe3, type: 3}
+  - {fileID: 8594206201621396238, guid: c9b038dd9486f314ea464e7f90124173, type: 3}
   player: {fileID: 1550298893}
-  spawnInterval: 2
-  minRadius: 2
+  keepAliveCount: 20
+  minRadius: 0
   maxRadius: 10
-  minSpawnCount: 5
-  maxSpawnCount: 10
-  maxAliveCount: 20
   checkRadius: 1
 --- !u!1 &1570454864
 GameObject:
