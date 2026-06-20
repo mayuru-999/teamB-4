@@ -17,10 +17,11 @@ public class HPmanager : MonoBehaviour
     public DropItemData[] dropItems;
     [Header("特殊ドロップ")]
     public GameObject chainDamagePrefab;
+   
 
-    [Range(0f, 1f)]
-    public float chainDropRate = 0.1f;
-    public bool isSpecial = false;
+    
+    
+    
 
     //  Spawnerからデータを安全に受け取るための初期化関数 
     public void InitializeStatus(Vector3 healthVector, Vector3 dustVector)
@@ -58,15 +59,7 @@ public class HPmanager : MonoBehaviour
             currentHP = hp;
         }
 
-        if (isSpecial)
-        {
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
-
-            if (sr != null)
-            {
-                sr.color = Color.yellow;
-            }
-        }
+    
     }
 
     public void TakeDamage(int damage, float pointMultiplier = 1f)
@@ -86,6 +79,14 @@ public class HPmanager : MonoBehaviour
 
     void Die()
     {
+        ChainDamage chain =
+                   GetComponent<ChainDamage>();
+
+        if (chain != null)
+        {
+            chain.Explode();
+            return;
+        }
         // 3%で特殊ドロップ
         if (Random.value < 0.03f)
         {
@@ -98,6 +99,7 @@ public class HPmanager : MonoBehaviour
                 );
             }
         }
+    
         // 97%で通常ドロップ
         else
         {
@@ -118,33 +120,6 @@ public class HPmanager : MonoBehaviour
                 }
             }
         }
-
-        // 特殊敵の爆発処理（そのまま維持）
-        if (isSpecial)
-        {
-            Collider2D[] hits =
-                Physics2D.OverlapCircleAll(
-                    transform.position,
-                    5f
-                );
-
-            foreach (Collider2D hit in hits)
-            {
-                if (hit.CompareTag("Target"))
-                {
-                    HPmanager hpComponent =
-                        hit.GetComponent<HPmanager>();
-
-                    if (hpComponent != null &&
-                         hpComponent != this &&
-                          !hpComponent.isSpecial)
-                    {
-                        hpComponent.TakeDamage(20);
-                    }
-                }
-            }
-        }
-
         Destroy(gameObject);
     }
 }
