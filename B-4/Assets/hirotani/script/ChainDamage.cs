@@ -32,7 +32,7 @@ public class ChainDamage : MonoBehaviour
         }
     }
 
-    void Explode()
+    public void Explode()
     {
         Collider2D[] hits =
             Physics2D.OverlapCircleAll(
@@ -42,7 +42,7 @@ public class ChainDamage : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
+            if (hit.CompareTag("Target") && hit.gameObject != gameObject)
             {
                 HPmanager enemy =
                     hit.GetComponent<HPmanager>();

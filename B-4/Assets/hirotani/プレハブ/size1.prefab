@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4191262463269016263
+--- !u!1 &3265467721359446812
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2364566971913054785}
-  - component: {fileID: 6945969116935896829}
-  - component: {fileID: 8296109513298386764}
-  - component: {fileID: -852446259935436061}
-  - component: {fileID: 587733706513184313}
-  - component: {fileID: -8503337389758086926}
+  - component: {fileID: 8353450804118857997}
+  - component: {fileID: 6047815199680050227}
+  - component: {fileID: -1631589813043581755}
+  - component: {fileID: -3396738109430364363}
+  - component: {fileID: 4802450942218838911}
+  - component: {fileID: 8697669705933758277}
   m_Layer: 0
-  m_Name: ChainS
+  m_Name: size1
   m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2364566971913054785
+--- !u!4 &8353450804118857997
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4191262463269016263}
+  m_GameObject: {fileID: 3265467721359446812}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21766, y: 0.08579, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7268137, w: -0.68683475}
+  m_LocalPosition: {x: -20.490917, y: -0.86577964, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6945969116935896829
+--- !u!212 &6047815199680050227
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4191262463269016263}
+  m_GameObject: {fileID: 3265467721359446812}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7246014163110289561, guid: 8752457a2877ed849b490862405e2051, type: 3}
+  m_Sprite: {fileID: 6959757910935084395, guid: b685979ef17f839439786a21ac176411, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,13 +95,91 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &8296109513298386764
+--- !u!114 &-1631589813043581755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265467721359446812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6282abf24a3183848b6cd274ddf46d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitTarget
+  player: {fileID: 0}
+  speed: 35
+--- !u!61 &-3396738109430364363
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4191262463269016263}
+  m_GameObject: {fileID: 3265467721359446812}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.21133333}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.45, y: 2.7561157}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &4802450942218838911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265467721359446812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TergetHP1
+  sizeType: 1
+  hp: 1
+  dropItems:
+  - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
+    count: 1
+  chainDamagePrefab: {fileID: 5671203868425182518, guid: 2ca04a9fbfa15814e90d776ddc7fd9a6, type: 3}
+--- !u!60 &8697669705933758277
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265467721359446812}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -133,59 +211,36 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 22.97, y: 29.091219}
+    oldSize: {x: 2.45, y: 2.7561157}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &-852446259935436061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4191262463269016263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HPmanager
-  hp: 1
-  dropItems:
-  - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
-    count: 2
-  chainDamagePrefab: {fileID: 5671203868425182518, guid: 2ca04a9fbfa15814e90d776ddc7fd9a6, type: 3}
-  chainDropRate: 0.1
-  isSpecial: 0
---- !u!114 &587733706513184313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4191262463269016263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a0fafb21ffd904b9f8efad6e5bcbc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChainDamage
-  hp: 1
-  radius: 5
-  damage: 20
---- !u!114 &-8503337389758086926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4191262463269016263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6282abf24a3183848b6cd274ddf46d8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OrbitTarget
-  player: {fileID: 0}
-  speed: 35
+  m_Points:
+    m_Paths:
+    - - {x: 1.1494696, y: -0.40446904}
+      - {x: 1.1494696, y: 0.23908626}
+      - {x: 0.99757457, y: 0.2330904}
+      - {x: 0.99757457, y: 0.68877554}
+      - {x: 0.99357736, y: 0.69277275}
+      - {x: 0.8436809, y: 1.1484579}
+      - {x: 0.8396837, y: 1.1524551}
+      - {x: 0.69778174, y: 1.4582438}
+      - {x: 0.55188257, y: 1.6101389}
+      - {x: 0.22011182, y: 1.6101389}
+      - {x: 0.016252685, y: 1.5221996}
+      - {x: -0.9011134, y: 0.60483354}
+      - {x: -1.1489421, y: 0.2330904}
+      - {x: -1.1489421, y: -0.38248423}
+      - {x: -1.1469436, y: -0.38448286}
+      - {x: -1.0110375, y: -0.69027156}
+      - {x: -0.85114795, y: -0.99606025}
+      - {x: -0.7052488, y: -1.1519525}
+      - {x: -0.38546973, y: -1.4617385}
+      - {x: -0.22957745, y: -1.6076376}
+      - {x: 0.23010491, y: -1.6076376}
+      - {x: 0.23210353, y: -1.605639}
+      - {x: 0.5778646, y: -1.3218352}
+      - {x: 0.8716616, y: -0.71825224}
+  m_UseDelaunayMesh: 1

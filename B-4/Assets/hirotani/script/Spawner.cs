@@ -16,6 +16,11 @@ public class Spawner : MonoBehaviour
 
     [Header("重なり防止")]
     public float checkRadius = 1.0f;
+    [Header("特殊敵プレハブ")]
+    public GameObject[] specialTargetPrefabs;
+
+    [Range(0f, 1f)]
+    public float specialSpawnRate = 0.1f; // 10%
 
     // 生成物管理リスト
     private List<GameObject> spawnedObjects = new List<GameObject>();
@@ -112,8 +117,32 @@ public class Spawner : MonoBehaviour
 
             if (hit == null)
             {
-                int randomIndex = Random.Range(0, targetPrefabs.Length);
-                GameObject obj = Instantiate(targetPrefabs[randomIndex], spawnPosition, Quaternion.identity);
+                GameObject prefabToSpawn;
+
+                // 10%で特殊敵
+                if (specialTargetPrefabs.Length > 0 &&
+                    Random.value < specialSpawnRate)
+                {
+                    int specialIndex =
+                        Random.Range(0, specialTargetPrefabs.Length);
+
+                    prefabToSpawn =
+                        specialTargetPrefabs[specialIndex];
+                }
+                else
+                {
+                    int normalIndex =
+                        Random.Range(0, targetPrefabs.Length);
+
+                    prefabToSpawn =
+                        targetPrefabs[normalIndex];
+                }
+
+                GameObject obj = Instantiate(
+                    prefabToSpawn,
+                    spawnPosition,
+                    Quaternion.identity
+                );
 
                 // 一旦デフォルトの値をセット
                 Vector3 targetScale = Vector3.one * 0.4f;
@@ -144,7 +173,7 @@ public class Spawner : MonoBehaviour
                 // HPとダストのステータス初期化
                 if (hp != null)
                 {
-                    hp.isSpecial = Random.value < 0.1f;
+                   
                     hp.InitializeStatus(targetHealth, targetDastpar);
                 }
 

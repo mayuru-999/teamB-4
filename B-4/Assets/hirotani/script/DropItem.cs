@@ -57,6 +57,8 @@ public class DropItem : MonoBehaviour
             {
                 destroyedCount += Mathf.RoundToInt(1 * pointMultiplier);
 
+                SPManager.AddSP(Mathf.RoundToInt(pointMultiplier));
+
                 Debug.Log("è¡Ç¶ÇΩêî: " + destroyedCount);
 
                 Destroy(gameObject);
