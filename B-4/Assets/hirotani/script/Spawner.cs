@@ -108,46 +108,47 @@ public class Spawner : MonoBehaviour
             Collider2D hit =
                 Physics2D.OverlapCircle(spawnPosition, checkRadius);
 
+            
+
             if (hit == null)
             {
-                int randomIndex =
-                    Random.Range(0, targetPrefabs.Length);
+                int randomIndex = Random.Range(0, targetPrefabs.Length);
+                GameObject obj = Instantiate(targetPrefabs[randomIndex], spawnPosition, Quaternion.identity);
 
-                GameObject obj =
-                    Instantiate(
-                        targetPrefabs[randomIndex],
-                        spawnPosition,
-                        Quaternion.identity
-                    );
+                // 一旦デフォルトの値をセット
+                Vector3 targetScale = Vector3.one * 0.4f;
+                Vector3 targetHealth = Vector3.one * 3f;
+                Vector3 targetDastpar = Vector3.one * 5f;
 
-                Vector3 targetScale;
+                // 惑星のHPmanagerコンポーネントを取得
+                HPmanager hp = obj.GetComponent<HPmanager>();
 
-                if (SkillManage.Instance != null)
+                if (SkillManage.Instance != null && hp != null)
                 {
-                    targetScale = SkillManage.Instance.getPlaneSizeLv();
-                }
-                else
-                {
-                    targetScale = Vector3.one * 0.4f;
+                    // 現在のレベルのデータを一括取得
+                    var (health, size, dastpar) = SkillManage.Instance.LvtoPlaneData();
+
+                    targetHealth = health;
+                    targetDastpar = dastpar;
+
+                    // 🔴 惑星自身の sizeType (1~3) に応じて、Vector3 から正しいスケールを抽出する
+                    if (hp.sizeType == 1) targetScale = Vector3.one * size.x; // 大きさ1のスケール
+                    else if (hp.sizeType == 2) targetScale = Vector3.one * size.y; // 大きさ2のスケール
+                    else if (hp.sizeType == 3) targetScale = Vector3.one * size.z; // 大きさ3のスケール
                 }
 
-                // 最初は0にする
+                // 初期スケールを0にしてから、各サイズに応じた targetScale へアニメーション
                 obj.transform.localScale = Vector3.zero;
-
-                // コルーチンでアニメーション
                 StartCoroutine(ScaleUp(obj.transform, targetScale));
 
-
-                // HP設定
-                HPmanager hp = obj.GetComponent<HPmanager>();
+                // HPとダストのステータス初期化
                 if (hp != null)
                 {
                     hp.isSpecial = Random.value < 0.1f;
+                    hp.InitializeStatus(targetHealth, targetDastpar);
                 }
 
-                // プレイヤー設定
-                OrbitTarget orbit =
-                    obj.GetComponent<OrbitTarget>();
+                OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
                 if (orbit != null)
                 {
                     orbit.player = player;
@@ -170,7 +171,7 @@ public class Spawner : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(
             player != null ? player.position : transform.position,
-            minRadius
+            maxRadius // 元のコードのまま（minRadiusのバグ防止用ならminRadiusに修正してください）
         );
     }
 }
