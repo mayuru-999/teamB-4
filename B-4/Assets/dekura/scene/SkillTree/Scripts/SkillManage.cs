@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Drawing;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class SkillManage : MonoBehaviour
@@ -14,22 +16,17 @@ public class SkillManage : MonoBehaviour
     private List<SkillData> unlockedSkills = new List<SkillData>();
 
     // PlaneSizeの値をレベル別に設定
-    // --- SkillManage.cs の修正部分 ---
-
-    // PlaneSize をゲームレベル5まで対応できるように要素数を増やす
     private Vector3[] PlaneSize = new Vector3[]
     {
-        new Vector3 (1.0f, 1.5f, 2.0f), // レベル1
-        new Vector3 (1.1f, 1.6f, 2.1f), // レベル2
-        new Vector3 (1.2f, 1.7f, 2.2f), // レベル3
-        new Vector3 (1.3f, 1.8f, 2.3f), // レベル4
-        new Vector3 (1.4f, 1.9f, 2.4f), // レベル5
+        new Vector3 (1.0f, 0.0f, 0.0f),
+        new Vector3 (0.7f, 0.3f, 0.0f),
+        new Vector3 (0.4f, 0.3f, 0.3f),
     };
 
-    // 各レベルごとのステータス
+    // 以下、ゲームLvに応じた各値のステータス
     // 例：
-    // Lv1（サイズ1,2,3）
-    // Lv2（サイズ1,2,3）...
+    // ゲームLv1（サイズ1,2,3）
+    // ゲームLv2（サイズ1,2,3）...
 
     // HP
     private Vector3[] PlaneHealth = new Vector3[]
@@ -52,6 +49,7 @@ public class SkillManage : MonoBehaviour
     };
 
     // スターダスト量
+    // Vector3である必要はないが、サイズ別に変える前提で一応Vector3にしている
     private Vector3[] StarDastsPar = new Vector3[]
     {
         new Vector3 (5, 5, 5),
@@ -87,12 +85,14 @@ public class SkillManage : MonoBehaviour
             return;
         }
 
+        // 登録
         unlockedSkills.Add(skill);
         SkillPointManager.Instance.skillPoint -= skill.needPoint;
 
         Debug.Log($"取得しました: {skill}");
         Debug.Log($"スキルポイント: {SkillPointManager.Instance.skillPoint}");
 
+        // UI更新
         SkillPointManager.Instance.UpdateUI();
         if (treeOperation != null) treeOperation.CenterOnSkill();
 
@@ -100,19 +100,33 @@ public class SkillManage : MonoBehaviour
             button.ButtonUpdate();
     }
 
-    // すでに解放済みか
+    /// <summary>
+    /// すでに解放済みか
+    /// </summary>
     public bool isUnlocked(SkillData skill)
     {
-        return unlockedSkills.Contains(skill) || skill == null;
+        if (unlockedSkills.Contains(skill) || skill == null)
+        {
+            return true;
+        }
+        return false;
     }
 
-    // 解放可能か判定
+    /// <summary>
+    /// スキルが解放可能か判定
+    /// </summary>
     public bool canUnlock(SkillData needSkills)
     {
-        return isUnlocked(needSkills) || needSkills == null;
+        if (isUnlocked(needSkills) || needSkills == null)
+        {
+            return true;
+        }
+        return false;
     }
 
-    // 指定タイプの効果量を合計
+    /// <summary>
+    /// 指定タイプのスキル効果量を合計して返す
+    /// </summary>
     public float getEffect(SkillEffect.Type type)
     {
         float effectValue = 0;
@@ -133,12 +147,14 @@ public class SkillManage : MonoBehaviour
         }
 
         if (type == SkillEffect.Type.PlaneLv)
-            return Mathf.Max(effectValue, 1);
+            return effectValue = Mathf.Max(effectValue, 1);
 
         return effectValue;
     }
 
-    // PlaneSizeをLvに応じて取得
+    /// <summary>
+    /// PlaneSizeをLvに応じて返す
+    /// </summary>
     public Vector3 getPlaneSizeLv()
     {
         int planeLv = 1;
@@ -150,7 +166,6 @@ public class SkillManage : MonoBehaviour
                 planeLv = Mathf.Max((int)skill.effect.value, planeLv);
             }
         }
-
         return PlaneSize[planeLv - 1];
     }
 
@@ -161,13 +176,15 @@ public class SkillManage : MonoBehaviour
             button.ButtonUpdate();
     }
 
-    // データリセット
+    // データをクリア
     public void ClearSkillData()
     {
         unlockedSkills.Clear();
     }
 
-    // ゲームLvを上げる
+    /// <summary>
+    /// ゲームLvを上げる
+    /// </summary>
     public void LvUpdate()
     {
         if (gameLv <= 5)
@@ -177,17 +194,22 @@ public class SkillManage : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Warning: Level Max");
+            Debug.LogWarning("Warning: Level Max!");
         }
     }
 
-    // Lvに応じたステータスを返す
-    public (Vector3 health, Vector3 size, Vector3 crystal) LvtoPlaneData()
+    /// <summary>
+    /// ゲームLvに応じた各ステータスを返す
+    /// </summary>
+    public (Vector3, Vector3, Vector3) LvtoPlaneData()
     {
+        // 受け取り方
+        // var (health, crystal, dust) = LvtoPlaneData();
+
         return (
             PlaneHealth[gameLv - 1],
-            PlaneSize[gameLv - 1],
-            Crystalvol[gameLv - 1]
+            Crystalvol[gameLv - 1],
+            StarDastsPar[gameLv - 1]
         );
     }
 }
