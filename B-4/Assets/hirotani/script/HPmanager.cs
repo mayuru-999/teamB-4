@@ -2,10 +2,16 @@
 
 public class HPmanager : MonoBehaviour
 {
+   
+    [Header("惑星の大きさ設定")]
+    [Tooltip("1 = 大きさ1(小), 2 = 大きさ2(中), 3 = 大きさ3(大)")]
+    [Range(1, 3)] public int sizeType = 1;
+
     private float pointMultiplier = 1f;
 
     public int hp = 100;
     private int currentHP;
+    private float currentDustVolume; //  ダストパラメータの値を保持する変数
 
     [Header("ドロップアイテム")]
     public DropItemData[] dropItems;
@@ -16,9 +22,41 @@ public class HPmanager : MonoBehaviour
     public float chainDropRate = 0.1f;
     public bool isSpecial = false;
 
+    //  Spawnerからデータを安全に受け取るための初期化関数 
+    public void InitializeStatus(Vector3 healthVector, Vector3 dustVector)
+    {
+        // sizeType (1〜3) に応じて Vector3 の x, y, z から対応する値を抽出
+        switch (sizeType)
+        {
+            case 1: // 大きさ1 (小)
+                hp = Mathf.RoundToInt(healthVector.x);
+                currentDustVolume = dustVector.x;
+                break;
+            case 2: // 大きさ2 (中)
+                hp = Mathf.RoundToInt(healthVector.y);
+                currentDustVolume = dustVector.y;
+                break;
+            case 3: // 大きさ3 (大)
+                hp = Mathf.RoundToInt(healthVector.z);
+                currentDustVolume = dustVector.z;
+                break;
+            default:
+                hp = Mathf.RoundToInt(healthVector.x);
+                currentDustVolume = dustVector.x;
+                break;
+        }
+
+        // ここで currentHP も上書き同期する
+        currentHP = hp;
+    }
+
     void Start()
     {
-        currentHP = hp;
+        // 念のため、Spawnerを経由せず配置された場合でも最低限動作するように
+        if (currentHP == 0)
+        {
+            currentHP = hp;
+        }
 
         if (isSpecial)
         {
@@ -30,6 +68,7 @@ public class HPmanager : MonoBehaviour
             }
         }
     }
+
     public void TakeDamage(int damage, float pointMultiplier = 1f)
     {
         currentHP -= damage;
@@ -44,7 +83,6 @@ public class HPmanager : MonoBehaviour
             Die();
         }
     }
-
 
     void Die()
     {
@@ -67,6 +105,8 @@ public class HPmanager : MonoBehaviour
             {
                 if (item != null && item.prefab != null)
                 {
+                    // 💡 必要に応じて、ここで「currentDustVolume」を item.count に掛け算・足し算すると
+                    // レベルや大きさによってドロップ数が変化する処理が作れます。
                     for (int i = 0; i < item.count; i++)
                     {
                         Instantiate(
@@ -79,7 +119,7 @@ public class HPmanager : MonoBehaviour
             }
         }
 
-        //特殊敵の爆発処理（そのまま維持）
+        // 特殊敵の爆発処理（そのまま維持）
         if (isSpecial)
         {
             Collider2D[] hits =
@@ -92,14 +132,14 @@ public class HPmanager : MonoBehaviour
             {
                 if (hit.CompareTag("Target"))
                 {
-                    HPmanager hp =
+                    HPmanager hpComponent =
                         hit.GetComponent<HPmanager>();
 
-                    if (hp != null &&
-                         hp != this &&
-                          !hp.isSpecial)
+                    if (hpComponent != null &&
+                         hpComponent != this &&
+                          !hpComponent.isSpecial)
                     {
-                        hp.TakeDamage(20);
+                        hpComponent.TakeDamage(20);
                     }
                 }
             }
@@ -107,6 +147,4 @@ public class HPmanager : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-    
 }

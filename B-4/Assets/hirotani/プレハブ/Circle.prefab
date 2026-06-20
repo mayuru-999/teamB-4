@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26614d2599566246807a29157e9cbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPmanager
+  sizeType: 3
   hp: 1
   dropItems:
   - prefab: {fileID: 2219536934679644898, guid: 00effdde497352148a5365482ed5385b, type: 3}
