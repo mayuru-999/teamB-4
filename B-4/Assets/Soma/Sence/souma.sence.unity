@@ -172,6 +172,9 @@ MonoBehaviour:
   minRadius: 0.5
   maxRadius: 5
   checkRadius: 1
+  smallScale: 0.5
+  mediumScale: 0.8
+  largeScale: 1.3
 --- !u!1001 &394428968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1619,6 +1622,7 @@ MonoBehaviour:
   targetTag: Target
   damage: 100
   attackInterval: 2
+  endDelay: 1.5
 --- !u!58 &1798109353
 CircleCollider2D:
   m_ObjectHideFlags: 0

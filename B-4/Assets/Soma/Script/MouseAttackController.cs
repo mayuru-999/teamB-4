@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class MouseAttackController : MonoBehaviour
 {
+    public static bool canAttack = true;
+
     public Player player;
 
     [Header("見た目 (UI Image)")]
@@ -19,6 +21,10 @@ public class MouseAttackController : MonoBehaviour
 
     private float lastAttackTime = 0f;
 
+    void Start()
+    {
+        canAttack = true;
+    }
     void Update()
     {
         if (player == null) return;
@@ -60,9 +66,8 @@ public class MouseAttackController : MonoBehaviour
         }
 
         // --- 4. 攻撃の実行 ---
-        if (progress >= 1f)
+        if (canAttack && progress >= 1f)
         {
-            // ※実際の攻撃判定は、倍率をかける前の本来の半径（attackRadius）で行われます
             Attack(worldPos, attackRadius, attackPower);
             lastAttackTime = Time.time;
 
@@ -71,6 +76,7 @@ public class MouseAttackController : MonoBehaviour
                 cooldownVisual.fillAmount = 0f;
             }
         }
+
     }
 
     void Attack(Vector2 center, float radius, int power)

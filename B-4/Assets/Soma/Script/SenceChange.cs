@@ -24,7 +24,11 @@ public class SenceChang : MonoBehaviour
     private float blinkCounter = 0f;
     private bool isBlinkVisible = true;
 
- 
+
+    private float endDelay = 1f;     // 追加：遅延時間
+    private float endTimer = 0f;
+    private bool isEnding = false;
+
 
     void Start()
     {
@@ -38,30 +42,43 @@ public class SenceChang : MonoBehaviour
         }
 
     }
-
     void Update()
     {
         if (isFinished) return;
+
+        // 0秒後の待機処理
+        if (isEnding)
+        {
+            endTimer += Time.deltaTime;
+
+            if (endTimer >= endDelay)
+            {
+                isFinished = true;
+                SceneManager.LoadScene("SkillTree_debug");
+            }
+
+            return;
+        }
 
         remainingTime -= Time.deltaTime;
 
         if (remainingTime <= 0)
         {
             remainingTime = 0;
-            isFinished = true;
-            SceneManager.LoadScene("SkillTree_debug");
+
+            // すぐにシーン遷移しない
+            isEnding = true;
+
+            // ↓ここで攻撃を止める
+            MouseAttackController.canAttack = false;
         }
 
-        // �\��
         timeText.text = remainingTime.ToString("F1") + "s";
 
-        // �c��2�b�Ő�
         if (remainingTime <= 2f)
         {
             timeText.color = Color.red;
             targetImage.color = Color.red;
-
-            // �_�ŏ���
             BlinkBorders();
         }
         else
@@ -69,14 +86,12 @@ public class SenceChang : MonoBehaviour
             timeText.color = Color.white;
             targetImage.color = Color.white;
 
-            // ��ɔ�\���ɂ���
             foreach (Image img in borderImages)
             {
                 img.enabled = false;
             }
         }
 
-        // �X�P�[���k��
         float rate = remainingTime / changeTime;
         Vector3 newScale = initialScale;
         newScale.x = initialScale.x * rate;
