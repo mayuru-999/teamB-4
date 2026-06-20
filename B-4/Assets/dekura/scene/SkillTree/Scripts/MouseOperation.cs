@@ -30,7 +30,7 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (gameObject.name == "ToMainButton") treeOperation.ChangeDescription("メインゲームへ");
-        if (gameObject.name == "ToCreateButton") treeOperation.ChangeDescription("惑星作成へ");
+        if (gameObject.name == "ToPlaneButton") treeOperation.ChangeDescription("惑星作成へ");
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -41,5 +41,9 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
     public void ToMainButton()
     {
         SceneManager.LoadScene("souma.sence");
+    }
+
+    public void ToPlaneButton()
+    {
     }
 }

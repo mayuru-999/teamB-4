@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
@@ -11,11 +12,13 @@ public class SkillManage : MonoBehaviour
 
     // ゲーム全体の段階（Lv）
     private int gameLv = 1;
+    private int bigbang = 0;
 
     // 既に取得しているスキルを管理するリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
+    private List<SkillData> unlockedSpSkills = new List<SkillData>();
 
-    // PlaneSizeの値をレベル別に設定
+    // PlaneSizeの値をレベル別に設定し、出現率
     private Vector3[] PlaneSize = new Vector3[]
     {
         new Vector3 (1.0f, 0.0f, 0.0f),
@@ -92,6 +95,12 @@ public class SkillManage : MonoBehaviour
         Debug.Log($"取得しました: {skill}");
         Debug.Log($"スキルポイント: {SkillPointManager.Instance.skillPoint}");
 
+        //Spスキル登録
+        if (skill.name == "color_Lv0" || skill.name == "slip_Lv0")
+        {
+            unlockedSpSkills.Add(skill);
+        }
+
         // UI更新
         SkillPointManager.Instance.UpdateUI();
         if (treeOperation != null) treeOperation.CenterOnSkill();
@@ -130,7 +139,6 @@ public class SkillManage : MonoBehaviour
     public float getEffect(SkillEffect.Type type)
     {
         float effectValue = 0;
-
         foreach (SkillData skill in unlockedSkills)
         {
             if (skill.effect.type == type)
@@ -172,6 +180,7 @@ public class SkillManage : MonoBehaviour
     public void ResetUnlockedSkill()
     {
         unlockedSkills.Clear();
+        unlockedSpSkills.Clear();
         foreach (SkillButton button in skillButtons)
             button.ButtonUpdate();
     }
@@ -180,6 +189,7 @@ public class SkillManage : MonoBehaviour
     public void ClearSkillData()
     {
         unlockedSkills.Clear();
+        unlockedSpSkills.Clear();
     }
 
     /// <summary>
@@ -187,13 +197,33 @@ public class SkillManage : MonoBehaviour
     /// </summary>
     public void LvUpdate()
     {
-        if (gameLv <= 5)
+        bigbang++;
+
+        switch (bigbang)
         {
-            gameLv++;
-            Debug.Log($"Level Up: {gameLv}");
+            case 4:
+                gameLv++;
+                Debug.Log($"Level Up: {gameLv}");
+                break;
+            case 8:
+                gameLv++;
+                Debug.Log($"Level Up: {gameLv}");
+                break;
+            case 11:
+                gameLv++;
+                Debug.Log($"Level Up: {gameLv}");
+                break;
+            case 15:
+                gameLv++;
+                Debug.Log($"Level Up: {gameLv}");
+                break;
+            default:
+                break;
+
         }
-        else
+        if (gameLv > 5)
         {
+            gameLv = 5;
             Debug.LogWarning("Warning: Level Max!");
         }
     }
