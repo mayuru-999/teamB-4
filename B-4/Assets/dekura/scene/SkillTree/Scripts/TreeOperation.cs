@@ -16,25 +16,31 @@ public class TreeOperation : MonoBehaviour
     [Header("Orion")]
     [SerializeField] private RectTransform viewport;
     [SerializeField] private RectTransform content;
+    [SerializeField] private RectTransform Forcus;
     [SerializeField] private ScrollRect scrollView;
     [SerializeField] private Image orion;
 
     [Header("Ui")]
     [SerializeField] private TextMeshProUGUI descriptText;
+    [SerializeField] private TextMeshProUGUI infoText;
+    [SerializeField] private TextMeshProUGUI skillPoints;
+    [SerializeField] private TextMeshProUGUI needSkillPoints;
     [SerializeField] private Image skillImage;
     [SerializeField] private SkillSprite[] skillImages;
 
     [Header("Zoom")]
-    [SerializeField] private float zoomMin = 0.5f;
+    [SerializeField] private float zoomMin = 0.4f;
     [SerializeField] private float zoomMax = 2.0f;
     [SerializeField] private float zoomSpeed = 0.1f;
 
     //スキルツリー完成フラグ
-    protected bool isCompleted = false;
+    [System.NonSerialized] protected bool isCompleted = false;
+    [System.NonSerialized] public bool mooving = false;
     //拡大率
     private float currentZoom = 1.0f;
     //スキルの表示位置
-    private Vector2 currentPosition = new Vector2(-390, 0);
+    private Vector2 currentPosition = new Vector2(-490, 0);
+    private Vector2 completePosition = new Vector2(-430, 0);
     //選択中スキルボタン
     private SkillButton tg = null;
 
@@ -44,6 +50,15 @@ public class TreeOperation : MonoBehaviour
         float scroll = eventData.scrollDelta.y;
         currentZoom = Mathf.Clamp(currentZoom + scroll * zoomSpeed, zoomMin, zoomMax);
         content.localScale = Vector3.one * currentZoom;
+
+        content.DOComplete();
+        CenterOnSkill();
+    }
+    public void CanselDOAnchorPos()
+    {
+        if(mooving) return;
+        Forcus.DOComplete();
+        content.DOComplete();
     }
 
     public void CenterOnSkill()
@@ -66,12 +81,17 @@ public class TreeOperation : MonoBehaviour
         }
 
         //スキルの画像と説明を更新
-        ResetDescription();
+        UpdateUi();
         //センタリング処理
         Debug.Log($"Centering on:{tg.skill}");
         Vector2 tgPos = (Vector2)content.InverseTransformPoint(tg.GetComponent<RectTransform>().position);
         //Dotweenアセット使用、動きがなめらか
-        content.DOAnchorPos(-tgPos * currentZoom + currentPosition, 0.8f).SetEase(Ease.OutQuart);
+        Forcus.DOAnchorPos(tgPos, 0.1f).SetEase(Ease.OutQuart);
+        content.DOAnchorPos(-tgPos * currentZoom + currentPosition, 0.8f).SetEase(Ease.OutQuart)
+            .OnComplete(() =>
+            {
+                mooving = false;
+            });
     }
 
     public void TreeCompleted()
@@ -84,21 +104,28 @@ public class TreeOperation : MonoBehaviour
         scrollView.inertia = true;
 
         isCompleted = true;
-        ResetDescription();
+        UpdateUi();
         orion.DOFade(0.15f, 4.0f);
         content.DOScale(zoomMin, 3.0f).SetEase(Ease.OutQuart);
-        content.DOAnchorPos(currentPosition, 5.0f).SetEase(Ease.OutQuart).OnComplete(() =>
-        {
-            Debug.Log("Skill Tree Completed!");
-            content.DOAnchorPosY(content.anchoredPosition.y + 20f, 2.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-        });
+        Forcus.DOAnchorPos(new Vector2(-362, -1041), 0.1f).SetEase(Ease.OutQuart);
+        content.DOAnchorPos(completePosition, 5.0f).SetEase(Ease.OutQuart)
+            .OnComplete(() =>
+            {
+                Debug.Log("Skill Tree Completed!");
+                content.DOAnchorPosY(content.anchoredPosition.y + 20f, 2.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+            });
     }
 
     public void ChangeDescription(string text)
     {
         descriptText.text = text;
     }
-    public void ResetDescription()
+    public void ChangeInformation(string text, Color color)
+    {
+        infoText.text = text;
+        infoText.color = color;
+    }
+    public void UpdateUi()
     {
         if(tg != null)
         {
@@ -112,6 +139,12 @@ public class TreeOperation : MonoBehaviour
             }
         }
         else skillImage.color = Color.clear;
+
+        needSkillPoints.text = $"必要鉱石：{tg.needPoint}";
+        skillPoints.text = $"鉱石：{SkillPointManager.Instance.skillPoint.ToString()}";
         descriptText.text = isCompleted ?  "Congratulations!" : tg.skill.skillDescription;
+        infoText.text = isCompleted ? "" : "クリックして解放";
+
+        //infoText.color = new Color(204f, 204f, 204f);
     }
 }

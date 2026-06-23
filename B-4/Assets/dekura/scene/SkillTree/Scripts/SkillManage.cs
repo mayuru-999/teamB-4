@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -7,8 +6,11 @@ using UnityEngine;
 public class SkillManage : MonoBehaviour
 {
     public static SkillManage Instance { get; private set; }
+
     private TreeOperation treeOperation;
+    private PlanetUiManager planetUiManager;
     private SkillButton[] skillButtons;
+    private PlaneSkill[] planeSkill;
 
     // ゲーム全体の段階（Lv）
     private int gameLv = 1;
@@ -73,11 +75,13 @@ public class SkillManage : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
         treeOperation = FindAnyObjectByType<TreeOperation>();
+        planetUiManager = FindAnyObjectByType<PlanetUiManager>();
         skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
+        planeSkill = FindObjectsByType<PlaneSkill>(FindObjectsSortMode.None);
     }
 
     // スキル取得処理
-    public void getSkill(SkillData skill)
+    public bool getSkill(SkillData skill)
     {
         treeOperation = FindAnyObjectByType<TreeOperation>();
         skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
@@ -85,7 +89,8 @@ public class SkillManage : MonoBehaviour
         if (SkillPointManager.Instance.skillPoint < skill.needPoint)
         {
             Debug.Log($"ポイントが足りません: {SkillPointManager.Instance.skillPoint - skill.needPoint}");
-            return;
+            if (treeOperation != null) treeOperation.ChangeInformation("ポイントが足りません!", Color.red);
+            return false;
         }
 
         // 登録
@@ -95,18 +100,46 @@ public class SkillManage : MonoBehaviour
         Debug.Log($"取得しました: {skill}");
         Debug.Log($"スキルポイント: {SkillPointManager.Instance.skillPoint}");
 
-        //Spスキル登録
-        if (skill.name == "color_Lv0" || skill.name == "slip_Lv0")
-        {
-            unlockedSpSkills.Add(skill);
-        }
-
         // UI更新
-        SkillPointManager.Instance.UpdateUI();
-        if (treeOperation != null) treeOperation.CenterOnSkill();
-
+        if (treeOperation != null)
+        {
+            treeOperation.mooving = true;
+            treeOperation.CenterOnSkill();
+        }
         foreach (SkillButton button in skillButtons)
             button.ButtonUpdate();
+
+        return true;
+    }
+
+    // Spスキル取得処理
+    public bool getSpSkill(SkillData skill)
+    {
+        planetUiManager = FindAnyObjectByType<PlanetUiManager>();
+        planeSkill = FindObjectsByType<PlaneSkill>(FindObjectsSortMode.None);
+
+        if (SkillPointManager.Instance.starDustPoint < skill.needPoint)
+        {
+            Debug.Log($"ポイントが足りません: {SkillPointManager.Instance.starDustPoint - skill.needPoint}");
+            if (planetUiManager != null) planetUiManager.informationText("ポイントが足りません!", planetUiManager.cautionInfoColor);
+            return false;
+        }
+
+        // 登録
+        unlockedSpSkills.Add(skill);
+        SkillPointManager.Instance.starDustPoint -= skill.needPoint;
+
+        Debug.Log($"取得しました: {skill}");
+        Debug.Log($"星のかけら: {SkillPointManager.Instance.starDustPoint}");
+        if (planetUiManager != null) planetUiManager.informationText("爆誕!!", planetUiManager.defaultInfoColor);
+
+        // UI更新
+        if (planetUiManager != null) planetUiManager.UpdateUI();
+
+        foreach (PlaneSkill plane in planeSkill)
+            plane.PlaneUpdate();
+
+        return true;
     }
 
     /// <summary>
@@ -114,7 +147,7 @@ public class SkillManage : MonoBehaviour
     /// </summary>
     public bool isUnlocked(SkillData skill)
     {
-        if (unlockedSkills.Contains(skill) || skill == null)
+        if (unlockedSkills.Contains(skill) || skill == null|| unlockedSpSkills.Contains(skill))
         {
             return true;
         }
@@ -179,17 +212,18 @@ public class SkillManage : MonoBehaviour
 
     public void ResetUnlockedSkill()
     {
-        unlockedSkills.Clear();
-        unlockedSpSkills.Clear();
-        foreach (SkillButton button in skillButtons)
-            button.ButtonUpdate();
+        if (getEffect(SkillEffect.Type.GOD) == 0)
+        {
+            unlockedSkills.Clear();
+            foreach (SkillButton button in skillButtons)
+                button.ButtonUpdate();
+        }
     }
 
     // データをクリア
     public void ClearSkillData()
     {
-        unlockedSkills.Clear();
-        unlockedSpSkills.Clear();
+        if (getEffect(SkillEffect.Type.GOD) == 0) unlockedSkills.Clear();
     }
 
     /// <summary>
@@ -238,7 +272,7 @@ public class SkillManage : MonoBehaviour
 
         return (
             PlaneHealth[gameLv - 1],
-            Crystalvol[gameLv - 1],
+            Crystalvol[gameLv - 1] * getEffect(SkillEffect.Type.CrystalVolumeRate),
             StarDastsPar[gameLv - 1]
         );
     }

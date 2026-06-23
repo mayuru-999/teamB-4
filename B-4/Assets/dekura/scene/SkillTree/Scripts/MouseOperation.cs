@@ -11,6 +11,7 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
     {
         treeOperation = FindAnyObjectByType<TreeOperation>();
         treeOperation.CenterOnSkill();
+        SkillPointManager.Instance.UpdateUI();
     }
 
     //ホイールスクロールでズームイン、アウト
@@ -20,8 +21,10 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
     }
 
     //クリックでスキルのセンタリング
-    //Downも宣言しないとUpが反応しないため、両方宣言
-    public void OnPointerDown(PointerEventData eventData) { }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        treeOperation.CanselDOAnchorPos();
+    }
     public void OnPointerUp(PointerEventData eventData)
     {
         if(gameObject.name == "Orion") treeOperation.CenterOnSkill();
@@ -29,13 +32,22 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (gameObject.name == "ToMainButton") treeOperation.ChangeDescription("メインゲームへ");
-        if (gameObject.name == "ToPlaneButton") treeOperation.ChangeDescription("惑星作成へ");
+        if (gameObject.name == "ToMainButton")
+        {
+            treeOperation.ChangeDescription("メインゲームへ");
+            treeOperation.ChangeInformation("クリックして移動", new Color(204f/255f, 204f/255f, 204f/255f));
+        }
+
+        if (gameObject.name == "ToPlaneButton")
+        {
+            treeOperation.ChangeDescription("惑星作成へ");
+            treeOperation.ChangeInformation("クリックして移動", new Color(204f/255f, 204f/255f, 204f/255f));
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        treeOperation.ResetDescription();
+        treeOperation.UpdateUi();
     }
 
     public void ToMainButton()
@@ -45,5 +57,6 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
 
     public void ToPlaneButton()
     {
+        SceneManager.LoadScene("CreatePlanet");
     }
 }

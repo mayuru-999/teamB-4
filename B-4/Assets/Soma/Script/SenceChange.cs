@@ -54,7 +54,8 @@ public class SenceChang : MonoBehaviour
             if (endTimer >= endDelay)
             {
                 isFinished = true;
-                SceneManager.LoadScene("SkillTree_debug");
+                //SceneManager.LoadScene("SkillTree_debug");
+                SceneManager.LoadScene("SkillTree");
             }
 
             return;
