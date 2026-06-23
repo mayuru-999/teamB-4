@@ -140,8 +140,9 @@ public class TreeOperation : MonoBehaviour
         }
         else skillImage.color = Color.clear;
 
-        needSkillPoints.text = $"必要鉱石：{tg.needPoint}";
         skillPoints.text = $"鉱石：{SkillPointManager.Instance.skillPoint.ToString()}";
+
+        needSkillPoints.text = isCompleted ? "" : $"必要鉱石：{tg.needPoint}";
         descriptText.text = isCompleted ?  "Congratulations!" : tg.skill.skillDescription;
         infoText.text = isCompleted ? "" : "クリックして解放";
 
