@@ -4,6 +4,7 @@ using TMPro;
 public class SkillPointManager : MonoBehaviour
 {
     public int skillPoint = 0;
+    public int starDustPoint = 0;
     public TMP_Text scoreText;
 
     public static SkillPointManager Instance { get; private set; }
@@ -24,7 +25,7 @@ public class SkillPointManager : MonoBehaviour
     {
         if (scoreText == null)
         {
-            scoreText = FindObjectOfType<TMP_Text>();
+            //scoreText = FindObjectOfType<TMP_Text>();
         }
 
         UpdateUI();

@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/dekura/scene/SkillTree/SkillTree.unity
     guid: b5c7d5002d3b19849b76a708934744b8
+  - enabled: 1
+    path: Assets/dekura/scene/CreatePlanet/CreatePlanet.unity
+    guid: 6b643bd1ae99d4241bb7033b6cd65c75
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

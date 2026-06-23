@@ -14,7 +14,12 @@ public class SkillEffect
         ColorChainAttack,   //スキル攻撃力
         SlipAriaAttack,     //スキル攻撃力
         PlaneVolume,        //惑星量増加
-        PlaneLv             //惑星サイズ増加
+        PlaneLv,            //惑星サイズ増加
+
+        BombAttack,         //爆発攻撃力
+        ClitRate,           //クリティカル率
+        CrystalVolumeRate,  //クリスタル量増加乗算
+        GOD                 //ゴッドモード
     }
     public Type type;
     public float value;
