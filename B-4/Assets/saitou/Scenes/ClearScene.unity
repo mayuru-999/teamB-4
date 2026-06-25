@@ -798,6 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SphereManager
   image: {fileID: 1435501000}
+  ballsContainer: {fileID: 0}
   balls:
   - rect: {fileID: 1441020397}
   - rect: {fileID: 1160642481}
@@ -812,6 +813,12 @@ MonoBehaviour:
   speed: 0.3
   minScale: 1.5
   maxScale: 4.8
+  entryInterval: 0.27
+  entryDuration: 1.44
+  entryOffscreenX: 1400
+  entrySpiralTurns: 0.36
+  entryInitialDelay: 2
+  entrySnapSpeed: 0.01
 --- !u!1 &1355866712
 GameObject:
   m_ObjectHideFlags: 0
