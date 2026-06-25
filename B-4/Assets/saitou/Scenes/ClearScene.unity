@@ -1114,6 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7f3bc65bc21814a97bf001fd9196dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scene3
+  delay: 350
 --- !u!1 &1838444582 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 910972386194927755, guid: 0a0eec2642c0ac14489b361bd2c99a3e, type: 3}
