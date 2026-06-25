@@ -12,6 +12,10 @@ public class SkillManage : MonoBehaviour
     private SkillButton[] skillButtons;
     private PlaneSkill[] planeSkill;
 
+    // --- 【追加】画面遷移カウント用の変数 ---
+    public int MainVisitCount { get; private set; } = 0; // 他のスクリプトから「SkillManage.Instance.MainVisitCount」で参照可能
+    private bool isComingFromSkillTree = false;         // スキルツリーから戻ってきたかどうかの内部フラグ
+
     // ゲーム全体の段階（Lv）
     private int gameLv = 1;
     private int bigbang = 0;
@@ -27,11 +31,6 @@ public class SkillManage : MonoBehaviour
         new Vector3 (0.7f, 0.3f, 0.0f),
         new Vector3 (0.4f, 0.3f, 0.3f),
     };
-
-    // 以下、ゲームLvに応じた各値のステータス
-    // 例：
-    // ゲームLv1（サイズ1,2,3）
-    // ゲームLv2（サイズ1,2,3）...
 
     // HP
     private Vector3[] PlaneHealth = new Vector3[]
@@ -54,7 +53,6 @@ public class SkillManage : MonoBehaviour
     };
 
     // スターダスト量
-    // Vector3である必要はないが、サイズ別に変える前提で一応Vector3にしている
     private Vector3[] StarDastsPar = new Vector3[]
     {
         new Vector3 (5, 5, 5),
@@ -74,10 +72,48 @@ public class SkillManage : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        // ※シーン開始時のFind系は、初回のシーンにあるものしか取得できないため、
+        // 必要に応じて getSkill や 各初期化時に再取得する設計が安全です。
+        RefreshReferences();
+    }
+
+    /// <summary>
+    /// シーン内のUIコンポーネントなどの参照を再取得する（追加）
+    /// </summary>
+    public void RefreshReferences()
+    {
         treeOperation = FindAnyObjectByType<TreeOperation>();
         planetUiManager = FindAnyObjectByType<PlanetUiManager>();
         skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
         planeSkill = FindObjectsByType<PlaneSkill>(FindObjectsSortMode.None);
+    }
+
+    // --- 【追加】カウント制御用の関数群 ---
+
+    /// <summary>
+    /// スキルツリーからメインに戻る直前に呼び出す
+    /// </summary>
+    public void SetReturnFromSkillTreeFlag()
+    {
+        isComingFromSkillTree = true;
+    }
+
+    /// <summary>
+    /// メイン画面がロードされた直後に呼び出して、必要ならカウントを進める
+    /// </summary>
+    public void CheckAndIncrementVisitCount()
+    {
+        if (isComingFromSkillTree)
+        {
+            MainVisitCount++;
+            Debug.Log($"【カウント】スキルツリーからメインに戻りました。回数: {MainVisitCount}回");
+
+            // カウントを永続保存したい場合はPlayerPrefsを併用（アプリを落としても覚えている）
+            // PlayerPrefs.SetInt("MainVisitCount_Saved", MainVisitCount);
+
+            isComingFromSkillTree = false; // フラグをリセット
+        }
     }
 
     // スキル取得処理
@@ -93,14 +129,12 @@ public class SkillManage : MonoBehaviour
             return false;
         }
 
-        // 登録
         unlockedSkills.Add(skill);
         SkillPointManager.Instance.skillPoint -= skill.needPoint;
 
         Debug.Log($"取得しました: {skill}");
         Debug.Log($"スキルポイント: {SkillPointManager.Instance.skillPoint}");
 
-        // UI更新
         if (treeOperation != null)
         {
             treeOperation.mooving = true;
@@ -125,7 +159,6 @@ public class SkillManage : MonoBehaviour
             return false;
         }
 
-        // 登録
         unlockedSpSkills.Add(skill);
         SkillPointManager.Instance.starDustPoint -= skill.needPoint;
 
@@ -133,7 +166,6 @@ public class SkillManage : MonoBehaviour
         Debug.Log($"星のかけら: {SkillPointManager.Instance.starDustPoint}");
         if (planetUiManager != null) planetUiManager.informationText("爆誕!!", planetUiManager.defaultInfoColor);
 
-        // UI更新
         if (planetUiManager != null) planetUiManager.UpdateUI();
 
         foreach (PlaneSkill plane in planeSkill)
@@ -142,21 +174,15 @@ public class SkillManage : MonoBehaviour
         return true;
     }
 
-    /// <summary>
-    /// すでに解放済みか
-    /// </summary>
     public bool isUnlocked(SkillData skill)
     {
-        if (unlockedSkills.Contains(skill) || skill == null|| unlockedSpSkills.Contains(skill))
+        if (unlockedSkills.Contains(skill) || skill == null || unlockedSpSkills.Contains(skill))
         {
             return true;
         }
         return false;
     }
 
-    /// <summary>
-    /// スキルが解放可能か判定
-    /// </summary>
     public bool canUnlock(SkillData needSkills)
     {
         if (isUnlocked(needSkills) || needSkills == null)
@@ -166,9 +192,6 @@ public class SkillManage : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// 指定タイプのスキル効果量を合計して返す
-    /// </summary>
     public float getEffect(SkillEffect.Type type)
     {
         float effectValue = 0;
@@ -193,9 +216,6 @@ public class SkillManage : MonoBehaviour
         return effectValue;
     }
 
-    /// <summary>
-    /// PlaneSizeをLvに応じて返す
-    /// </summary>
     public Vector3 getPlaneSizeLv()
     {
         int planeLv = 1;
@@ -220,15 +240,11 @@ public class SkillManage : MonoBehaviour
         }
     }
 
-    // データをクリア
     public void ClearSkillData()
     {
         if (getEffect(SkillEffect.Type.GOD) == 0) unlockedSkills.Clear();
     }
 
-    /// <summary>
-    /// ゲームLvを上げる
-    /// </summary>
     public void LvUpdate()
     {
         bigbang++;
@@ -253,7 +269,6 @@ public class SkillManage : MonoBehaviour
                 break;
             default:
                 break;
-
         }
         if (gameLv > 5)
         {
@@ -262,18 +277,19 @@ public class SkillManage : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// ゲームLvに応じた各ステータスを返す
-    /// </summary>
     public (Vector3, Vector3, Vector3) LvtoPlaneData()
     {
-        // 受け取り方
-        // var (health, crystal, dust) = LvtoPlaneData();
-
         return (
             PlaneHealth[gameLv - 1],
             Crystalvol[gameLv - 1] * getEffect(SkillEffect.Type.CrystalVolumeRate),
             StarDastsPar[gameLv - 1]
         );
+    }
+
+  
+    public void ResetVisitCount()
+    {
+        MainVisitCount = 0; // クラス内部からなら書き換えが可能
+        Debug.Log("SkillManage: カウントをリセットしました。");
     }
 }
