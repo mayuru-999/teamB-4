@@ -7,96 +7,168 @@ public class SphereManager : MonoBehaviour
     {
         public RectTransform rect;
 
-        // ▼ 入場アニメーション用の内部状態（インスペクタには出さない）
-        [System.NonSerialized] public bool hasEntered;     // 入場が完了したか
-        [System.NonSerialized] public float entryStartTime; // このボールの入場開始時刻
+        [System.NonSerialized] public bool hasEntered;
+        [System.NonSerialized] public float entryStartTime;
+        [System.NonSerialized] public int enterOrder = -1;
+        [System.NonSerialized] public bool entryStarted;
+        [System.NonSerialized] public float fixedTargetAngle;
+        [System.NonSerialized] public float enterAngleOffset;
     }
 
     public RectTransform image;
+    public RectTransform ballsContainer;
     public Ball[] balls;
-    public float radius = 250f; // 変更前250f
-    public float verticalRatio = 0.5f; // 縦方向の圧縮率（1にすると真円に近づく）
+    public float radius = 250f;
+    public float verticalRatio = 0.5f;
     public float speed = 1f;
     public float minScale = 0.5f;
     public float maxScale = 1.5f;
 
     [Header("入場アニメーション設定")]
-    public float entryInterval = 0.15f;  // ボールが入場を開始する間隔（インデックスごとのずれ）
-    public float entryDuration = 1.0f;   // 1個あたりの入場にかかる時間（等速移動）
-    public float entryOffscreenX = 900f; // 画面外左の開始X座標（絶対値。マイナス方向に配置される）
+    public float entryInterval = 0.02f;
+    public float entryDuration = 1.0f;
+    public float entryOffscreenX = 1400f;
+    public float entrySpiralTurns = 0f;
+    public float entryInitialDelay = 0f;
 
-    private float startTime; // スクリプト開始時刻（入場タイミング計算の基準）
+    [Header("入場完了後のスムージング")]
+    public float entrySnapSpeed = 5f;
+
+    private float startTime;
+    private int nextEnterOrder;
 
     void Start()
     {
         startTime = Time.time;
-        for (int i = 0; i < balls.Length; i++)
+
+        int n = balls.Length;
+        int[] order = new int[n];
+        float[] spotDistance = new float[n];
+
+        float entryStartAngle = Mathf.PI;
+        for (int i = 0; i < n; i++)
         {
-            balls[i].hasEntered = false;
-            balls[i].entryStartTime = startTime + entryInterval * i;
+            order[i] = i;
+            float spotAngle = (2f * Mathf.PI / n) * i;
+            float forward = (spotAngle - entryStartAngle) % (2f * Mathf.PI);
+            if (forward < 0f) forward += 2f * Mathf.PI;
+            spotDistance[i] = forward;
         }
+
+        System.Array.Sort(order, (a, b) => spotDistance[b].CompareTo(spotDistance[a]));
+
+        for (int rank = 0; rank < n; rank++)
+        {
+            int ballIndex = order[rank];
+            balls[ballIndex].hasEntered = false;
+            balls[ballIndex].enterOrder = -1;
+            balls[ballIndex].entryStarted = false;
+            balls[ballIndex].fixedTargetAngle = 0f;
+            balls[ballIndex].enterAngleOffset = 0f;
+            balls[ballIndex].entryStartTime = startTime + entryInitialDelay + entryInterval * rank;
+        }
+
+        nextEnterOrder = 0;
     }
 
     void Update()
     {
-        for (int i = 0; i < balls.Length; i++)
+        int n = balls.Length;
+        float[] depths = new float[n];
+
+        for (int i = 0; i < n; i++)
         {
             var b = balls[i];
 
-            // ■ 均等配置 + 自動回転（本来の角度はそのまま使う）
-            float angle =
-                (2f * Mathf.PI / balls.Length) * i
+            float targetAngle =
+                (2f * Mathf.PI / n) * i
                 + Time.time * speed;
 
-            // ■ 円運動（楕円で立体感）― 本来の軌道上の位置（収束先）
-            float targetX = Mathf.Cos(angle) * radius;
-            float targetY = Mathf.Sin(angle) * radius * verticalRatio;
+            float targetX = Mathf.Cos(targetAngle) * radius;
+            float targetY = Mathf.Sin(targetAngle) * radius * verticalRatio;
 
-            float x, y = targetY; // Yは常に本来位置（高さは最初から合わせておく）
+            float x, y;
+
+            float startX = -entryOffscreenX;
+            float startY = 0f;
+            float startRadius = Mathf.Sqrt(
+                startX * startX + (startY / Mathf.Max(verticalRatio, 0.0001f)) * (startY / Mathf.Max(verticalRatio, 0.0001f))
+            );
+            float startAngle = Mathf.Atan2(startY / Mathf.Max(verticalRatio, 0.0001f), startX);
 
             if (!b.hasEntered)
             {
                 if (Time.time < b.entryStartTime)
                 {
-                    // ■ まだ入場開始時刻に達していない
-                    // → 画面外左で待機（高さだけ本来の軌道位置に揃えておく）
-                    x = -entryOffscreenX;
+                    x = startX;
+                    y = startY;
                 }
                 else
                 {
-                    // ■ 入場中：画面外左 → 本来のX座標へ等速で近づける
+                    if (!b.entryStarted)
+                    {
+                        b.fixedTargetAngle = targetAngle;
+                        b.entryStarted = true;
+                    }
+
                     float t = (Time.time - b.entryStartTime) / entryDuration;
                     if (t >= 1f)
                     {
                         t = 1f;
-                        b.hasEntered = true; // 入場完了。以後は通常ロジックのみ通る
+                        b.hasEntered = true;
+                        b.enterOrder = nextEnterOrder;
+                        nextEnterOrder++;
+
+                        b.enterAngleOffset = b.fixedTargetAngle - targetAngle;
+                        while (b.enterAngleOffset > Mathf.PI) b.enterAngleOffset -= 2f * Mathf.PI;
+                        while (b.enterAngleOffset < -Mathf.PI) b.enterAngleOffset += 2f * Mathf.PI;
                     }
-                    x = Mathf.Lerp(-entryOffscreenX, targetX, t);
+
+                    float currentRadius = Mathf.Lerp(startRadius, radius, t);
+
+                    float forwardDelta = b.fixedTargetAngle - startAngle;
+                    forwardDelta = forwardDelta % (2f * Mathf.PI);
+                    if (forwardDelta < 0f) forwardDelta += 2f * Mathf.PI;
+
+                    float extraTurns = Mathf.Round(entrySpiralTurns);
+                    float totalDelta = forwardDelta + extraTurns * 2f * Mathf.PI;
+                    float currentAngle = startAngle + totalDelta * t;
+
+                    x = Mathf.Cos(currentAngle) * currentRadius;
+                    y = Mathf.Sin(currentAngle) * currentRadius * verticalRatio;
                 }
             }
             else
             {
-                // ■ 入場完了後は通常の円運動
-                x = targetX;
+                b.enterAngleOffset = Mathf.Lerp(b.enterAngleOffset, 0f, 1f - Mathf.Pow(0.01f, Time.deltaTime * entrySnapSpeed));
+
+                float smoothedAngle = targetAngle + b.enterAngleOffset;
+                x = Mathf.Cos(smoothedAngle) * radius;
+                y = Mathf.Sin(smoothedAngle) * radius * verticalRatio;
             }
 
             b.rect.anchoredPosition = new Vector2(x, y);
 
-            // ■ 奥行き（修正版：上＝奥、下＝手前）
-            // yの実際の範囲は ±radius*verticalRatio なので、それに合わせて正規化する
-            float depth01 = 1f - ((targetY + radius * verticalRatio) / (radius * verticalRatio * 2f));
+            float depth01 = 1f - ((y + radius * verticalRatio) / (radius * verticalRatio * 2f));
+            depth01 = Mathf.Clamp01(depth01);
+            depths[i] = depth01;
 
-            // ■ スケール（奥小・手前大）
             float scale = Mathf.Lerp(minScale, maxScale, depth01);
             b.rect.localScale = Vector3.one * scale;
+        }
 
-            // ■ 描画順（奥が上・手前が下）
-            b.rect.SetSiblingIndex(Mathf.RoundToInt(depth01 * (balls.Length - 1)));
+        // ■ 2パス目：重なり順（SiblingIndex）の決定
+        int[] sortOrder = new int[n];
+        for (int i = 0; i < n; i++) sortOrder[i] = i;
 
-#if UNITY_EDITOR
-            // エディタ上でのみ座標を確認したい場合はコメントを外す
-            // Debug.Log($"{i}: {x}, {y}");
-#endif
+        System.Array.Sort(sortOrder, (a, b) =>
+        {
+            return depths[a].CompareTo(depths[b]);
+        });
+
+        for (int rank = 0; rank < n; rank++)
+        {
+            balls[sortOrder[rank]].rect.SetSiblingIndex(rank);
         }
     }
 }
