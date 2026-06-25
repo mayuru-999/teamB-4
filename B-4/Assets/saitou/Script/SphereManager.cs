@@ -11,8 +11,7 @@ public class SphereManager : MonoBehaviour
         [System.NonSerialized] public float entryStartTime;
         [System.NonSerialized] public int enterOrder = -1;
         [System.NonSerialized] public bool entryStarted;
-        [System.NonSerialized] public float fixedTargetAngle;
-        [System.NonSerialized] public float enterAngleOffset;
+        [System.NonSerialized] public float entryAngleOffset;
     }
 
     public RectTransform image;
@@ -30,9 +29,6 @@ public class SphereManager : MonoBehaviour
     public float entryOffscreenX = 1400f;
     public float entrySpiralTurns = 0f;
     public float entryInitialDelay = 0f;
-
-    [Header("入場完了後のスムージング")]
-    public float entrySnapSpeed = 5f;
 
     private float startTime;
     private int nextEnterOrder;
@@ -63,8 +59,7 @@ public class SphereManager : MonoBehaviour
             balls[ballIndex].hasEntered = false;
             balls[ballIndex].enterOrder = -1;
             balls[ballIndex].entryStarted = false;
-            balls[ballIndex].fixedTargetAngle = 0f;
-            balls[ballIndex].enterAngleOffset = 0f;
+            balls[ballIndex].entryAngleOffset = 0f;
             balls[ballIndex].entryStartTime = startTime + entryInitialDelay + entryInterval * rank;
         }
 
@@ -107,7 +102,13 @@ public class SphereManager : MonoBehaviour
                 {
                     if (!b.entryStarted)
                     {
-                        b.fixedTargetAngle = targetAngle;
+                        // 入場開始時点の targetAngle から startAngle までの
+                        // 反時計回りの総回転量を固定で記録する
+                        float delta = targetAngle - startAngle;
+                        delta = delta % (2f * Mathf.PI);
+                        if (delta < 0f) delta += 2f * Mathf.PI;
+                        float extraTurns = Mathf.Round(entrySpiralTurns);
+                        b.entryAngleOffset = delta + extraTurns * 2f * Mathf.PI;
                         b.entryStarted = true;
                     }
 
@@ -118,21 +119,16 @@ public class SphereManager : MonoBehaviour
                         b.hasEntered = true;
                         b.enterOrder = nextEnterOrder;
                         nextEnterOrder++;
-
-                        b.enterAngleOffset = b.fixedTargetAngle - targetAngle;
-                        while (b.enterAngleOffset > Mathf.PI) b.enterAngleOffset -= 2f * Mathf.PI;
-                        while (b.enterAngleOffset < -Mathf.PI) b.enterAngleOffset += 2f * Mathf.PI;
                     }
 
-                    float currentRadius = Mathf.Lerp(startRadius, radius, t);
+                    // EaseOutQuad：終点に近づくほど減速する
+                    float easedT = 1f - (1f - t) * (1f - t);
 
-                    float forwardDelta = b.fixedTargetAngle - startAngle;
-                    forwardDelta = forwardDelta % (2f * Mathf.PI);
-                    if (forwardDelta < 0f) forwardDelta += 2f * Mathf.PI;
+                    float currentRadius = Mathf.Lerp(startRadius, radius, easedT);
 
-                    float extraTurns = Mathf.Round(entrySpiralTurns);
-                    float totalDelta = forwardDelta + extraTurns * 2f * Mathf.PI;
-                    float currentAngle = startAngle + totalDelta * t;
+                    // 終点は常に最新の targetAngle に追従。
+                    // 回転量は入場開始時に固定した entryAngleOffset を使う。
+                    float currentAngle = targetAngle - b.entryAngleOffset * (1f - easedT);
 
                     x = Mathf.Cos(currentAngle) * currentRadius;
                     y = Mathf.Sin(currentAngle) * currentRadius * verticalRatio;
@@ -140,11 +136,8 @@ public class SphereManager : MonoBehaviour
             }
             else
             {
-                b.enterAngleOffset = Mathf.Lerp(b.enterAngleOffset, 0f, 1f - Mathf.Pow(0.01f, Time.deltaTime * entrySnapSpeed));
-
-                float smoothedAngle = targetAngle + b.enterAngleOffset;
-                x = Mathf.Cos(smoothedAngle) * radius;
-                y = Mathf.Sin(smoothedAngle) * radius * verticalRatio;
+                x = targetX;
+                y = targetY;
             }
 
             b.rect.anchoredPosition = new Vector2(x, y);
