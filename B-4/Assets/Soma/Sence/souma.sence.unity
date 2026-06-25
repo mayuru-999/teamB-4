@@ -172,9 +172,8 @@ MonoBehaviour:
   minRadius: 0.5
   maxRadius: 5
   checkRadius: 1
-  smallScale: 0.5
-  mediumScale: 0.8
-  largeScale: 1.3
+  specialTargetPrefabs: []
+  specialSpawnRate: 0.1
 --- !u!1001 &394428968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2354,7 +2353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WhiteFadeManager
   fadeImage: {fileID: 1896114625}
   fadeSpeed: 1.5
-  nextSceneName: SkillTree_debug
+  nextSceneName: SkillTree
 --- !u!1001 &7530574840625689192
 PrefabInstance:
   m_ObjectHideFlags: 0

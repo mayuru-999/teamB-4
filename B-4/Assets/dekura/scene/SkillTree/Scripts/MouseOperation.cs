@@ -52,6 +52,13 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
 
     public void ToMainButton()
     {
+  
+        if (SkillManage.Instance != null)
+        {
+            SkillManage.Instance.SetReturnFromSkillTreeFlag();
+        }
+
+        
         SceneManager.LoadScene("souma.sence");
     }
 

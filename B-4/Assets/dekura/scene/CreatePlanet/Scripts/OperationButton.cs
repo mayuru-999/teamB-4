@@ -30,6 +30,13 @@ public class OperationButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void ToMainButton()
     {
+       
+        if (SkillManage.Instance != null)
+        {
+            SkillManage.Instance.SetReturnFromSkillTreeFlag();
+        }
+
+       
         SceneManager.LoadScene("souma.sence");
     }
 

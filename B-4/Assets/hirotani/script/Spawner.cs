@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
             time += Time.deltaTime;
             float ratio = time / duration;
 
-            // ポッと出る感じ（バウンド）
+            
             float scale = Mathf.Sin(ratio * Mathf.PI * 0.5f)
                         + Mathf.Sin(ratio * Mathf.PI) * 0.15f;
 
@@ -102,68 +102,95 @@ public class Spawner : MonoBehaviour
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             float randomDistance = Random.Range(minRadius, maxRadius);
 
-            Vector3 spawnPosition =
-                new Vector3(
-                    Mathf.Cos(angle) * randomDistance,
-                    Mathf.Sin(angle) * randomDistance,
-                    0
-                ) + player.position;
+            Vector3 spawnPosition = new Vector3(
+                Mathf.Cos(angle) * randomDistance,
+                Mathf.Sin(angle) * randomDistance,
+                0
+            ) + player.position;
 
             // 重なりチェック
-            Collider2D hit =
-                Physics2D.OverlapCircle(spawnPosition, checkRadius);
-
-            
+            Collider2D hit = Physics2D.OverlapCircle(spawnPosition, checkRadius);
 
             if (hit == null)
             {
-                GameObject prefabToSpawn;
-
-                // 10%で特殊敵
-                if (specialTargetPrefabs.Length > 0 &&
-                    Random.value < specialSpawnRate)
+               
+                Vector3 spawnRates = Vector3.right; // デフォルト (1, 0, 0)
+                if (SkillManage.Instance != null)
                 {
-                    int specialIndex =
-                        Random.Range(0, specialTargetPrefabs.Length);
+                    spawnRates = SkillManage.Instance.getPlaneSizeLv(); // x=小の確率, y=中の確率, z=大の確率
+                }
 
-                    prefabToSpawn =
-                        specialTargetPrefabs[specialIndex];
+            
+                int targetIndex = 0; // デフォルトは 0 (サイズ1・小)
+                float roll = Random.value; // 0.0 〜 1.0 のランダム値
+
+                if (roll < spawnRates.x)
+                {
+                    targetIndex = 0; // サイズ1（小）
+                }
+                else if (roll < spawnRates.x + spawnRates.y)
+                {
+                    targetIndex = 1; // サイズ2（中）
                 }
                 else
                 {
-                    int normalIndex =
-                        Random.Range(0, targetPrefabs.Length);
-
-                    prefabToSpawn =
-                        targetPrefabs[normalIndex];
+                    targetIndex = 2; // サイズ3（大）
                 }
 
-                GameObject obj = Instantiate(
-                    prefabToSpawn,
-                    spawnPosition,
-                    Quaternion.identity
-                );
+                // 配列の要素数を超えないように安全ガード（念のため）
+                if (targetIndex >= targetPrefabs.Length)
+                {
+                    targetIndex = targetPrefabs.Length - 1;
+                }
 
-                // 一旦デフォルトの値をセット
+          
+                GameObject prefabToSpawn;
+
+                // 10%で特殊敵
+                if (specialTargetPrefabs.Length > 0 && Random.value < specialSpawnRate)
+                {
+                    // 特殊敵の配列からも、同じサイズ（インデックス）のものを引っ張る
+                    int specialIndex = Mathf.Min(targetIndex, specialTargetPrefabs.Length - 1);
+                    prefabToSpawn = specialTargetPrefabs[specialIndex];
+                }
+                else
+                {
+                    prefabToSpawn = targetPrefabs[targetIndex];
+                }
+
+           
+                GameObject obj = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+
+                // 各種ステータスの初期化用変数
                 Vector3 targetScale = Vector3.one * 0.4f;
                 Vector3 targetHealth = Vector3.one * 3f;
                 Vector3 targetDastpar = Vector3.one * 5f;
 
-                // 惑星のHPmanagerコンポーネントを取得
                 HPmanager hp = obj.GetComponent<HPmanager>();
 
                 if (SkillManage.Instance != null && hp != null)
                 {
-                    // 現在のレベルのデータを一括取得
-                    var (health, size, dastpar) = SkillManage.Instance.LvtoPlaneData();
+                    // レベルに応じたステータスを取得
+                    var (currentHealth, currentCrystal, currentDust) = SkillManage.Instance.LvtoPlaneData();
+                    targetHealth = currentHealth;
+                    targetDastpar = currentDust;
 
-                    targetHealth = health;
-                    targetDastpar = dastpar;
-
-                    // 🔴 惑星自身の sizeType (1~3) に応じて、Vector3 から正しいスケールを抽出する
-                    if (hp.sizeType == 1) targetScale = Vector3.one * size.x; // 大きさ1のスケール
-                    else if (hp.sizeType == 2) targetScale = Vector3.one * size.y; // 大きさ2のスケール
-                    else if (hp.sizeType == 3) targetScale = Vector3.one * size.z; // 大きさ3のスケール
+            
+                    if (targetIndex == 0)
+                    {
+                        hp.sizeType = 1;
+                        targetScale = Vector3.one * 0.4f; // サイズ1の見た目の大きさ
+                    }
+                    else if (targetIndex == 1)
+                    {
+                        hp.sizeType = 2;
+                        targetScale = Vector3.one * 0.7f; // サイズ2の見た目の大きさ
+                    }
+                    else
+                    {
+                        hp.sizeType = 3;
+                        targetScale = Vector3.one * 1.0f; // サイズ3の見た目の大きさ
+                    }
                 }
 
                 // 初期スケールを0にしてから、各サイズに応じた targetScale へアニメーション
@@ -173,7 +200,6 @@ public class Spawner : MonoBehaviour
                 // HPとダストのステータス初期化
                 if (hp != null)
                 {
-                   
                     hp.InitializeStatus(targetHealth, targetDastpar);
                 }
 
