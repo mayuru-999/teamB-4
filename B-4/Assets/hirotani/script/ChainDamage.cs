@@ -42,15 +42,18 @@ public class ChainDamage : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            if (hit.CompareTag("Target") && hit.gameObject != gameObject)
-            {
-                HPmanager enemy =
-                    hit.GetComponent<HPmanager>();
+            if (!hit.CompareTag("Target") || hit.gameObject == gameObject)
+                continue;
 
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(damage);
-                }
+            // ChainDamageが付いている敵にはダメージを与えない
+            if (hit.GetComponent<ChainDamage>() != null)
+                continue;
+
+            HPmanager enemy = hit.GetComponent<HPmanager>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
             }
         }
 

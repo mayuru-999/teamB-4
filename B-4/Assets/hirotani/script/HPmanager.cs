@@ -17,11 +17,12 @@ public class HPmanager : MonoBehaviour
     public DropItemData[] dropItems;
     [Header("特殊ドロップ")]
     public GameObject chainDamagePrefab;
-   
+    private bool isDead = false;
 
-    
-    
-    
+
+
+
+
 
     //  Spawnerからデータを安全に受け取るための初期化関数 
     public void InitializeStatus(Vector3 healthVector, Vector3 dustVector)
@@ -64,12 +65,11 @@ public class HPmanager : MonoBehaviour
 
     public void TakeDamage(int damage, float pointMultiplier = 1f)
     {
+        if (isDead) return;
+
         currentHP -= damage;
 
-        // 倒れる直前に倍率を保持しておく
         this.pointMultiplier = pointMultiplier;
-
-        Debug.Log(gameObject.name + " HP : " + currentHP);
 
         if (currentHP <= 0)
         {
@@ -79,14 +79,17 @@ public class HPmanager : MonoBehaviour
 
     void Die()
     {
-        ChainDamage chain =
-                   GetComponent<ChainDamage>();
+        if (isDead) return;
+        isDead = true;
+
+        ChainDamage chain = GetComponent<ChainDamage>();
 
         if (chain != null)
         {
             chain.Explode();
             return;
         }
+   
         // 3%で特殊ドロップ
         if (Random.value < 0.03f)
         {
@@ -99,16 +102,17 @@ public class HPmanager : MonoBehaviour
                 );
             }
         }
-    
-        // 97%で通常ドロップ
+
         else
         {
+            int totalDropCount = 0;
+
             foreach (var item in dropItems)
             {
                 if (item != null && item.prefab != null)
                 {
-                    // 💡 必要に応じて、ここで「currentDustVolume」を item.count に掛け算・足し算すると
-                    // レベルや大きさによってドロップ数が変化する処理が作れます。
+                    totalDropCount += item.count;
+
                     for (int i = 0; i < item.count; i++)
                     {
                         Instantiate(
@@ -119,7 +123,8 @@ public class HPmanager : MonoBehaviour
                     }
                 }
             }
+
+            // ここでDP加算
+            DropPointManager.AddDP(totalDropCount);
         }
-        Destroy(gameObject);
     }
-}
