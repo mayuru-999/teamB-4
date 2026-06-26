@@ -685,6 +685,7 @@ RectTransform:
   - {fileID: 311411192}
   - {fileID: 1976235618}
   - {fileID: 1355866713}
+  - {fileID: 1435501000}
   - {fileID: 1316703122}
   - {fileID: 63788447}
   m_Father: {fileID: 0}
@@ -847,8 +848,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.62, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1435501000}
+  m_Children: []
   m_Father: {fileID: 1088796540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -964,14 +964,14 @@ RectTransform:
   m_GameObject: {fileID: 1435500999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.62, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1355866713}
+  m_Father: {fileID: 1088796540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.903278, y: 44.000023}
+  m_AnchoredPosition: {x: 18.99997, y: 171}
   m_SizeDelta: {x: 2266.0952, y: 992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1435501001
@@ -1114,7 +1114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7f3bc65bc21814a97bf001fd9196dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scene3
-  delay: 375
+  delay: 9
+  AutoChange: 0
+  AutoChangeCount: 1000
 --- !u!1 &1838444582 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 910972386194927755, guid: 0a0eec2642c0ac14489b361bd2c99a3e, type: 3}
