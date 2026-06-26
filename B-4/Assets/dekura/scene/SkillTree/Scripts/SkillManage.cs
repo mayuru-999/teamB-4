@@ -18,7 +18,7 @@ public class SkillManage : MonoBehaviour
 
     // ゲーム全体の段階（Lv）
     private int gameLv = 1;
-    private int bigbang = 0;
+    public int bigbang = 0;
 
     // 既に取得しているスキルを管理するリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
@@ -248,7 +248,7 @@ public class SkillManage : MonoBehaviour
     public void LvUpdate()
     {
         bigbang++;
-
+        Debug.Log($"現在のビッグバンカウント: {bigbang}");
         switch (bigbang)
         {
             case 4:

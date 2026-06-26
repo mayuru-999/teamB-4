@@ -98,7 +98,7 @@ public class MouseAttackController : MonoBehaviour
             }
         }
 
-        Debug.Log(count + " 個にダメージ");
+      
     }
 
     void OnDrawGizmos()

@@ -47,13 +47,14 @@ public class DeleteByTag : MonoBehaviour
         // 攻撃の処理（マウス長押し）
         if (Input.GetMouseButton(0))
         {
-            // ★条件追加: カウントが16の時だけチャージ（タイマー）が進む
-            if (SkillManage.Instance != null && SkillManage.Instance.MainVisitCount == 16)
+            // カウントが1以上の時にチャージが進む
+            if (SkillManage.Instance != null && SkillManage.Instance.MainVisitCount >= 1)
             {
                 timer += Time.deltaTime;
 
                 if (timer >= attackInterval)
                 {
+                   //カウントアップもレベルチェックも全て連動します
                     TriggerBigBang();
                 }
             }
@@ -72,17 +73,15 @@ public class DeleteByTag : MonoBehaviour
         AttackAll();
         timer = 0f;
 
-        // ★追加: 使用後にカウントをリセット（0にする、または1にする場合は適宜変更してください）
         if (SkillManage.Instance != null)
         {
-            // メソッドを呼び出して安全にリセットする
+            // ★超重要：ここだけでLvUpdateを呼び出す（bigbang++ とログ出力、レベルアップがここで実行される）
+            SkillManage.Instance.LvUpdate();
+
             SkillManage.Instance.ResetVisitCount();
         }
 
-        // 攻撃終了モードに移行
         isEnding = true;
-
-        // 通常の攻撃を止める
         MouseAttackController.canAttack = false;
     }
 
