@@ -33,9 +33,14 @@ public class TreeOperation : MonoBehaviour
     [SerializeField] private float zoomMax = 2.0f;
     [SerializeField] private float zoomSpeed = 0.1f;
 
+    //初期カラー
+    [System.NonSerialized] public Color defaultDiscColor;
+    [System.NonSerialized] public Color defaultInfoColor;
+
     //スキルツリー完成フラグ
-    [System.NonSerialized] protected bool isCompleted = false;
+    [System.NonSerialized] public bool isCompleted = false;
     [System.NonSerialized] public bool mooving = false;
+
     //拡大率
     private float currentZoom = 1.0f;
     //スキルの表示位置
@@ -43,6 +48,12 @@ public class TreeOperation : MonoBehaviour
     private Vector2 completePosition = new Vector2(-430, 0);
     //選択中スキルボタン
     private SkillButton tg = null;
+
+    private void Awake()
+    {
+        defaultDiscColor = descriptText.color;
+        defaultInfoColor = infoText.color;
+    }
 
     public void TreeZoom(PointerEventData eventData)
     {
@@ -145,6 +156,9 @@ public class TreeOperation : MonoBehaviour
         needSkillPoints.text = isCompleted ? "" : $"必要鉱石：{tg.needPoint}";
         descriptText.text = isCompleted ?  "Congratulations!" : tg.skill.skillDescription;
         infoText.text = isCompleted ? "" : "クリックして解放";
+
+        descriptText.color = defaultDiscColor;
+        infoText.color = defaultInfoColor;
 
         //infoText.color = new Color(204f, 204f, 204f);
     }

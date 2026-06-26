@@ -24,6 +24,7 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
     public void OnPointerDown(PointerEventData eventData)
     {
         treeOperation.CanselDOAnchorPos();
+        SoundsManager.Instance.PlaySound("select");
     }
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -35,13 +36,13 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
         if (gameObject.name == "ToMainButton")
         {
             treeOperation.ChangeDescription("メインゲームへ");
-            treeOperation.ChangeInformation("クリックして移動", new Color(204f/255f, 204f/255f, 204f/255f));
+            treeOperation.ChangeInformation("クリックして移動", treeOperation.defaultInfoColor);
         }
 
         if (gameObject.name == "ToPlaneButton")
         {
             treeOperation.ChangeDescription("惑星作成へ");
-            treeOperation.ChangeInformation("クリックして移動", new Color(204f/255f, 204f/255f, 204f/255f));
+            treeOperation.ChangeInformation("クリックして移動", treeOperation.defaultInfoColor);
         }
     }
 
@@ -58,12 +59,13 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
             SkillManage.Instance.SetReturnFromSkillTreeFlag();
         }
 
-        
+        SoundsManager.Instance.PlaySound("select2");
         SceneManager.LoadScene("souma.sence");
     }
 
     public void ToPlaneButton()
     {
+        SoundsManager.Instance.PlaySound("select2");
         SceneManager.LoadScene("CreatePlanet");
     }
 }
