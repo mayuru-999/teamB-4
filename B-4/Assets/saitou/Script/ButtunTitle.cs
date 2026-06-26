@@ -14,13 +14,13 @@ public class scene3 : MonoBehaviour
     
 
     float count = 0.0f;
-    public float delay = 600.0f;
+    public float delay = 10.0f;
     public bool AutoChange = false;
     public float AutoChangeCount = 1000.0f;
 
     private void Update()
     {
-        count += 1.0f / Time.deltaTime; ;
+        count += Time.deltaTime;
 
         if (count >= delay)
         {

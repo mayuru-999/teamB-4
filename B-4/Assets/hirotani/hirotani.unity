@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::attak
   attackVisual: {fileID: 0}
-  attackPower: 1
+  attackPower: 10
   explosionRadius: 1
   attackInterval: 1.8
 --- !u!1 &1535671908
@@ -416,6 +416,8 @@ MonoBehaviour:
   minRadius: 0
   maxRadius: 10
   checkRadius: 1
+  specialTargetPrefabs: []
+  specialSpawnRate: 0.1
 --- !u!1 &1570454864
 GameObject:
   m_ObjectHideFlags: 0
