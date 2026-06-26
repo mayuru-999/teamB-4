@@ -912,6 +912,50 @@ MonoBehaviour:
   duration: 1
   pingPong: 0
   delay: 5.5
+--- !u!1 &1375124911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1375124912}
+  - component: {fileID: 1375124913}
+  m_Layer: 0
+  m_Name: deleteObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1375124912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375124911}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.30759, y: -1.06374, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375124913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375124911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9512aa77844b56b4dbe24439e209a281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::deleteManeger
 --- !u!1 &1401181318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8590340896610169572, guid: ae902b640d146e447b892b7926087ad0, type: 3}
@@ -2321,3 +2365,4 @@ SceneRoots:
   - {fileID: 1088796540}
   - {fileID: 1708676076}
   - {fileID: 1928839160}
+  - {fileID: 1375124912}
