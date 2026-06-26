@@ -245,6 +245,15 @@ public class SkillManage : MonoBehaviour
         if (getEffect(SkillEffect.Type.GOD) == 0) unlockedSkills.Clear();
     }
 
+    //ClearSceneで使うリセット用関数
+    public void AllClearSkillData()
+    {
+        unlockedSkills.Clear();
+        unlockedSpSkills.Clear();
+        gameLv = 1;
+        bigbang = 0;
+    }
+
     public void LvUpdate()
     {
         bigbang++;
