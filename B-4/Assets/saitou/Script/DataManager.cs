@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlanetUiManager456 : MonoBehaviour
+public class DataManager : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI breakPlane;

@@ -581,8 +581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreathingGlow
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  minIntensity: 0.85
-  maxIntensity: 0.905
+  minIntensity: 900
+  maxIntensity: 1000
   cycleDuration: 2
   alpha: 1
 --- !u!1 &845263343
@@ -949,8 +949,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreathingGlow
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  minIntensity: 0.85
-  maxIntensity: 0.905
+  minIntensity: 900
+  maxIntensity: 1000
   cycleDuration: 2
   alpha: 1
 --- !u!1001 &1214986930
@@ -1892,8 +1892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreathingGlow
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  minIntensity: 0.85
-  maxIntensity: 1000
+  minIntensity: 900
+  maxIntensity: 10000
   cycleDuration: 2
   alpha: 1
 --- !u!1 &2071312561
@@ -2123,8 +2123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreathingGlow
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  minIntensity: 0.85
-  maxIntensity: 0.905
+  minIntensity: 900
+  maxIntensity: 1000
   cycleDuration: 2
   alpha: 1
 --- !u!1660057539 &9223372036854775807

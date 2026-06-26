@@ -909,7 +909,7 @@ MonoBehaviour:
   target: {fileID: 0}
   minScale: 1
   maxScale: 125
-  duration: 2
+  duration: 1
   pingPong: 0
   delay: 5.5
 --- !u!1 &1401181318 stripped
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   target: {fileID: 0}
   minScale: 1
   maxScale: 125
-  duration: 2
+  duration: 1
   pingPong: 0
   delay: 5.5
 --- !u!1 &1441020396 stripped
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7f3bc65bc21814a97bf001fd9196dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scene3
-  delay: 9
+  delay: 7.8
   AutoChange: 0
   AutoChangeCount: 1000
 --- !u!1 &1838444582 stripped
