@@ -7,46 +7,44 @@ public class SenceChang : MonoBehaviour
 {
     public float changeTime = 30f;
     public TMP_Text timeText;
-    public Image targetImage; // �F�ύX�p
+    public Image targetImage;
 
     public Transform scaleImage;
     private Vector3 initialScale;
 
-    // �ǉ��F���̉摜4��
     public Image[] borderImages;
+
+    public GameObject resultPanel; // ←追加
 
     private float remainingTime;
     private bool isFinished = false;
 
-    // �_�ŗp
-
-    private float blinkInterval = 0.2f; // �_�ŊԊu
+    private float blinkInterval = 0.2f;
     private float blinkCounter = 0f;
     private bool isBlinkVisible = true;
 
-
-    private float endDelay = 1f;     // 追加：遅延時間
+    private float endDelay = 1f;
     private float endTimer = 0f;
     private bool isEnding = false;
-
 
     void Start()
     {
         remainingTime = changeTime;
         initialScale = scaleImage.localScale;
 
-        // �ŏ��͔�\��
+        // 最初は非表示
+        resultPanel.SetActive(false);
+
         foreach (Image img in borderImages)
         {
             img.enabled = false;
         }
-
     }
+
     void Update()
     {
         if (isFinished) return;
 
-        // 0秒後の待機処理
         if (isEnding)
         {
             endTimer += Time.deltaTime;
@@ -54,10 +52,10 @@ public class SenceChang : MonoBehaviour
             if (endTimer >= endDelay)
             {
                 isFinished = true;
-                //SceneManager.LoadScene("SkillTree_debug");
-                SceneManager.LoadScene("SkillTree");
-            }
 
+                // シーン遷移の代わりにパネル表示
+                resultPanel.SetActive(true);
+            }
             return;
         }
 
@@ -66,11 +64,9 @@ public class SenceChang : MonoBehaviour
         if (remainingTime <= 0)
         {
             remainingTime = 0;
-
-            // すぐにシーン遷移しない
             isEnding = true;
 
-            // ↓ここで攻撃を止める
+            // 攻撃停止
             MouseAttackController.canAttack = false;
         }
 
@@ -99,7 +95,6 @@ public class SenceChang : MonoBehaviour
         scaleImage.localScale = newScale;
     }
 
-
     void BlinkBorders()
     {
         blinkCounter += Time.deltaTime;
@@ -107,13 +102,12 @@ public class SenceChang : MonoBehaviour
         if (blinkCounter >= blinkInterval)
         {
             blinkCounter = 0f;
-            isBlinkVisible = !isBlinkVisible; // ON/OFF�؂�ւ�
+            isBlinkVisible = !isBlinkVisible;
         }
 
         foreach (Image img in borderImages)
         {
             img.enabled = isBlinkVisible;
         }
-
     }
 }

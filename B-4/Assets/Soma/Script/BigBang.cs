@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DeleteByTag : MonoBehaviour
 {
+    public GameObject resultPanel;
+
     private Renderer myRenderer;
     private Color originalColor;
 
@@ -14,7 +16,6 @@ public class DeleteByTag : MonoBehaviour
 
     private float timer = 0f;
 
-    public WhiteFadeManager fadeManager;
     public float endDelay = 1f;
 
     private bool isEnding = false;
@@ -24,12 +25,13 @@ public class DeleteByTag : MonoBehaviour
 
     void Start()
     {
-        // 自分のRenderer取得
+        if (resultPanel != null)
+            resultPanel.SetActive(false);
+
         myRenderer = GetComponent<Renderer>();
 
         if (myRenderer != null)
         {
-            // materialをインスタンス化（重要）
             myRenderer.material = new Material(myRenderer.material);
             originalColor = myRenderer.material.color;
         }
@@ -51,9 +53,10 @@ public class DeleteByTag : MonoBehaviour
 
             if (endTimer >= endDelay)
             {
-                if (fadeManager != null)
-                    fadeManager.StartFade();
+                if (resultPanel != null)
+                    resultPanel.SetActive(true);
             }
+
             return;
         }
 
@@ -61,16 +64,12 @@ public class DeleteByTag : MonoBehaviour
         HandleInput();
     }
 
-    //========================
-    // 点滅処理
-    //========================
     void HandleBlink()
     {
         if (isBlinking && myRenderer != null)
         {
             float t = Mathf.Sin(Time.time * blinkSpeed) * 0.5f + 0.5f;
             Color blinkColor = Color.Lerp(originalColor, Color.red, t);
-
             myRenderer.material.color = blinkColor;
         }
     }
@@ -80,14 +79,9 @@ public class DeleteByTag : MonoBehaviour
         isBlinking = false;
 
         if (myRenderer != null)
-        {
             myRenderer.material.color = originalColor;
-        }
     }
 
-    //========================
-    // 状態管理
-    //========================
     void CheckBigBangReady()
     {
         if (SkillManage.Instance == null) return;
@@ -113,9 +107,7 @@ public class DeleteByTag : MonoBehaviour
                 timer += Time.deltaTime;
 
                 if (timer >= attackInterval)
-                {
                     TriggerBigBang();
-                }
             }
         }
         else
@@ -124,9 +116,6 @@ public class DeleteByTag : MonoBehaviour
         }
     }
 
-    //========================
-    // ビッグバン
-    //========================
     void TriggerBigBang()
     {
         AttackAll();
@@ -156,15 +145,11 @@ public class DeleteByTag : MonoBehaviour
             HPmanager hp = obj.GetComponent<HPmanager>();
 
             if (hp != null)
-            {
                 hp.TakeDamage(damage, 2f);
-            }
         }
 
         if (SkillManage.Instance != null)
-        {
             SkillManage.Instance.ClearSkillData();
-        }
 
         Debug.Log("全体攻撃完了");
     }

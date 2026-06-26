@@ -6,6 +6,7 @@ public class scene1 : MonoBehaviour
 {
     public void change_button()
     {
+        Debug.Log("ƒ{ƒ^ƒ“‹N“®");
         SceneManager.LoadScene("SkillTree");
     }
 }
