@@ -2,34 +2,49 @@ using UnityEngine;
 
 public class DeleteByTag : MonoBehaviour
 {
-    public WhiteFadeManager fadeManager;
+    private Renderer myRenderer;
+    private Color originalColor;
+
+    public float blinkSpeed = 5f;
+    private bool isBlinking = false;
+
     public string targetTag = "Target";
     public int damage = 10;
     public float attackInterval = 1f;
 
     private float timer = 0f;
 
-    // 終了処理用
+    public WhiteFadeManager fadeManager;
+    public float endDelay = 1f;
+
     private bool isEnding = false;
     private float endTimer = 0f;
-    public float endDelay = 1f;
+
+    private bool canUseBigBang = false;
 
     void Start()
     {
-        // シーンが新しくなったので、SkillManage内のUI等の参照をリフレッシュする
+        // 自分のRenderer取得
+        myRenderer = GetComponent<Renderer>();
+
+        if (myRenderer != null)
+        {
+            // materialをインスタンス化（重要）
+            myRenderer.material = new Material(myRenderer.material);
+            originalColor = myRenderer.material.color;
+        }
+
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.RefreshReferences();
-
-            // カウントのチェックを実行
             SkillManage.Instance.CheckAndIncrementVisitCount();
-            Debug.Log($"シーンカウント: {SkillManage.Instance.MainVisitCount}回目");
         }
     }
 
     void Update()
     {
-        // 終了待機モード
+        HandleBlink();
+
         if (isEnding)
         {
             endTimer += Time.deltaTime;
@@ -37,24 +52,68 @@ public class DeleteByTag : MonoBehaviour
             if (endTimer >= endDelay)
             {
                 if (fadeManager != null)
-                {
                     fadeManager.StartFade();
-                }
             }
             return;
         }
 
-        // 攻撃の処理（マウス長押し）
+        CheckBigBangReady();
+        HandleInput();
+    }
+
+    //========================
+    // 点滅処理
+    //========================
+    void HandleBlink()
+    {
+        if (isBlinking && myRenderer != null)
+        {
+            float t = Mathf.Sin(Time.time * blinkSpeed) * 0.5f + 0.5f;
+            Color blinkColor = Color.Lerp(originalColor, Color.red, t);
+
+            myRenderer.material.color = blinkColor;
+        }
+    }
+
+    void StopBlink()
+    {
+        isBlinking = false;
+
+        if (myRenderer != null)
+        {
+            myRenderer.material.color = originalColor;
+        }
+    }
+
+    //========================
+    // 状態管理
+    //========================
+    void CheckBigBangReady()
+    {
+        if (SkillManage.Instance == null) return;
+
+        if (SkillManage.Instance.MainVisitCount >= 1)
+        {
+            if (!canUseBigBang)
+            {
+                canUseBigBang = true;
+                isBlinking = true;
+
+                Debug.Log("ビッグバン準備OK");
+            }
+        }
+    }
+
+    void HandleInput()
+    {
         if (Input.GetMouseButton(0))
         {
-            // カウントが1以上の時にチャージが進む
-            if (SkillManage.Instance != null && SkillManage.Instance.MainVisitCount >= 1)
+            if (canUseBigBang)
             {
                 timer += Time.deltaTime;
 
                 if (timer >= attackInterval)
                 {
-                   //カウントアップもレベルチェックも全て連動します
                     TriggerBigBang();
                 }
             }
@@ -65,24 +124,27 @@ public class DeleteByTag : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// ビッグバン（全体攻撃、カウントリセット、終了モード移行）を実行する
-    /// </summary>
-    private void TriggerBigBang()
+    //========================
+    // ビッグバン
+    //========================
+    void TriggerBigBang()
     {
         AttackAll();
         timer = 0f;
 
         if (SkillManage.Instance != null)
         {
-            // ★超重要：ここだけでLvUpdateを呼び出す（bigbang++ とログ出力、レベルアップがここで実行される）
             SkillManage.Instance.LvUpdate();
-
             SkillManage.Instance.ResetVisitCount();
         }
 
+        StopBlink();
+
         isEnding = true;
+        canUseBigBang = false;
         MouseAttackController.canAttack = false;
+
+        Debug.Log("ビッグバン発動");
     }
 
     void AttackAll()
@@ -99,11 +161,11 @@ public class DeleteByTag : MonoBehaviour
             }
         }
 
-        Debug.Log("全体への攻撃（ビッグバン）完了");
-
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.ClearSkillData();
         }
+
+        Debug.Log("全体攻撃完了");
     }
 }
