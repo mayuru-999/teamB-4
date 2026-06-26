@@ -118,22 +118,27 @@ public class Spawner : MonoBehaviour
                 if (SkillManage.Instance != null)
                 {
                     spawnRates = SkillManage.Instance.getPlaneSizeLv(); // x=小の確率, y=中の確率, z=大の確率
+                    Debug.Log("Lv" + SkillManage.Instance.getPlaneSizeLv());
                 }
 
             
                 int targetIndex = 0; // デフォルトは 0 (サイズ1・小)
                 float roll = Random.value; // 0.0 〜 1.0 のランダム値
-
+                Debug.Log("roll" + roll);
+                Debug.Log(spawnRates.x + " " + spawnRates.y + " " + spawnRates.z);
                 if (roll < spawnRates.x)
                 {
+                    Debug.Log(0);
                     targetIndex = 0; // サイズ1（小）
                 }
                 else if (roll < spawnRates.x + spawnRates.y)
                 {
+                    Debug.Log(1);
                     targetIndex = 1; // サイズ2（中）
                 }
                 else
                 {
+                    Debug.Log(2);
                     targetIndex = 2; // サイズ3（大）
                 }
 
@@ -184,12 +189,12 @@ public class Spawner : MonoBehaviour
                     else if (targetIndex == 1)
                     {
                         hp.sizeType = 2;
-                        targetScale = Vector3.one * 0.7f; // サイズ2の見た目の大きさ
+                        targetScale = Vector3.one * 0.6f; // サイズ2の見た目の大きさ
                     }
                     else
                     {
                         hp.sizeType = 3;
-                        targetScale = Vector3.one * 1.0f; // サイズ3の見た目の大きさ
+                        targetScale = Vector3.one * 0.8f; // サイズ3の見た目の大きさ
                     }
                 }
 
