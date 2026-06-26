@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 757739086732966483, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2028292390343869016, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -254,6 +258,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4534325647438140360, guid: fd02754bf6932a646ad9462a0c01879f, type: 3}
+    - target: {fileID: 7602319070948693163, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7602319070948693163, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1617,11 +1625,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53006bad89bbb04ebc07881f35ff673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickToDestroyTarget
-  fadeManager: {fileID: 3728306531475030374}
+  blinkSpeed: 5
   targetTag: Target
   damage: 100
-  attackInterval: 2
-  endDelay: 1.5
+  attackInterval: 1
+  fadeManager: {fileID: 3728306531475030374}
+  endDelay: 1.3
 --- !u!58 &1798109353
 CircleCollider2D:
   m_ObjectHideFlags: 0
