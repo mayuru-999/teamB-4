@@ -30,18 +30,18 @@ public class OperationButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void ToMainButton()
     {
-       
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.SetReturnFromSkillTreeFlag();
         }
 
-       
+        SoundsManager.Instance.PlaySound("select2");
         SceneManager.LoadScene("souma.sence");
     }
 
     public void ToTreeButton()
     {
+        SoundsManager.Instance.PlaySound("select2");
         SceneManager.LoadScene("SkillTree");
     }
 }

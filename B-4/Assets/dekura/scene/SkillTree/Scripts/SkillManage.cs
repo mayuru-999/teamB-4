@@ -17,8 +17,8 @@ public class SkillManage : MonoBehaviour
     private bool isComingFromSkillTree = false;         // スキルツリーから戻ってきたかどうかの内部フラグ
 
     // ゲーム全体の段階（Lv）
-    private int gameLv = 1;
-    public int bigbang = 0;
+    [System.NonSerialized] public int gameLv = 1;
+    [System.NonSerialized] public int bigbang = 0;
 
     // 既に取得しているスキルを管理するリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
@@ -119,13 +119,13 @@ public class SkillManage : MonoBehaviour
     // スキル取得処理
     public bool getSkill(SkillData skill)
     {
-        treeOperation = FindAnyObjectByType<TreeOperation>();
-        skillButtons = FindObjectsByType<SkillButton>(FindObjectsSortMode.None);
+        RefreshReferences();
 
         if (SkillPointManager.Instance.skillPoint < skill.needPoint)
         {
             Debug.Log($"ポイントが足りません: {SkillPointManager.Instance.skillPoint - skill.needPoint}");
             if (treeOperation != null) treeOperation.ChangeInformation("ポイントが足りません!", Color.red);
+            SoundsManager.Instance.PlaySound("failure");
             return false;
         }
 
@@ -134,6 +134,8 @@ public class SkillManage : MonoBehaviour
 
         Debug.Log($"取得しました: {skill}");
         Debug.Log($"スキルポイント: {SkillPointManager.Instance.skillPoint}");
+
+        SoundsManager.Instance.PlaySound("success");
 
         if (treeOperation != null)
         {
@@ -149,13 +151,13 @@ public class SkillManage : MonoBehaviour
     // Spスキル取得処理
     public bool getSpSkill(SkillData skill)
     {
-        planetUiManager = FindAnyObjectByType<PlanetUiManager>();
-        planeSkill = FindObjectsByType<PlaneSkill>(FindObjectsSortMode.None);
+        RefreshReferences();
 
         if (SkillPointManager.Instance.starDustPoint < skill.needPoint)
         {
             Debug.Log($"ポイントが足りません: {SkillPointManager.Instance.starDustPoint - skill.needPoint}");
             if (planetUiManager != null) planetUiManager.informationText("ポイントが足りません!", planetUiManager.cautionInfoColor);
+            SoundsManager.Instance.PlaySound("failure");
             return false;
         }
 
@@ -164,8 +166,10 @@ public class SkillManage : MonoBehaviour
 
         Debug.Log($"取得しました: {skill}");
         Debug.Log($"星のかけら: {SkillPointManager.Instance.starDustPoint}");
-        if (planetUiManager != null) planetUiManager.informationText("爆誕!!", planetUiManager.defaultInfoColor);
 
+        SoundsManager.Instance.PlaySound("success");
+
+        if (planetUiManager != null) planetUiManager.informationText("爆誕!!", planetUiManager.defaultInfoColor);
         if (planetUiManager != null) planetUiManager.UpdateUI();
 
         foreach (PlaneSkill plane in planeSkill)
@@ -209,6 +213,13 @@ public class SkillManage : MonoBehaviour
                 }
             }
         }
+        foreach (SkillData skill in unlockedSpSkills)
+        {
+            if (skill.effect.type == type)
+            {
+                effectValue += skill.effect.value;
+            }
+        }
 
         if (type == SkillEffect.Type.PlaneLv)
             return effectValue = Mathf.Max(effectValue, 1);
@@ -216,6 +227,7 @@ public class SkillManage : MonoBehaviour
         return effectValue;
     }
 
+    //planeSizeのlvに応じて出現率を返す
     public Vector3 getPlaneSizeLv()
     {
         int planeLv = 1;

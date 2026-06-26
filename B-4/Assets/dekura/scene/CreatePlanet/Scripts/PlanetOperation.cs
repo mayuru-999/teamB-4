@@ -60,8 +60,16 @@ public class PlanetOperation : MonoBehaviour
     }
 
     //ボタン操作
-    public void RotateRight() => TryRotate(+stepAngle);
-    public void RotateLeft() => TryRotate(-stepAngle);
+    public void RotateRight()
+    {
+        TryRotate(+stepAngle);
+        SoundsManager.Instance.PlaySound("select");
+    } 
+    public void RotateLeft() 
+    {
+        TryRotate(-stepAngle);
+        SoundsManager.Instance.PlaySound("select");
+    }
     public void GetPlanet() 
     {
         planets[GetObjectIndex()].GetComponent<PlaneSkill>().OnClick();

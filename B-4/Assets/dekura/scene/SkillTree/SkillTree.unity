@@ -534,9 +534,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: be3d289439be8af4fa55d53ed94ab8e7, type: 2}
+  needSkill: {fileID: 11400000, guid: 7948204edb7f0964d98ec79436d2ea98, type: 2}
+  needPoint: 17500
 --- !u!1 &143281118
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,9 +682,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 470466c6e843bc147860bf2938dd2a03, type: 2}
+  needSkill: {fileID: 11400000, guid: d99fe6cc444c662469052aef27a38bb7, type: 2}
+  needPoint: 30000
 --- !u!1 &195232398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,9 +2219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: c4c1ba5018b1b7247a977839f52d267e, type: 2}
+  needSkill: {fileID: 11400000, guid: d1769f2d955d9a448a1715df7f804025, type: 2}
+  needPoint: 11000
 --- !u!1 &652651810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,9 +2457,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: a17800c692059dd4b92524671b21b630, type: 2}
+  needSkill: {fileID: 11400000, guid: d47c2d572a4795441b7dafb1b8288fb9, type: 2}
+  needPoint: 50000
 --- !u!1 &680222143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,6 +3460,63 @@ MonoBehaviour:
   skill: {fileID: 11400000, guid: 7cb89a3c9c511e543811b7e1de96200b, type: 2}
   needSkill: {fileID: 11400000, guid: 9e36017c2d634a6418cd4b173bde5b5e, type: 2}
   needPoint: 6600
+--- !u!1001 &842518047
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5381185086411464807, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_Name
+      value: SoundsManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.31992
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -26.11767
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012463313707997303, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 655402708c7326f4a948385214fee231, type: 3}
 --- !u!1 &852657314
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,9 +3737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: dcd7ff4e56f84a74990019f6756aa4f7, type: 2}
+  needSkill: {fileID: 11400000, guid: 3634fb4f1e8a902419aa666089a9e6c3, type: 2}
+  needPoint: 9000
 --- !u!1 &918795713
 GameObject:
   m_ObjectHideFlags: 0
@@ -4232,7 +4289,7 @@ RectTransform:
   - {fileID: 1369117001}
   - {fileID: 4996760217615425328}
   - {fileID: 61673984}
-  - {fileID: 1203498649}
+  - {fileID: 1448759849}
   m_Father: {fileID: 1224159874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4385,9 +4442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: d1769f2d955d9a448a1715df7f804025, type: 2}
+  needSkill: {fileID: 11400000, guid: 1e7f9acb19f13894b901fd5d31883d52, type: 2}
+  needPoint: 10000
 --- !u!1 &1018347597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4681,9 +4738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 8785102ed2b4fdc488974c85e057390e, type: 2}
+  needSkill: {fileID: 11400000, guid: a17800c692059dd4b92524671b21b630, type: 2}
+  needPoint: 57000
 --- !u!1 &1043369967
 GameObject:
   m_ObjectHideFlags: 0
@@ -4850,7 +4907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1965068652352745750, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: starDustPoint
-      value: 70
+      value: 70000
       objectReference: {fileID: 0}
     - target: {fileID: 2303526980372913229, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: m_Name
@@ -5568,151 +5625,6 @@ MonoBehaviour:
   skill: {fileID: 11400000, guid: a58c09baa73b4364d90b8f43d392a186, type: 2}
   needSkill: {fileID: 11400000, guid: 7fcbfcf2ffb7c814796fbb690342da71, type: 2}
   needPoint: 7450
---- !u!1 &1203498648
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1203498649}
-  - component: {fileID: 1203498653}
-  - component: {fileID: 1203498652}
-  - component: {fileID: 1203498651}
-  - component: {fileID: 1203498655}
-  m_Layer: 5
-  m_Name: ToClear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1203498649
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203498648}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1000731116}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -699, y: 426}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1203498651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203498648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1203498652}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MouseOperation, Assembly-CSharp
-        m_MethodName: ToMainButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1203498652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203498648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7529412}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -6143238910969021838, guid: b4fb2726531bbf1408ca3ce92fe35f2d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1203498653
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203498648}
-  m_CullTransparentMesh: 1
---- !u!114 &1203498655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203498648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e1ce1601f8ac0439d59133ac36fcbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::asd
 --- !u!1 &1224159870
 GameObject:
   m_ObjectHideFlags: 0
@@ -5999,9 +5911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 3634fb4f1e8a902419aa666089a9e6c3, type: 2}
+  needSkill: {fileID: 11400000, guid: 118830c2d3732ef4f989e6c3710755fb, type: 2}
+  needPoint: 8400
 --- !u!1 &1263930065
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,9 +6059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 38c6334f0f6425145b8cf158e3fd200e, type: 2}
+  needSkill: {fileID: 11400000, guid: c4c1ba5018b1b7247a977839f52d267e, type: 2}
+  needPoint: 12000
 --- !u!1 &1272226873
 GameObject:
   m_ObjectHideFlags: 0
@@ -6295,9 +6207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 7948204edb7f0964d98ec79436d2ea98, type: 2}
+  needSkill: {fileID: 11400000, guid: 38c6334f0f6425145b8cf158e3fd200e, type: 2}
+  needPoint: 15000
 --- !u!1 &1278013584
 GameObject:
   m_ObjectHideFlags: 0
@@ -6777,9 +6689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: d47c2d572a4795441b7dafb1b8288fb9, type: 2}
+  needSkill: {fileID: 11400000, guid: 15a6a859cd22c054087506c75efeee0b, type: 2}
+  needPoint: 43000
 --- !u!1 &1445001018
 GameObject:
   m_ObjectHideFlags: 0
@@ -6925,9 +6837,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: e074b206b61100f4ca1a280d1ff586e0, type: 2}
+  needSkill: {fileID: 11400000, guid: 99df7825c7efb9945a0fc2531782b620, type: 2}
+  needPoint: 74000
+--- !u!224 &1448759849 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+  m_PrefabInstance: {fileID: 4504249071113191517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1462060284
 GameObject:
   m_ObjectHideFlags: 0
@@ -7148,9 +7065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: defda79b269208c4ea9291ace82d84ea, type: 2}
+  needSkill: {fileID: 11400000, guid: 48c3aeaaf9c456342971afbbb4d96693, type: 2}
+  needPoint: 95000
 --- !u!1 &1542095588
 GameObject:
   m_ObjectHideFlags: 0
@@ -7879,9 +7796,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 1e7f9acb19f13894b901fd5d31883d52, type: 2}
+  needSkill: {fileID: 11400000, guid: dcd7ff4e56f84a74990019f6756aa4f7, type: 2}
+  needPoint: 9500
 --- !u!1 &1643678771
 GameObject:
   m_ObjectHideFlags: 0
@@ -8578,9 +8495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 15a6a859cd22c054087506c75efeee0b, type: 2}
+  needSkill: {fileID: 11400000, guid: 470466c6e843bc147860bf2938dd2a03, type: 2}
+  needPoint: 36000
 --- !u!1 &1755378620
 GameObject:
   m_ObjectHideFlags: 0
@@ -8874,9 +8791,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 4da1de95a7b7f524e8bc46d623fcb94b, type: 2}
+  needSkill: {fileID: 11400000, guid: defda79b269208c4ea9291ace82d84ea, type: 2}
+  needPoint: 110000
 --- !u!1 &1828714947
 GameObject:
   m_ObjectHideFlags: 0
@@ -9022,9 +8939,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 99df7825c7efb9945a0fc2531782b620, type: 2}
+  needSkill: {fileID: 11400000, guid: 8785102ed2b4fdc488974c85e057390e, type: 2}
+  needPoint: 65000
 --- !u!1 &1832215413
 GameObject:
   m_ObjectHideFlags: 0
@@ -9207,9 +9124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: d99fe6cc444c662469052aef27a38bb7, type: 2}
+  needSkill: {fileID: 11400000, guid: b3f22652705ed5e419b7a545185213c0, type: 2}
+  needPoint: 25000
 --- !u!1 &1859336339
 GameObject:
   m_ObjectHideFlags: 0
@@ -9427,9 +9344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: b3f22652705ed5e419b7a545185213c0, type: 2}
+  needSkill: {fileID: 11400000, guid: be3d289439be8af4fa55d53ed94ab8e7, type: 2}
+  needPoint: 20000
 --- !u!1 &1893918992
 GameObject:
   m_ObjectHideFlags: 0
@@ -9723,9 +9640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 48c3aeaaf9c456342971afbbb4d96693, type: 2}
+  needSkill: {fileID: 11400000, guid: e074b206b61100f4ca1a280d1ff586e0, type: 2}
+  needPoint: 84000
 --- !u!1 &2020506971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9871,9 +9788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7ff11d799e48a48aeead8ee7d96909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillButton
-  skill: {fileID: 0}
-  needSkill: {fileID: 0}
-  needPoint: 0
+  skill: {fileID: 11400000, guid: 118830c2d3732ef4f989e6c3710755fb, type: 2}
+  needSkill: {fileID: 11400000, guid: a58c09baa73b4364d90b8f43d392a186, type: 2}
+  needPoint: 7900
 --- !u!1 &2073478738
 GameObject:
   m_ObjectHideFlags: 0
@@ -10136,6 +10053,142 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1001 &4504249071113191517
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1000731116}
+    m_Modifications:
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -699
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 426
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 140063753087427702, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4504249071113191518}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ToClearButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429631816577584197, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477475416048297788, guid: 945912fef2572404085ad539849a26b7, type: 3}
+      propertyPath: m_Name
+      value: ToClear
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 945912fef2572404085ad539849a26b7, type: 3}
+--- !u!114 &4504249071113191518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1896709455500657586, guid: 945912fef2572404085ad539849a26b7, type: 3}
+  m_PrefabInstance: {fileID: 4504249071113191517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23094c875de9c04883b7cda0c7534e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToClearButton
 --- !u!1001 &4986091075063815485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10292,3 +10345,4 @@ SceneRoots:
   - {fileID: 1859336340}
   - {fileID: 7781569077393203351}
   - {fileID: 1056840635}
+  - {fileID: 842518047}
