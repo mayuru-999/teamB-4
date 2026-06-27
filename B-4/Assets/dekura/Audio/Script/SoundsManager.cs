@@ -9,7 +9,7 @@ public class SoundsManager : MonoBehaviour
     {
         public string name;
         public AudioClip soundfile;
-        [Range(0f, 1f)] public float volume = 1f; 
+        [Range(0f, 1f)] public float volume; 
     }
 
     [SerializeField] private SoundsData[] sounds;
@@ -29,6 +29,14 @@ public class SoundsManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+//#if UnityEditer
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.Space)){
+            PlaySound("success");
+        }
+    }
+//#endif
+
     public void PlaySound(string name)
     {
         //配列から該当の名前を持つ要素の検索
@@ -39,7 +47,6 @@ public class SoundsManager : MonoBehaviour
             Debug.LogWarning($"Sound not Found：{name}");
             return;
         }
-
         audioSource.PlayOneShot(sound.soundfile, sound.volume);
     }
 }

@@ -3606,7 +3606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1965068652352745750, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: starDustPoint
-      value: 70
+      value: 5627
       objectReference: {fileID: 0}
     - target: {fileID: 2303526980372913229, guid: d1c60c3b5e828844da0b744d375fc585, type: 3}
       propertyPath: m_Name
@@ -5102,6 +5102,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7084602737161988306, guid: 655402708c7326f4a948385214fee231, type: 3}
+      propertyPath: sounds.Array.data[0].soundfile
+      value: 
+      objectReference: {fileID: 8300000, guid: 328eef0a077a9f44da5ea5e823b26b78, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
