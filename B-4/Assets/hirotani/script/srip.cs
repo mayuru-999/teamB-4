@@ -1,24 +1,13 @@
 using UnityEngine;
-using UnityEngine;
 
-public class GasZone2D : MonoBehaviour
+public class srip : MonoBehaviour
 {
-    public float radius = 4f;
-    public int damage = 5;
+    public GameObject gasPrefab;
 
-    void Update()
+    private void OnDestroy()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+        if (!gameObject.scene.isLoaded) return;
 
-        foreach (Collider2D hit in hits)
-        {
-            if (!hit.CompareTag("Target")) continue;
-
-            HPmanager hp = hit.GetComponent<HPmanager>();
-            if (hp != null)
-            {
-                hp.TakeDamage(damage);
-            }
-        }
+        Instantiate(gasPrefab, transform.position, Quaternion.identity);
     }
 }
