@@ -4,9 +4,17 @@ public class DropPointManager : MonoBehaviour
 {
     public static int dropPoint;
 
+    // このオブジェクトが壊れたときにもらえるDP
+    public int destroyPoint = 100;
+
     void Awake()
     {
         dropPoint = PlayerPrefs.GetInt("DropPoint", 0);
+    }
+
+    private void OnDestroy()
+    {
+        AddDP(destroyPoint);
     }
 
     public static void AddDP(int amount)

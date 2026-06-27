@@ -414,7 +414,7 @@ MonoBehaviour:
   maxRadius: 10
   checkRadius: 1
   specialTargetPrefabs:
-  - {fileID: 8594206201621396238, guid: c9b038dd9486f314ea464e7f90124173, type: 3}
+  - {fileID: 7545486165367753301, guid: 6845484f2d857ed4d8f4305bd68960f8, type: 3}
   - {fileID: 4191262463269016263, guid: 66afdfe209409784fb79aaca5d0eafe3, type: 3}
   - {fileID: 6022739567130765024, guid: 9dcf45d2a13bf644e97633904f65097b, type: 3}
   specialSpawnRate: 0.1

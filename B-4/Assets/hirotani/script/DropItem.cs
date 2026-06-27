@@ -62,6 +62,7 @@ public class DropItem : MonoBehaviour
                 Debug.Log("è¡Ç¶ÇΩêî: " + destroyedCount);
 
                 Destroy(gameObject);
+                
             }
         }
     }

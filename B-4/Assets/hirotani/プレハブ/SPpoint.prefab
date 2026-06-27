@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1240753942183864357}
   - component: {fileID: 1629691820439838619}
   - component: {fileID: -98296308748741292}
+  - component: {fileID: 4371263343525631906}
   m_Layer: 0
   m_Name: SPpoint
   m_TagString: Untagged
@@ -105,3 +106,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialDropMove
   moveSpeed: 15
+--- !u!114 &4371263343525631906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5671203868425182518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092649a0cf658614ab6d73e8f055e38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPManager
