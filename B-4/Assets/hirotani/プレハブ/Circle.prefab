@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2497508485691438154, guid: 15284048060768447b29c630841a8d65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,7 +134,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 24.5, y: 29.091219}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -205,9 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89be1ee9ba474c243b2e85a6e2e39768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GasZone
-  damage: 100
-  gasPrefab: {fileID: 0}
-  radius: 20
+  gasPrefab: {fileID: 6653894243330949730, guid: a0e072d5fc0b8b547a7e74cb7cb74b18, type: 3}
 --- !u!114 &-2394665568664740551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,4 +219,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GasZoneVisual
   radius: 4
-  fadeTime: 0.5
