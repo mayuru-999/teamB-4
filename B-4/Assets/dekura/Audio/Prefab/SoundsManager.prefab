@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundsManager
   sounds:
   - name: success
-    soundfile: {fileID: 8300000, guid: 0e576ecc87d73804f918287c5707ffa2, type: 3}
+    soundfile: {fileID: 8300000, guid: 9dfda189d71a315479a7d58437c77159, type: 3}
     volume: 1
   - name: failure
     soundfile: {fileID: 8300000, guid: 39a378cb797be554f8b5f4cd61c77c13, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
     volume: 0.5
   - name: select2
     soundfile: {fileID: 8300000, guid: ce504a2ac59bbdb44af0144165181eaa, type: 3}
-    volume: 0.9
+    volume: 0.56
   - name: attencion
     soundfile: {fileID: 8300000, guid: c07a0a1782fbbf640bffb157d4b4928d, type: 3}
     volume: 0.9
