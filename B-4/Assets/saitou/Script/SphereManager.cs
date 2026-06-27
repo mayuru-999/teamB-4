@@ -30,12 +30,24 @@ public class SphereManager : MonoBehaviour
     public float entrySpiralTurns = 0f;
     public float entryInitialDelay = 0f;
 
+    // ■ シーン遷移対策：
+    //   Time.time はUnity起動からの絶対時間で、シーンを切り替えてもリセットされない。
+    //   そのため「他のシーンを経由してからこのシーンに来る」と、Start()が呼ばれた瞬間の
+    //   Time.timeが既に大きな値になっており、targetAngle (= 角度 + Time.time*speed) が
+    //   想定外の値になって入場アニメーションの回転量がシーンごとに変わってしまっていた。
+    //   これを避けるため、Start()で「このスクリプトが開始した瞬間のTime.time」を記録し、
+    //   以降は必ず localTime = Time.time - sceneStartTime（このシーンに来てからの経過時間）
+    //   を使って計算する。これにより、他のシーンをどれだけ長く経由しても、
+    //   常に「このシーンに来た瞬間 = 0秒」として一貫した動きになる。
+    private float sceneStartTime;
+
     private float startTime;
     private int nextEnterOrder;
 
     void Start()
     {
-        startTime = Time.time;
+        sceneStartTime = Time.time; // このシーンに来た瞬間のTime.timeを記録（基準点）
+        startTime = 0f; // 以降の計算はすべて「シーン開始からの相対時間(localTime)」が0から始まる前提にする
 
         int n = balls.Length;
         int[] order = new int[n];
@@ -68,6 +80,10 @@ public class SphereManager : MonoBehaviour
 
     void Update()
     {
+        // ■ Time.time ではなく、このシーンに来てからの経過時間(localTime)を使う。
+        //   これがシーン遷移によるズレを防ぐための核心部分。
+        float localTime = Time.time - sceneStartTime;
+
         int n = balls.Length;
         float[] depths = new float[n];
 
@@ -77,7 +93,7 @@ public class SphereManager : MonoBehaviour
 
             float targetAngle =
                 (2f * Mathf.PI / n) * i
-                + Time.time * speed;
+                + localTime * speed;
 
             float targetX = Mathf.Cos(targetAngle) * radius;
             float targetY = Mathf.Sin(targetAngle) * radius * verticalRatio;
@@ -93,7 +109,7 @@ public class SphereManager : MonoBehaviour
 
             if (!b.hasEntered)
             {
-                if (Time.time < b.entryStartTime)
+                if (localTime < b.entryStartTime)
                 {
                     x = startX;
                     y = startY;
@@ -112,7 +128,7 @@ public class SphereManager : MonoBehaviour
                         b.entryStarted = true;
                     }
 
-                    float t = (Time.time - b.entryStartTime) / entryDuration;
+                    float t = (localTime - b.entryStartTime) / entryDuration;
                     if (t >= 1f)
                     {
                         t = 1f;
