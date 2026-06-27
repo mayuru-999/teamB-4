@@ -89,7 +89,8 @@ public class HPmanager : MonoBehaviour
             chain.Explode();
             return;
         }
-   
+     
+
         // 3%で特殊ドロップ
         if (Random.value < 0.03f)
         {
@@ -125,7 +126,8 @@ public class HPmanager : MonoBehaviour
             }
 
             // ここでDP加算
-            DropPointManager.AddDP(totalDropCount);
+           
+            Destroy(gameObject);
         }
     }
 }
