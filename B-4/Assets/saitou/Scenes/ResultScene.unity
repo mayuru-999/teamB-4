@@ -588,6 +588,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2071312563}
+    - target: {fileID: 7462716052057021387, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1436270290}
+    - target: {fileID: 7462716052057021387, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: change_button
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462716052057021387, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: scene2, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462716052057021387, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
