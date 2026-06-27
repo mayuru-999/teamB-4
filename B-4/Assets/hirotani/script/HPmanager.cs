@@ -101,6 +101,7 @@ public class HPmanager : MonoBehaviour
                     transform.position,
                     Quaternion.identity
                 );
+                Destroy(gameObject);
             }
         }
 
