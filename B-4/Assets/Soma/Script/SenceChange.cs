@@ -19,6 +19,9 @@ public class SenceChang : MonoBehaviour
 
     public GameObject resultPanel;
 
+
+    public GameObject[] canvasesToHide;
+
     private float remainingTime;
     private bool isFinished = false;
 
@@ -61,6 +64,8 @@ public class SenceChang : MonoBehaviour
             {
                 isFinished = true;
                 resultPanel.SetActive(true);
+
+                HideTargetCanvases();
             }
             return;
         }
@@ -121,7 +126,21 @@ public class SenceChang : MonoBehaviour
         MouseAttackController.canAttack = false;
     }
 
-    // ★追加: ビッグバンが起きた時に外部から呼び出す関数
+  
+    private void HideTargetCanvases()
+    {
+        if (canvasesToHide == null) return;
+
+        foreach (GameObject canvasObj in canvasesToHide)
+        {
+            if (canvasObj != null)
+            {
+                canvasObj.SetActive(false);
+            }
+        }
+    }
+
+    
     public void OnBigBangTriggered()
     {
         if (isFinished || isEnding) return;
