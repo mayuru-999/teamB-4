@@ -275,7 +275,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7602319070948693163, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602319070948693163, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
       propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602319070948693163, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
+      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7602319070948693163, guid: bb9ce90df706a1b4fafac64c59cd2d67, type: 3}
@@ -920,6 +928,10 @@ PrefabInstance:
     - target: {fileID: 659888534523820133, guid: f82667b89226e7b428865a2692722fa4, type: 3}
       propertyPath: m_Name
       value: PlyaerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 659888534523820133, guid: f82667b89226e7b428865a2692722fa4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2804548427162295301, guid: f82667b89226e7b428865a2692722fa4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1621,7 +1633,7 @@ GameObject:
   - component: {fileID: 1707986778}
   - component: {fileID: 1707986777}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: BackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2411,8 +2423,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 507375789}
     - target: {fileID: 5564454595474759218, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564454595474759218, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
       propertyPath: m_SortingOrder
-      value: 100
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564454595474759218, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8174140218166118831, guid: 6faca3a215e943240b8960cf59e2629a, type: 3}
       propertyPath: m_fontColor.b
@@ -2584,6 +2604,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2848450939546133450, guid: 726d9faf5d4e7814383816529940a5b9, type: 3}
+      propertyPath: canvasesToHide.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848450939546133450, guid: 726d9faf5d4e7814383816529940a5b9, type: 3}
       propertyPath: 'borderImages.Array.data[0]'
       value: 
       objectReference: {fileID: 595634659}
@@ -2599,6 +2623,10 @@ PrefabInstance:
       propertyPath: 'borderImages.Array.data[3]'
       value: 
       objectReference: {fileID: 1626551363}
+    - target: {fileID: 2848450939546133450, guid: 726d9faf5d4e7814383816529940a5b9, type: 3}
+      propertyPath: 'canvasesToHide.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1828030750}
     - target: {fileID: 5133607979139994034, guid: 726d9faf5d4e7814383816529940a5b9, type: 3}
       propertyPath: m_Name
       value: SenceChange

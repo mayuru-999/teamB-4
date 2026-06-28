@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour
 {
+    // --- 追加: 生成をコントロールするシングルトン or フラグ ---
+    public static Spawner Instance { get; private set; }
+    private bool isSpawningActive = true;
+    // ----------------------------------------------------
+
     [Header("生成設定")]
     public GameObject[] targetPrefabs;
     public Transform player;
@@ -25,6 +30,12 @@ public class Spawner : MonoBehaviour
     // 生成物管理リスト
     private List<GameObject> spawnedObjects = new List<GameObject>();
 
+    void Awake()
+    {
+        // 外部からアクセスしやすいようにシングルトン化
+        if (Instance == null) { Instance = this; }
+    }
+
     void Start()
     {
         // ゲーム開始時に即20個生成
@@ -40,6 +51,14 @@ public class Spawner : MonoBehaviour
         SpawnUntilKeepCount();
     }
 
+    // --- 追加: 外部から生成を止めるためのメソッド ---
+    public void StopSpawning()
+    {
+        isSpawningActive = false;
+        Debug.Log("Spawner: 新しい惑星の生成を停止しました。");
+    }
+    // ------------------------------------------------
+
     System.Collections.IEnumerator ScaleUp(Transform t, Vector3 target)
     {
         float time = 0f;
@@ -50,7 +69,6 @@ public class Spawner : MonoBehaviour
             time += Time.deltaTime;
             float ratio = time / duration;
 
-            
             float scale = Mathf.Sin(ratio * Mathf.PI * 0.5f)
                         + Mathf.Sin(ratio * Mathf.PI) * 0.15f;
 
@@ -65,6 +83,10 @@ public class Spawner : MonoBehaviour
 
     void SpawnUntilKeepCount()
     {
+        // --- 追加: 生成停止フラグが立っていたら処理を行わない ---
+        if (!isSpawningActive) return;
+        // ----------------------------------------------------
+
         int targetCount = keepAliveCount;
 
         if (SkillManage.Instance != null)
@@ -94,6 +116,10 @@ public class Spawner : MonoBehaviour
 
     void SpawnTarget()
     {
+        // --- 追加: ここでも念のためチェック ---
+        if (!isSpawningActive) return;
+        // ------------------------------------
+
         if (player == null || targetPrefabs.Length == 0) return;
 
         // 最大試行回数（無限ループ防止）
@@ -113,7 +139,7 @@ public class Spawner : MonoBehaviour
 
             if (hit == null)
             {
-               
+
                 Vector3 spawnRates = Vector3.right; // デフォルト (1, 0, 0)
                 if (SkillManage.Instance != null)
                 {
@@ -121,7 +147,6 @@ public class Spawner : MonoBehaviour
                     Debug.Log("Lv" + SkillManage.Instance.getPlaneSizeLv());
                 }
 
-            
                 int targetIndex = 0; // デフォルトは 0 (サイズ1・小)
                 float roll = Random.value; // 0.0 〜 1.0 のランダム値
                 Debug.Log("roll" + roll);
@@ -148,7 +173,6 @@ public class Spawner : MonoBehaviour
                     targetIndex = targetPrefabs.Length - 1;
                 }
 
-          
                 GameObject prefabToSpawn;
 
                 // 10%で特殊敵
@@ -163,7 +187,6 @@ public class Spawner : MonoBehaviour
                     prefabToSpawn = targetPrefabs[targetIndex];
                 }
 
-           
                 GameObject obj = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
                 // 各種ステータスの初期化用変数
@@ -180,7 +203,6 @@ public class Spawner : MonoBehaviour
                     targetHealth = currentHealth;
                     targetDastpar = currentDust;
 
-            
                     if (targetIndex == 0)
                     {
                         hp.sizeType = 1;
@@ -231,7 +253,7 @@ public class Spawner : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(
             player != null ? player.position : transform.position,
-            maxRadius // 元のコードのまま（minRadiusのバグ防止用ならminRadiusに修正してください）
+            minRadius // minRadiusのバグ表示を修正
         );
     }
 }

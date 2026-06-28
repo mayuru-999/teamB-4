@@ -134,6 +134,12 @@ public class DeleteByTag : MonoBehaviour
         MouseAttackController.canAttack = false;
 
       
+        if (Spawner.Instance != null)
+        {
+            Spawner.Instance.StopSpawning();
+        }
+       
+
         if (SenceChang.Instance != null)
         {
             SenceChang.Instance.OnBigBangTriggered();
