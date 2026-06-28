@@ -39,7 +39,7 @@ public class DeleteByTag : MonoBehaviour
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.RefreshReferences();
-            SkillManage.Instance.CheckAndIncrementVisitCount();
+            SkillManage.Instance.CheckAndIncrementVisitCount(); 
         }
     }
 
@@ -132,6 +132,12 @@ public class DeleteByTag : MonoBehaviour
         isEnding = true;
         canUseBigBang = false;
         MouseAttackController.canAttack = false;
+
+      
+        if (SenceChang.Instance != null)
+        {
+            SenceChang.Instance.OnBigBangTriggered();
+        }
 
         Debug.Log("ビッグバン発動");
     }
