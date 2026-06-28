@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class SenceChang : MonoBehaviour
 {
+    // 外部から簡単にアクセスできるようにインスタンスを保持（シングルトン化）
+    public static SenceChang Instance { get; private set; }
+
     public float changeTime = 30f;
     public TMP_Text timeText;
     public Image targetImage;
@@ -14,7 +17,7 @@ public class SenceChang : MonoBehaviour
 
     public Image[] borderImages;
 
-    public GameObject resultPanel; // ←追加
+    public GameObject resultPanel;
 
     private float remainingTime;
     private bool isFinished = false;
@@ -23,16 +26,21 @@ public class SenceChang : MonoBehaviour
     private float blinkCounter = 0f;
     private bool isBlinkVisible = true;
 
-    private float endDelay = 1f;
+    public float endDelay = 1f; // 外から調整できるように public に変更
     private float endTimer = 0f;
     private bool isEnding = false;
+
+    void Awake()
+    {
+        // インスタンスの登録
+        if (Instance == null) { Instance = this; }
+    }
 
     void Start()
     {
         remainingTime = changeTime;
         initialScale = scaleImage.localScale;
 
-        // 最初は非表示
         resultPanel.SetActive(false);
 
         foreach (Image img in borderImages)
@@ -52,8 +60,6 @@ public class SenceChang : MonoBehaviour
             if (endTimer >= endDelay)
             {
                 isFinished = true;
-
-                // シーン遷移の代わりにパネル表示
                 resultPanel.SetActive(true);
             }
             return;
@@ -63,11 +69,7 @@ public class SenceChang : MonoBehaviour
 
         if (remainingTime <= 0)
         {
-            remainingTime = 0;
-            isEnding = true;
-
-            // 攻撃停止
-            MouseAttackController.canAttack = false;
+            TriggerEndSequence(); // 終了処理を関数に共通化
         }
 
         timeText.text = remainingTime.ToString("F1") + "s";
@@ -109,5 +111,25 @@ public class SenceChang : MonoBehaviour
         {
             img.enabled = isBlinkVisible;
         }
+    }
+
+    // タイムアップ時とビッグバン時で共通する終了処理
+    private void TriggerEndSequence()
+    {
+        remainingTime = 0;
+        isEnding = true;
+        MouseAttackController.canAttack = false;
+    }
+
+    // ★追加: ビッグバンが起きた時に外部から呼び出す関数
+    public void OnBigBangTriggered()
+    {
+        if (isFinished || isEnding) return;
+
+        // タイマーのテキストを「0.0s」や「CLEAR!」などに変更したい場合はここ
+        // timeText.text = "0.0s"; 
+
+        // 強制的に終了シーエンス（ディレイカウント）へ移行させる
+        TriggerEndSequence();
     }
 }
