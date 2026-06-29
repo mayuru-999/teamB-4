@@ -37,12 +37,14 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
         {
             treeOperation.ChangeDescription("メインゲームへ");
             treeOperation.ChangeInformation("クリックして移動", treeOperation.defaultInfoColor);
+            treeOperation.HideNeedSkillPoints();
         }
 
         if (gameObject.name == "ToPlaneButton")
         {
             treeOperation.ChangeDescription("惑星作成へ");
             treeOperation.ChangeInformation("クリックして移動", treeOperation.defaultInfoColor);
+            treeOperation.HideNeedSkillPoints();
         }
     }
 

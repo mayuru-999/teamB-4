@@ -20,6 +20,12 @@ public class SkillManage : MonoBehaviour
     [System.NonSerialized] public int gameLv = 1;
     [System.NonSerialized] public int bigbang = 0;
 
+    // 初期ステータス
+    [System.NonSerialized] public float baseAttack = 0f;
+    [System.NonSerialized] public float baseAttackInterval = 0f;
+    [System.NonSerialized] public float baseAttackRange = 0f;
+    [System.NonSerialized] public float basePlaneVol = 20f;
+
     // 既に取得しているスキルを管理するリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
     private List<SkillData> unlockedSpSkills = new List<SkillData>();
@@ -73,8 +79,6 @@ public class SkillManage : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
-        // ※シーン開始時のFind系は、初回のシーンにあるものしか取得できないため、
-        // 必要に応じて getSkill や 各初期化時に再取得する設計が安全です。
         RefreshReferences();
     }
 
@@ -307,10 +311,15 @@ public class SkillManage : MonoBehaviour
         );
     }
 
-  
     public void ResetVisitCount()
     {
         MainVisitCount = 0; // クラス内部からなら書き換えが可能
         Debug.Log("SkillManage: カウントをリセットしました。");
+    }
+
+    //アプリ終了時にsave処理
+    private void OnApplicationQuit()
+    {
+
     }
 }

@@ -44,8 +44,8 @@ public class TreeOperation : MonoBehaviour
     //拡大率
     private float currentZoom = 1.0f;
     //スキルの表示位置
-    private Vector2 currentPosition = new Vector2(-490, 0);
-    private Vector2 completePosition = new Vector2(-430, 0);
+    private Vector2 currentPosition = new Vector2(523, 0);
+    private Vector2 completePosition = new Vector2(523, 0);
     //選択中スキルボタン
     private SkillButton tg = null;
 
@@ -136,6 +136,9 @@ public class TreeOperation : MonoBehaviour
         infoText.text = text;
         infoText.color = color;
     }
+    public void HideNeedSkillPoints() => needSkillPoints.text = "";
+        
+
     public void UpdateUi()
     {
         if(tg != null)
