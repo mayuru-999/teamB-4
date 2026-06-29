@@ -2,7 +2,6 @@
 
 public class HPmanager : MonoBehaviour
 {
-   
     [Header("惑星の大きさ設定")]
     [Tooltip("1 = 大きさ1(小), 2 = 大きさ2(中), 3 = 大きさ3(大)")]
     [Range(1, 3)] public int sizeType = 1;
@@ -11,7 +10,7 @@ public class HPmanager : MonoBehaviour
 
     public int hp = 100;
     private int currentHP;
-    private float currentDustVolume; //  ダストパラメータの値を保持する変数
+    private float currentDustVolume; // ダストパラメータの値を保持する変数
 
     [Header("ドロップアイテム")]
     public DropItemData[] dropItems;
@@ -19,26 +18,20 @@ public class HPmanager : MonoBehaviour
     public GameObject chainDamagePrefab;
     private bool isDead = false;
 
-
-
-
-
-
-    //  Spawnerからデータを安全に受け取るための初期化関数 
+    // Spawnerからデータを安全に受け取るための初期化関数 
     public void InitializeStatus(Vector3 healthVector, Vector3 dustVector)
     {
-        // sizeType (1〜3) に応じて Vector3 の x, y, z から対応する値を抽出
         switch (sizeType)
         {
-            case 1: // 大きさ1 (小)
+            case 1:
                 hp = Mathf.RoundToInt(healthVector.x);
                 currentDustVolume = dustVector.x;
                 break;
-            case 2: // 大きさ2 (中)
+            case 2:
                 hp = Mathf.RoundToInt(healthVector.y);
                 currentDustVolume = dustVector.y;
                 break;
-            case 3: // 大きさ3 (大)
+            case 3:
                 hp = Mathf.RoundToInt(healthVector.z);
                 currentDustVolume = dustVector.z;
                 break;
@@ -48,19 +41,15 @@ public class HPmanager : MonoBehaviour
                 break;
         }
 
-        // ここで currentHP も上書き同期する
         currentHP = hp;
     }
 
     void Start()
     {
-        // 念のため、Spawnerを経由せず配置された場合でも最低限動作するように
         if (currentHP == 0)
         {
             currentHP = hp;
         }
-
-    
     }
 
     public void TakeDamage(int damage, float pointMultiplier = 1f)
@@ -69,6 +58,7 @@ public class HPmanager : MonoBehaviour
 
         currentHP -= damage;
 
+        // ここで渡された倍率を保存（ビッグバン時は 2f が入る）
         this.pointMultiplier = pointMultiplier;
 
         if (currentHP <= 0)
@@ -89,7 +79,6 @@ public class HPmanager : MonoBehaviour
             chain.Explode();
             return;
         }
-     
 
         // 3%で特殊ドロップ
         if (Random.value < 0.03f)
@@ -104,7 +93,6 @@ public class HPmanager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-
         else
         {
             int totalDropCount = 0;
@@ -113,9 +101,14 @@ public class HPmanager : MonoBehaviour
             {
                 if (item != null && item.prefab != null)
                 {
-                    totalDropCount += item.count;
+                    // 変更点：本来の個数に倍率を掛けて、生成する総数を計算
+                    // Mathf.RoundToInt で四捨五入して整数にします（1.5倍などにも対応可能）
+                    int finalCount = Mathf.RoundToInt(item.count * pointMultiplier);
 
-                    for (int i = 0; i < item.count; i++)
+                    totalDropCount += finalCount;
+
+                    // 変更点：計算した finalCount 分だけループして生成
+                    for (int i = 0; i < finalCount; i++)
                     {
                         Instantiate(
                             item.prefab,
@@ -127,7 +120,7 @@ public class HPmanager : MonoBehaviour
             }
 
             // ここでDP加算
-           
+
             Destroy(gameObject);
         }
     }

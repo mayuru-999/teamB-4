@@ -116,9 +116,9 @@ public class Spawner : MonoBehaviour
 
     void SpawnTarget()
     {
-        // --- 追加: ここでも念のためチェック ---
+       
         if (!isSpawningActive) return;
-        // ------------------------------------
+     
 
         if (player == null || targetPrefabs.Length == 0) return;
 
