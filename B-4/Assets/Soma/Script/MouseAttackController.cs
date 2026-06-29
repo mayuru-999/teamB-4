@@ -12,12 +12,16 @@ public class MouseAttackController : MonoBehaviour
     public Image attackRangeVisual;
     public Image cooldownVisual;
 
+    [Header("エフェクト")]
+    [Tooltip("レティクルの子として配置した、クリティカル用パーティクルシステム")]
+    public ParticleSystem criticalParticleSystem;
+
     [Header("サイズ個別の調整")]
     [Tooltip("攻撃範囲（外枠）の見た目の大きさ倍率")]
-    public float rangeScaleMultiplier = 0.9f; 
-    
+    public float rangeScaleMultiplier = 0.9f;
+
     [Tooltip("クールタイム（内側ゲージ）の見た目の大きさ倍率。小さくしたい場合は数値を下げます")]
-    public float cooldownScaleMultiplier = 1.0f; // 最初から少し小さめ（0.8倍）に設定
+    public float cooldownScaleMultiplier = 1.0f;
 
     private float lastAttackTime = 0f;
 
@@ -25,6 +29,7 @@ public class MouseAttackController : MonoBehaviour
     {
         canAttack = true;
     }
+
     void Update()
     {
         if (player == null) return;
@@ -35,20 +40,20 @@ public class MouseAttackController : MonoBehaviour
 
         float attackRadius = player.AttackRange;
         float attackInterval = player.AttackInterval;
-        int attackPower = Mathf.RoundToInt(player.AttackPower);
 
         // --- 1. 外側円（範囲ガイド）の処理 ---
         if (attackRangeVisual != null)
         {
             attackRangeVisual.transform.position = worldPos;
-            
+
             // 攻撃範囲用のサイズ計算（rangeScaleMultiplier を掛ける）
             float rangeVisualSize = (attackRadius * 2f) * rangeScaleMultiplier;
-            attackRangeVisual.rectTransform.localScale = 
+            attackRangeVisual.rectTransform.localScale =
                 new Vector3(rangeVisualSize, rangeVisualSize, 1f);
         }
 
         // --- 2. クールタイム進行度（0f ～ 1f）の計算 ---
+        // ここで progress を定義しています
         float progress = (Time.time - lastAttackTime) / attackInterval;
         progress = Mathf.Clamp01(progress);
 
@@ -56,10 +61,10 @@ public class MouseAttackController : MonoBehaviour
         if (cooldownVisual != null)
         {
             cooldownVisual.transform.position = worldPos;
-            
+
             // クールタイム専用のサイズ計算（cooldownScaleMultiplier を掛ける）
             float cooldownVisualSize = (attackRadius * 2f) * cooldownScaleMultiplier;
-            cooldownVisual.rectTransform.localScale = 
+            cooldownVisual.rectTransform.localScale =
                 new Vector3(cooldownVisualSize, cooldownVisualSize, 1f);
 
             cooldownVisual.fillAmount = progress;
@@ -68,15 +73,27 @@ public class MouseAttackController : MonoBehaviour
         // --- 4. 攻撃の実行 ---
         if (canAttack && progress >= 1f)
         {
-            Attack(worldPos, attackRadius, attackPower);
+            // 1. クリティカルだったかどうかを受け取るための変数を用意
+            bool wasCritical;
+
+            // 2. 引数に「out 変数名」を渡して呼び出す
+            int calculatedPower = player.CalculateDamage(out wasCritical);
+
+            // 3. 取得したダメージを使って攻撃を実行
+            Attack(worldPos, attackRadius, calculatedPower);
             lastAttackTime = Time.time;
 
             if (cooldownVisual != null)
             {
                 cooldownVisual.fillAmount = 0f;
             }
-        }
 
+            // 4. クリティカルが発生していたらパーティクルを再生
+            if (wasCritical && criticalParticleSystem != null)
+            {
+                criticalParticleSystem.Play();
+            }
+        }
     }
 
     void Attack(Vector2 center, float radius, int power)
@@ -92,13 +109,11 @@ public class MouseAttackController : MonoBehaviour
 
                 if (hp != null)
                 {
-                    hp.TakeDamage(power);
+                    hp.TakeDamage(power); // クリティカル反映済みのパワーが伝わる
                     count++;
                 }
             }
         }
-
-      
     }
 
     void OnDrawGizmos()
