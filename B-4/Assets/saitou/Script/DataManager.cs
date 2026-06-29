@@ -21,9 +21,9 @@ public class DataManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        breakPlane.text = $"”j‰ó‚µ‚½˜f¯‚Ì”\naaaaaaaaaaaaaa";
-        skillPoint.text = $"Šl“¾zÎ—Ê\nbbbbbbbb";
-        stardustPoint.text = $"¯‚ÌŒ‡•ĞŠl“¾—Ê\ncccccccccccccccccc";
+        breakPlane.text = $"”j‰ó‚µ‚½˜f¯‚Ì”\n";
+        skillPoint.text = $"Šl“¾zÎ—Ê\n{SPManager.GetSP()}";
+        stardustPoint.text = $"¯‚ÌŒ‡•ĞŠl“¾—Ê\n";
     }
 
 }
