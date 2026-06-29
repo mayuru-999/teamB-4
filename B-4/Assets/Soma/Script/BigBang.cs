@@ -1,45 +1,51 @@
 using UnityEngine;
 
+// 指定されたタグを持つ全てのオブジェクトに対してダメージを与え、ビッグバン演出を管理するクラス
 public class DeleteByTag : MonoBehaviour
 {
+    // 結果表示用パネル
     public GameObject resultPanel;
 
     private Renderer myRenderer;
     private Color originalColor;
 
+    // 点滅に関する設定
     public float blinkSpeed = 5f;
     private bool isBlinking = false;
 
+    // ビッグバンのパラメータ
     public string targetTag = "Target";
     public int damage = 10;
     public float attackInterval = 1f;
-
     private float timer = 0f;
 
+    // 終了演出用
     public float endDelay = 1f;
-
     private bool isEnding = false;
     private float endTimer = 0f;
 
+    // ビッグバン発動可能フラグ
     private bool canUseBigBang = false;
 
     void Start()
     {
+        // 結果パネルを非表示で初期化
         if (resultPanel != null)
             resultPanel.SetActive(false);
 
+        // マテリアルを複製して元の色を保持
         myRenderer = GetComponent<Renderer>();
-
         if (myRenderer != null)
         {
             myRenderer.material = new Material(myRenderer.material);
             originalColor = myRenderer.material.color;
         }
 
+        // スキル管理クラスの初期化と訪問回数カウント
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.RefreshReferences();
-            SkillManage.Instance.CheckAndIncrementVisitCount(); 
+            SkillManage.Instance.CheckAndIncrementVisitCount();
         }
     }
 
@@ -47,6 +53,7 @@ public class DeleteByTag : MonoBehaviour
     {
         HandleBlink();
 
+        // 終了処理中の場合はタイマーのみ更新して抜ける
         if (isEnding)
         {
             endTimer += Time.deltaTime;
@@ -64,6 +71,7 @@ public class DeleteByTag : MonoBehaviour
         HandleInput();
     }
 
+    // 点滅処理の更新
     void HandleBlink()
     {
         if (isBlinking && myRenderer != null)
@@ -74,6 +82,7 @@ public class DeleteByTag : MonoBehaviour
         }
     }
 
+    // 点滅を停止して色を元に戻す
     void StopBlink()
     {
         isBlinking = false;
@@ -82,6 +91,7 @@ public class DeleteByTag : MonoBehaviour
             myRenderer.material.color = originalColor;
     }
 
+    // ビッグバン発動条件の判定
     void CheckBigBangReady()
     {
         if (SkillManage.Instance == null) return;
@@ -98,6 +108,7 @@ public class DeleteByTag : MonoBehaviour
         }
     }
 
+    // 入力処理（マウスホールド）
     void HandleInput()
     {
         if (Input.GetMouseButton(0))
@@ -116,11 +127,13 @@ public class DeleteByTag : MonoBehaviour
         }
     }
 
+    // ビッグバン実行処理
     void TriggerBigBang()
     {
         AttackAll();
         timer = 0f;
 
+        // スキル管理データの更新とリセット
         if (SkillManage.Instance != null)
         {
             SkillManage.Instance.LvUpdate();
@@ -129,17 +142,18 @@ public class DeleteByTag : MonoBehaviour
 
         StopBlink();
 
+        // 終了状態へ移行
         isEnding = true;
         canUseBigBang = false;
         MouseAttackController.canAttack = false;
 
-      
+        // 生成処理の停止
         if (Spawner.Instance != null)
         {
             Spawner.Instance.StopSpawning();
         }
-       
 
+        // シーン遷移管理への通知
         if (SenceChang.Instance != null)
         {
             SenceChang.Instance.OnBigBangTriggered();
@@ -148,6 +162,7 @@ public class DeleteByTag : MonoBehaviour
         Debug.Log("ビッグバン発動");
     }
 
+    // タグに基づいた全体攻撃処理
     void AttackAll()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag(targetTag);
@@ -160,6 +175,7 @@ public class DeleteByTag : MonoBehaviour
                 hp.TakeDamage(damage, 2f);
         }
 
+        // スキルデータのクリア
         if (SkillManage.Instance != null)
             SkillManage.Instance.ClearSkillData();
 
