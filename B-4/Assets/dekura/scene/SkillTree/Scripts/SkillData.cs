@@ -19,7 +19,9 @@ public class SkillEffect
         BombAttack,         //爆発攻撃力
         ClitRate,           //クリティカル率
         CrystalVolumeRate,  //クリスタル量増加乗算
-        GOD                 //ゴッドモード
+        GOD,                //ゴッドモード
+
+        none                //他Ui操作時に参照しない場合に選択
     }
     public Type type;
     public float value;

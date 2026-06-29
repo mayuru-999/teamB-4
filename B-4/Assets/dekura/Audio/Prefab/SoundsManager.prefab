@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundsManager
   sounds:
   - name: success
-    soundfile: {fileID: 8300000, guid: 9dfda189d71a315479a7d58437c77159, type: 3}
+    soundfile: {fileID: 8300000, guid: 75c1a2a2052e9ec41ab9d1642f17e2e0, type: 3}
     volume: 1
   - name: failure
     soundfile: {fileID: 8300000, guid: 39a378cb797be554f8b5f4cd61c77c13, type: 3}
