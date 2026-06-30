@@ -77,9 +77,17 @@ public class Player : MonoBehaviour
         }
     }
 
-   
+
     public int CalculateDamage(out bool isCritical)
     {
+        // DeleteByTag から BigBang にクラス名を変更 
+        if (BigBang.Instance != null && BigBang.Instance.IsWaitingForPanelClick)
+        {
+            isCritical = false;
+            return 0; // 攻撃を発生させない、またはダメージを与えない
+        }
+        
+
         // 1. 最終的なダメージのベースを計算
         float finalDamage = AttackPower;
         isCritical = false;
@@ -105,4 +113,6 @@ public class Player : MonoBehaviour
 
         return Mathf.RoundToInt(finalDamage);
     }
+
+
 }
