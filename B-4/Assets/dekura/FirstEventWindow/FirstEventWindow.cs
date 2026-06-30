@@ -37,9 +37,10 @@ public class FirstEventWindow : MonoBehaviour
     private string thisScene;
     private int m_gameLv;
     private int m_bigbang;
-    private int m_skillpoint;
+    private int m_starDustpoint;
 
     private bool canBigbang = false;
+    private bool canExit = false;
     private bool isClicked = false;
 
     //Uiの設定
@@ -53,7 +54,9 @@ public class FirstEventWindow : MonoBehaviour
         bigbang = FindAnyObjectByType<BigBang>();
         m_gameLv = SkillManage.Instance.gameLv;
         m_bigbang = SkillManage.Instance.bigbang;
-        m_skillpoint = SkillPointManager.Instance.skillPoint;
+        m_starDustpoint = PointManager.GetDP();
+
+        if (bigbang != null) canBigbang = bigbang.canUseBigBang;
 
         defaltInfoColor = infoText.color;
         infoText.color = Color.clear;
@@ -63,10 +66,10 @@ public class FirstEventWindow : MonoBehaviour
     }
     void Update()
     {
-        if (thisScene == "souma.sence")
+        if (thisScene == "CreatePlanet")
         {
-            if (bigbang == null || canBigbang) return;
-            canBigbang = bigbang.canUseBigBang;
+            if (canExit || SkillManage.Instance.getEffect(SkillEffect.Type.GOD) == 0)  return;
+            canExit = true;
             CheckConditions();
         }
     }
@@ -134,7 +137,7 @@ public class FirstEventWindow : MonoBehaviour
         {
             scene = "SkillTree",
             flagKey= "firstCreateUnlocked",
-            condition = () => m_skillpoint >= 20,
+            condition = () => m_starDustpoint >= 20,
 
             message = "惑星作成がアンロック！\n" +
                       "地球のボタンを押してみよう！",
@@ -161,6 +164,16 @@ public class FirstEventWindow : MonoBehaviour
             message = "星のかけらで惑星を創造！\n" +
                     　"惑星を作ってボーナスを獲得し、\n" +
                       "すべての惑星を創造しよう！",
+        });
+        conditions.Add(new NotifyCondition
+        {
+            scene = "CreatePlanet",
+            flagKey= "planetComplete",
+            condition = () => canExit,
+
+            message = "全部の惑星を創造した！\n" +
+                      "クリアできるよ\n" +
+                      "うになったよ",
         });
     }
 

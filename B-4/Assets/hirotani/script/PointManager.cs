@@ -42,4 +42,10 @@ public class PointManager : MonoBehaviour
     {
         return PlayerPrefs.GetInt("DropPoint", 0);
     }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey("SkillPoint");
+        PlayerPrefs.DeleteKey("DropPoint");
+    }
 }
