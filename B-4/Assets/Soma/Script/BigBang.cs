@@ -9,13 +9,14 @@ public class BigBang : MonoBehaviour
     // 結果表示用パネル
     public GameObject resultPanel;
 
+    [SerializeField] private GameObject reticleCanvasObject;
     // 初めて条件をクリアしたときに表示する説明用パネル
     [Header("チュートリアル設定")]
     public GameObject firstClearPanel;
     public bool IsWaitingForPanelClick { get; private set; } = false; // パネルのクリック待ち状態フラグ
 
     [Header("ビッグバン表示設定")]
-    // ★追加: ビッグバン条件がtrueの時に表示したい画像（GameObject）
+    //  ビッグバン条件がtrueの時に表示したい画像（GameObject）
     public GameObject bigBangImage;
 
     private Renderer myRenderer;
@@ -37,7 +38,7 @@ public class BigBang : MonoBehaviour
     private float endTimer = 0f;
 
     // ビッグバン発動可能フラグ
-    [System.NonSerialized]public bool canUseBigBang = false;
+    [System.NonSerialized] public bool canUseBigBang = false;
 
     void Awake()
     {
@@ -55,7 +56,7 @@ public class BigBang : MonoBehaviour
         if (firstClearPanel != null)
             firstClearPanel.SetActive(false);
 
-        // ★追加: 初期化時にビッグバン画像を非表示にしておく
+        // 初期化時にビッグバン画像を非表示にしておく
         if (bigBangImage != null)
             bigBangImage.SetActive(false);
 
@@ -82,7 +83,7 @@ public class BigBang : MonoBehaviour
         // パネル表示中のクリック待ち処理
         if (IsWaitingForPanelClick)
         {
-            // 左クリック（画面上のどこでも）が押されたらパネルを閉じて再開
+            // 左クリックが押されたらパネルを閉じて再開
             if (Input.GetMouseButtonDown(0))
             {
                 if (firstClearPanel != null)
@@ -97,11 +98,13 @@ public class BigBang : MonoBehaviour
 
                 IsWaitingForPanelClick = false;
 
-                // ★追加: チュートリアルを閉じたら、本来出すべきだったビッグバン画像を表示する
+                // チュートリアルを閉じたら、本来出すべきだったビッグバン画像を表示する
                 if (bigBangImage != null && canUseBigBang)
                     bigBangImage.SetActive(true);
 
-                Debug.Log("【演出】チュートリアルパネルが閉じられたため、ゲームを再開します。");
+                if (reticleCanvasObject != null)
+                    reticleCanvasObject.SetActive(true);
+
             }
             return; // パネルが表示されている間は、これ以降のビッグバン長押し入力を受け付けない
         }
@@ -168,14 +171,23 @@ public class BigBang : MonoBehaviour
                     // クリック待ち状態フラグを立てる
                     IsWaitingForPanelClick = true;
 
+                    if (reticleCanvasObject != null)
+                        reticleCanvasObject.SetActive(false);
+
                     SkillManage.Instance.HasTriggeredFirstStop = true;
                     Debug.Log("【演出】初回限定のパネル表示・スポナー＆タイマー停止を実行しました。");
                 }
                 else
                 {
-                   
+
                     if (bigBangImage != null)
                         bigBangImage.SetActive(true);
+
+                    if (reticleCanvasObject != null)
+                    {
+                        reticleCanvasObject.SetActive(false);
+
+                    }
                 }
             }
         }
@@ -223,7 +235,7 @@ public class BigBang : MonoBehaviour
 
         StopBlink();
 
-        // ★追加: ビッグバンが発動したので画像を非表示にする
+        // ビッグバンが発動したので画像を非表示にする
         if (bigBangImage != null)
             bigBangImage.SetActive(false);
 
@@ -243,6 +255,9 @@ public class BigBang : MonoBehaviour
         {
             SenceChang.Instance.OnBigBangTriggered();
         }
+
+        if (reticleCanvasObject != null)
+            reticleCanvasObject.SetActive(true);
 
         Debug.Log("ビッグバン発動");
     }
