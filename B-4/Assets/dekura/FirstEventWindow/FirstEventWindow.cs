@@ -3,50 +3,60 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FirstEventWindow : MonoBehaviour
 {
-    [SerializeField] private GameObject thisObj;
+    [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject window;
     [SerializeField] private TextMeshProUGUI descText;
+    [SerializeField] private TextMeshProUGUI infoText;
     [SerializeField] private Image mouseImage;
+    [SerializeField] private Image shadow;
 
     //条件定義List
     private List<NotifyCondition> conditions = new List<NotifyCondition>();
     private class NotifyCondition
     {
-        public string message;
         public string scene;
+        public string flagKey;
+        public string message;
         public Func<bool> condition;
-        public Func<bool> flag;
-        public Action<bool> flagAction;
     }
 
     //同時にトリガーした時のためのキュー処理
     private Queue<string> queue = new Queue<string>();
     private bool showing = false;
 
-    //条件取得のための変数群
+    //条件取得のための変数たち
     private BigBang bigbang;
 
     private string thisScene;
     private int m_gameLv;
     private int m_bigbang;
+    private int m_skillpoint;
 
     private bool canBigbang = false;
     private bool isClicked = false;
 
+    //Uiの設定
+    private Color defaltInfoColor;
+
     void Start()
     {
-        Debug.Log("起動はしてるよ");
-        thisObj.SetActive(false);
+        canvas.SetActive(false);
 
         thisScene = SceneManager.GetActiveScene().name;
         bigbang = FindAnyObjectByType<BigBang>();
         m_gameLv = SkillManage.Instance.gameLv;
         m_bigbang = SkillManage.Instance.bigbang;
+        m_skillpoint = SkillPointManager.Instance.skillPoint;
+
+        defaltInfoColor = infoText.color;
+        infoText.color = Color.clear;
 
         SetUp();
         CheckConditions();
@@ -66,63 +76,79 @@ public class FirstEventWindow : MonoBehaviour
         //メインシーンでのアクション
         conditions.Add(new NotifyCondition
         {
-            message = "ビッグバンができるよ～～～～～～～",
             scene = "souma.sence",
+            flagKey = "firstBigbang",
             condition = () => canBigbang,
-            flag = () => SkillManage.Instance.firstBigbang,
-            flagAction = (value) => SkillManage.Instance.firstBigbang = value
+
+            message = "中央の惑星が点滅すると\n" +
+                      "左クリック長押しでビッグバンができる合図！\n" +
+                      "スキルをリセットする代わりに\n" +
+                      "ボーナスをゲットできるぞ！",
         });
         conditions.Add(new NotifyCondition
         {
-            message = "",
-            scene= "souma.sence",
-            condition = () => m_bigbang >= 1,
-            flag = () => SkillManage.Instance.firstAfterBigbang,
-            flagAction = (value) => SkillManage.Instance.firstAfterBigbang = value
-        });
-        conditions.Add(new NotifyCondition
-        {
-            message = "",
             scene = "souma.sence",
+            flagKey = "firstAfterBigbang",
+            condition = () => m_bigbang >= 1,
+
+            message = "ビッグバン後は星のかけらの\n" +
+                      "ドロップ率UP！\n" +
+                      "どんどんビッグバンを起こし、\n" +
+                      "星のかけらを集めよう！",
+        });
+        conditions.Add(new NotifyCondition
+        {
+            scene = "souma.sence",
+            flagKey= "firstLvUp",
             condition = () => m_gameLv >= 2,
-            flag = () => SkillManage.Instance.firstLvUp,
-            flagAction = (value) => SkillManage.Instance.firstLvUp = value
+
+            message = "ビッグバンを繰り返すと\n" +
+                      "惑星LVがアップ！\n" +
+                      "LVが高い惑星を壊して\n" +
+                      "鉱石やかけらをたくさん集めよう！",
         });
 
         //スキルツリーでのアクション
         conditions.Add(new NotifyCondition
         {
-            message = "すきるつりーにようこそ～～～～～",
             scene = "SkillTree",
+            flagKey= "firstVisitTree",
             condition = () => m_bigbang >= 0,
-            flag = () => SkillManage.Instance.firstVisitTree,
-            flagAction = (value) => SkillManage.Instance.firstVisitTree = value
+
+            message = "鉱石ポイントでスキルを開放！\n" +
+                    　"右のノードをクリック！\n" +
+                      "どんどん強化していこう！",
         });
-        //conditions.Add(new NotifyCondition
-        //{
-        //    message = "",
-        //    scene = "SkillTree",
-        //    condition = () => ,
-        //    flag = () => SkillManage.Instance.firstCreateUnlocked,
-        //    flagAction = (value) => SkillManage.Instance.firstCreateUnlocked = value
-        //});
         conditions.Add(new NotifyCondition
         {
-            message = "",
             scene = "SkillTree",
+            flagKey= "firstCreateUnlocked",
+            condition = () => m_skillpoint >= 20,
+
+            message = "惑星作成がアンロック！\n" +
+                      "地球のボタンを押してみよう！",
+        });
+        conditions.Add(new NotifyCondition
+        {
+            scene = "SkillTree",
+            flagKey= "firstResetSkill",
             condition = () => m_bigbang >= 1,
-            flag = () => SkillManage.Instance.firstResetSkill,
-            flagAction = (value) => SkillManage.Instance.firstResetSkill = value
+
+            message = "ビッグバン後はスキルツリーがリセット！\n" +
+                      "繰り返し強化して\n" +
+                      "スキルツリーを完成させよう！",
         });
 
         //惑星シーンでのアクション
         conditions.Add(new NotifyCondition
         {
-            message = "",
             scene = "CreatePlanet",
+            flagKey= "firstVisitCreate",
             condition = () => true,
-            flag = () => SkillManage.Instance.firstVisitCreate,
-            flagAction = (value) => SkillManage.Instance.firstVisitCreate = value
+
+            message = "星のかけらで惑星を創造！\n" +
+                    　"惑星を作ってボーナスを獲得し、\n" +
+                      "すべての惑星を創造しよう！",
         });
     }
 
@@ -131,13 +157,14 @@ public class FirstEventWindow : MonoBehaviour
         //条件全て確認
         foreach (var c in conditions)
         {
+            bool flags = SkillManage.Instance.GetFlags(c.flagKey);
+
             //未実行かつ、条件、シーンが合致していれば
-            if (!c.flag() && c.condition() && c.scene == thisScene)
+            if (!flags && c.condition() && c.scene == thisScene)
             {
                 //キューに登録
-                Debug.Log($"登録したよ{c.message}");
                 queue.Enqueue(c.message);
-                c.flagAction(true);
+                SkillManage.Instance.SetFlags(c.flagKey, true);
             }
         }
 
@@ -147,42 +174,49 @@ public class FirstEventWindow : MonoBehaviour
         }
     }
 
-    //yield::関数を任意のタイミングで中断・再開できるモノらしい
+    //yield::IEnumeratorでつかえる、関数を任意のタイミングで中断・再開できるモノらしい
     private IEnumerator ShowNext()
     {
         //キューがないなら終わり
         if(queue.Count == 0)
         {
-            Debug.Log("見せてないよ");
             showing = false;
             yield break;
         }
 
-        Debug.Log("見せてるよ");
+        if (thisScene == "souma.sence") BigBang.Instance.theWorld(true);
+
         showing = true;
         string message = queue.Dequeue();　//dequeue::取り出してから削除
 
-        thisObj.SetActive(true);
-        thisObj.transform.localScale = Vector3.zero;
-        thisObj.transform.DOScale(1f, 1f).SetEase(Ease.OutBack);
+        canvas.SetActive(true);
+        infoText.color = Color.clear;
+        window.transform.localScale = Vector3.zero;
+        window.transform.DOScale(1f, 1f).SetEase(Ease.OutBack);
+        shadow.DOFade(0.8f, 1f);
         descText.text = message;
 
-        //時間で消すならこう
-        //yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+
+        infoText.color = defaltInfoColor;
 
         isClicked = false;
         yield return new WaitUntil(() => isClicked);
 
-        thisObj.SetActive(false);
+        yield return window.transform
+            .DOScale(0f, 1f)
+            .SetEase(Ease.InBack)
+            .WaitForCompletion();
+
+        yield return shadow.DOFade(0f, 1f);
+
+        canvas.SetActive(false);
+
+        if (thisScene == "souma.sence") BigBang.Instance.theWorld(false);
 
         //もう一度最初から
         yield return ShowNext();
     }
 
-    //public void OnClick() => isClicked = true;
-    public void OnClick()
-    {
-        isClicked = true;
-        Debug.Log("くりっくしたよ");
-    }
+    public void OnClick() => isClicked = true;
 }

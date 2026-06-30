@@ -35,6 +35,7 @@ public class PlanetUiManager : MonoBehaviour
     {
         //focus(軌道上一番上)が当たっているオブジェクトのPlaneSkillを取得
         PlaneSkill planeSkill = planetOperation.GetFocusobject().GetComponent<PlaneSkill>();
+        Debug.Log($"{planeSkill.skill}");
 
         planetName.text = "???";
         descriptionTxt.text = $"必要なかけら：{planeSkill.skill.needPoint}";

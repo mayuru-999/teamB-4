@@ -15,7 +15,7 @@ public class ToPlaneButtonStatus : MonoBehaviour
     {
         button = gameObject.GetComponent<Button>();
 
-        isUnlocked = SkillManage.Instance.firstCreateUnlocked;
+        isUnlocked = SkillManage.Instance.GetFlags("firstCreateUnlocked");
         UpdateUi();
     }
 
@@ -26,7 +26,7 @@ public class ToPlaneButtonStatus : MonoBehaviour
             lockSprict.DOFade(0f, 3f)
             .OnComplete(() =>
             {
-                SkillManage.Instance.firstCreateUnlocked = true;
+                SkillManage.Instance.SetFlags("firstCreateUnlocked", true);
                 button.enabled = true;
             });
         }

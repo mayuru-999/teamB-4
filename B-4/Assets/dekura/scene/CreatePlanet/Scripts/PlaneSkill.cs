@@ -18,10 +18,8 @@ public class PlaneSkill : MonoBehaviour
     private Sprite defaultSprite;
     private Image shader;
 
-    void Start()
+    void Awake()
     {
-        planetOperation = FindAnyObjectByType<PlanetOperation>();
-
         defaultColor = GetComponent<Image>().color;
         defaultSprite = GetComponent<Image>().sprite;
         shader = transform.Find("Shader").gameObject.GetComponent<Image>();
@@ -42,6 +40,8 @@ public class PlaneSkill : MonoBehaviour
 
     public void PlaneUpdate()
     {
+        planetOperation = FindAnyObjectByType<PlanetOperation>();
+
         if (skill == null)
         {
             GetComponent<Image>().color = new Color(0, 0, 0, 0);
