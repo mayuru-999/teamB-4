@@ -40,7 +40,7 @@ public class MouseOperation : MonoBehaviour, IScrollHandler, IPointerUpHandler,I
             treeOperation.HideNeedSkillPoints();
         }
 
-        if (gameObject.name == "ToPlaneButton" && SkillManage.Instance.firstCreateUnlocked)
+        if (gameObject.name == "ToPlaneButton" && SkillManage.Instance.GetFlags("firstCreateUnlocked"))
         {
             treeOperation.ChangeDescription("惑星作成へ");
             treeOperation.ChangeInformation("クリックして移動", treeOperation.defaultInfoColor);

@@ -28,22 +28,25 @@ public class SkillManage : MonoBehaviour
     [System.NonSerialized] public float baseAttackRange = 0f;
     [System.NonSerialized] public float basePlaneVol = 20f;
 
-    //初イベントのフラグ管理
-    [System.NonSerialized] public bool firstCreateUnlocked = false;
-    [System.NonSerialized] public bool firstVisitCreate = false;
-    [System.NonSerialized] public bool firstVisitTree = false;
-    [System.NonSerialized] public bool firstBigbang = false;
-    [System.NonSerialized] public bool firstAfterBigbang = false;
-    [System.NonSerialized] public bool firstResetSkill = false;
-    [System.NonSerialized] public bool firstLvUp = false;
-
     //アクション可能時の通知バッジ用
     [System.NonSerialized] public bool canNewAction_Planet = false;
     [System.NonSerialized] public bool canNewAction_Tree = false;
 
+    //初イベントのフラグ管理
+    [System.NonSerialized] public Dictionary<string, bool> firstEventFlags = new Dictionary<string, bool>()
+    {
+        {"firstCreateUnlocked",false },
+        {"firstVisitCreate",false },
+        {"firstVisitTree",false },
+        {"firstBigbang",false },
+        {"firstAfterBigbang",false },
+        {"firstResetSkill",false },
+        {"firstLvUp",false },
+    };
+
     // 既に取得しているスキルを管理するリスト
-    private List<SkillData> unlockedSkills = new List<SkillData>();
-    private List<SkillData> unlockedSpSkills = new List<SkillData>();
+    [System.NonSerialized] public List<SkillData> unlockedSkills = new List<SkillData>();
+    [System.NonSerialized] public List<SkillData> unlockedSpSkills = new List<SkillData>();
 
     // PlaneSizeの値をレベル別に設定し、出現率
     private Vector3[] PlaneSize = new Vector3[]
@@ -279,6 +282,10 @@ public class SkillManage : MonoBehaviour
     //ClearSceneで使うリセット用関数
     public void AllClearSkillData()
     {
+        foreach(string name in firstEventFlags.Keys)
+        {
+            firstEventFlags[name] = false;
+        }
         unlockedSkills.Clear();
         unlockedSpSkills.Clear();
         gameLv = 1;
@@ -326,15 +333,18 @@ public class SkillManage : MonoBehaviour
         );
     }
 
+    public bool GetFlags(string name)
+    {
+        return firstEventFlags[name];
+    }
+    public void SetFlags(string name, bool value)
+    {
+        firstEventFlags[name] = value;
+    }
+
     public void ResetVisitCount()
     {
         MainVisitCount = 0; // クラス内部からなら書き換えが可能
         Debug.Log("SkillManage: カウントをリセットしました。");
-    }
-
-    //アプリ終了時にsave処理
-    private void OnApplicationQuit()
-    {
-
     }
 }
