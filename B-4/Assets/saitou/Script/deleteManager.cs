@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class deleteManeger : MonoBehaviour
+public class deleteManager : MonoBehaviour
 {
 
     private void Start()
     {
-       
+        DropItem.destroyedCount = 0;
+
         if (SkillManage.Instance != null)
         {
             Debug.Log("SkillManage.Instance != null");
