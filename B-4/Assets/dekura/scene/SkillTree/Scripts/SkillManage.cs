@@ -13,6 +13,8 @@ public class SkillManage : MonoBehaviour
     private PlaneSkill[] planeSkill;
 
     // --- 【追加】画面遷移カウント用の変数 ---
+    public bool HasTriggeredFirstStop { get; set; } = false;
+    // --- 【追加】画面遷移カウント用の変数 ---
     public int MainVisitCount { get; private set; } = 0; // 他のスクリプトから「SkillManage.Instance.MainVisitCount」で参照可能
     private bool isComingFromSkillTree = false;         // スキルツリーから戻ってきたかどうかの内部フラグ
 
@@ -25,6 +27,19 @@ public class SkillManage : MonoBehaviour
     [System.NonSerialized] public float baseAttackInterval = 0f;
     [System.NonSerialized] public float baseAttackRange = 0f;
     [System.NonSerialized] public float basePlaneVol = 20f;
+
+    //初イベントのフラグ管理
+    [System.NonSerialized] public bool firstCreateUnlocked = false;
+    [System.NonSerialized] public bool firstVisitCreate = false;
+    [System.NonSerialized] public bool firstVisitTree = false;
+    [System.NonSerialized] public bool firstBigbang = false;
+    [System.NonSerialized] public bool firstAfterBigbang = false;
+    [System.NonSerialized] public bool firstResetSkill = false;
+    [System.NonSerialized] public bool firstLvUp = false;
+
+    //アクション可能時の通知バッジ用
+    [System.NonSerialized] public bool canNewAction_Planet = false;
+    [System.NonSerialized] public bool canNewAction_Tree = false;
 
     // 既に取得しているスキルを管理するリスト
     private List<SkillData> unlockedSkills = new List<SkillData>();
