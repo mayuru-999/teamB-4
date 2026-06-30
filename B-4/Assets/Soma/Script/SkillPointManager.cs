@@ -3,11 +3,11 @@ using TMPro;
 
 public class SkillPointManager : MonoBehaviour
 {
+    public static SkillPointManager Instance { get; private set; }
+
     public int skillPoint = 0;
     public int starDustPoint = 0;
     public TMP_Text scoreText;
-
-    public static SkillPointManager Instance { get; private set; }
 
     void Awake()
     {

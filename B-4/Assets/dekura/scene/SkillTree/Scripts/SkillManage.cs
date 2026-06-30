@@ -43,6 +43,7 @@ public class SkillManage : MonoBehaviour
         {"firstAfterBigbang",false },
         {"firstResetSkill",false },
         {"firstLvUp",false },
+        {"planetComplete",false },
     };
 
     // 既に取得しているスキルを管理するリスト
