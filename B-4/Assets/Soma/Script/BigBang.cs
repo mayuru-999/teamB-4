@@ -37,7 +37,7 @@ public class BigBang : MonoBehaviour
     private float endTimer = 0f;
 
     // ビッグバン発動可能フラグ
-    private bool canUseBigBang = false;
+    [System.NonSerialized]public bool canUseBigBang = false;
 
     void Awake()
     {
