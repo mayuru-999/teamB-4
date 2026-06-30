@@ -1,10 +1,18 @@
 using UnityEngine;
 
 // 指定されたタグを持つ全てのオブジェクトに対してダメージを与え、ビッグバン演出を管理するクラス
-public class DeleteByTag : MonoBehaviour
+public class BigBang : MonoBehaviour
 {
+    // 外部から簡単にアクセスできるようにインスタンスを保持（シングルトン化）
+    public static BigBang Instance { get; private set; }
+
     // 結果表示用パネル
     public GameObject resultPanel;
+
+    // 初めて条件をクリアしたときに表示する説明用パネル
+    [Header("チュートリアル設定")]
+    public GameObject firstClearPanel;
+    public bool IsWaitingForPanelClick { get; private set; } = false; // パネルのクリック待ち状態フラグ
 
     private Renderer myRenderer;
     private Color originalColor;
@@ -27,11 +35,21 @@ public class DeleteByTag : MonoBehaviour
     // ビッグバン発動可能フラグ
     private bool canUseBigBang = false;
 
+    void Awake()
+    {
+        // インスタンスの登録
+        if (Instance == null) { Instance = this; }
+    }
+
     void Start()
     {
         // 結果パネルを非表示で初期化
         if (resultPanel != null)
             resultPanel.SetActive(false);
+
+        // 初期化時に初めて用パネルを非表示にしておく
+        if (firstClearPanel != null)
+            firstClearPanel.SetActive(false);
 
         // マテリアルを複製して元の色を保持
         myRenderer = GetComponent<Renderer>();
@@ -52,6 +70,28 @@ public class DeleteByTag : MonoBehaviour
     void Update()
     {
         HandleBlink();
+
+        // パネル表示中のクリック待ち処理
+        if (IsWaitingForPanelClick)
+        {
+            // 左クリック（画面上のどこでも）が押されたらパネルを閉じて再開
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (firstClearPanel != null)
+                    firstClearPanel.SetActive(false);
+
+                // ゲームを再開する（タイマーを動かし、スポナーを再稼働する）
+                if (SenceChang.Instance != null)
+                    SenceChang.Instance.SetTimerPause(false);
+
+                if (Spawner.Instance != null)
+                    Spawner.Instance.ResumeSpawning();
+
+                IsWaitingForPanelClick = false;
+                Debug.Log("【演出】チュートリアルパネルが閉じられたため、ゲームを再開します。");
+            }
+            return; // パネルが表示されている間は、これ以降のビッグバン長押し入力を受け付けない
+        }
 
         // 終了処理中の場合はタイマーのみ更新して抜ける
         if (isEnding)
@@ -82,20 +122,12 @@ public class DeleteByTag : MonoBehaviour
         }
     }
 
-    // 点滅を停止して色を元に戻す
-    void StopBlink()
-    {
-        isBlinking = false;
-
-        if (myRenderer != null)
-            myRenderer.material.color = originalColor;
-    }
-
     // ビッグバン発動条件の判定
     void CheckBigBangReady()
     {
         if (SkillManage.Instance == null) return;
 
+        // 条件が満たされたとき
         if (SkillManage.Instance.MainVisitCount >= 1)
         {
             if (!canUseBigBang)
@@ -104,8 +136,38 @@ public class DeleteByTag : MonoBehaviour
                 isBlinking = true;
 
                 Debug.Log("ビッグバン準備OK");
+
+                // 本当に「最初の1回目」の時だけパネルを出して全てを止める
+                if (!SkillManage.Instance.HasTriggeredFirstStop)
+                {
+                    // パネルを表示
+                    if (firstClearPanel != null)
+                        firstClearPanel.SetActive(true);
+
+                    // スポナーを止める
+                    if (Spawner.Instance != null)
+                        Spawner.Instance.StopSpawning();
+
+                    // 画面上のタイマー（時間）もストップさせる 
+                    if (SenceChang.Instance != null)
+                        SenceChang.Instance.SetTimerPause(true);
+
+                    // クリック待ち状態フラグを立てる
+                    IsWaitingForPanelClick = true;
+
+                    SkillManage.Instance.HasTriggeredFirstStop = true;
+                    Debug.Log("【演出】初回限定のパネル表示・スポナー＆タイマー停止を実行しました。");
+                }
             }
         }
+    }
+
+    void StopBlink()
+    {
+        isBlinking = false;
+
+        if (myRenderer != null)
+            myRenderer.material.color = originalColor;
     }
 
     // 入力処理（マウスホールド）
