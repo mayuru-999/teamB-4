@@ -14,6 +14,10 @@ public class BigBang : MonoBehaviour
     public GameObject firstClearPanel;
     public bool IsWaitingForPanelClick { get; private set; } = false; // パネルのクリック待ち状態フラグ
 
+    [Header("ビッグバン表示設定")]
+    // ★追加: ビッグバン条件がtrueの時に表示したい画像（GameObject）
+    public GameObject bigBangImage;
+
     private Renderer myRenderer;
     private Color originalColor;
 
@@ -50,6 +54,10 @@ public class BigBang : MonoBehaviour
         // 初期化時に初めて用パネルを非表示にしておく
         if (firstClearPanel != null)
             firstClearPanel.SetActive(false);
+
+        // ★追加: 初期化時にビッグバン画像を非表示にしておく
+        if (bigBangImage != null)
+            bigBangImage.SetActive(false);
 
         // マテリアルを複製して元の色を保持
         myRenderer = GetComponent<Renderer>();
@@ -88,6 +96,11 @@ public class BigBang : MonoBehaviour
                     Spawner.Instance.ResumeSpawning();
 
                 IsWaitingForPanelClick = false;
+
+                // ★追加: チュートリアルを閉じたら、本来出すべきだったビッグバン画像を表示する
+                if (bigBangImage != null && canUseBigBang)
+                    bigBangImage.SetActive(true);
+
                 Debug.Log("【演出】チュートリアルパネルが閉じられたため、ゲームを再開します。");
             }
             return; // パネルが表示されている間は、これ以降のビッグバン長押し入力を受け付けない
@@ -158,6 +171,12 @@ public class BigBang : MonoBehaviour
                     SkillManage.Instance.HasTriggeredFirstStop = true;
                     Debug.Log("【演出】初回限定のパネル表示・スポナー＆タイマー停止を実行しました。");
                 }
+                else
+                {
+                   
+                    if (bigBangImage != null)
+                        bigBangImage.SetActive(true);
+                }
             }
         }
     }
@@ -203,6 +222,10 @@ public class BigBang : MonoBehaviour
         }
 
         StopBlink();
+
+        // ★追加: ビッグバンが発動したので画像を非表示にする
+        if (bigBangImage != null)
+            bigBangImage.SetActive(false);
 
         // 終了状態へ移行
         isEnding = true;
