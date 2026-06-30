@@ -29,7 +29,7 @@ public class FirstEventWindow : MonoBehaviour
     private bool showing = false;
 
     //条件取得のための変数群
-    private DeleteByTag bigbang;
+    private BigBang bigbang;
 
     private string thisScene;
     private int m_gameLv;
@@ -44,7 +44,7 @@ public class FirstEventWindow : MonoBehaviour
         thisObj.SetActive(false);
 
         thisScene = SceneManager.GetActiveScene().name;
-        bigbang = FindAnyObjectByType<DeleteByTag>();
+        bigbang = FindAnyObjectByType<BigBang>();
         m_gameLv = SkillManage.Instance.gameLv;
         m_bigbang = SkillManage.Instance.bigbang;
 
