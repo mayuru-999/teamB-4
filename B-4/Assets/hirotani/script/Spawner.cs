@@ -51,13 +51,31 @@ public class Spawner : MonoBehaviour
         SpawnUntilKeepCount();
     }
 
-    // --- 追加: 外部から生成を止めるためのメソッド ---
+   
     public void StopSpawning()
     {
         isSpawningActive = false;
         Debug.Log("Spawner: 新しい惑星の生成を停止しました。");
+
+        // すでに生成されているオブジェクトの回転を停止する
+        foreach (GameObject obj in spawnedObjects)
+        {
+            if (obj != null)
+            {
+                OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
+                if (orbit != null)
+                {
+                    // OrbitTargetスクリプト自体を非アクティブにして回転を止める場合
+                    orbit.enabled = false;
+
+                    // もしOrbitTargetに「StopOrbit()」のような専用メソッドがある場合は以下のように呼び出します
+                    // orbit.StopOrbit(); 
+                }
+            }
+        }
+        Debug.Log("Spawner: 既存の惑星の回転を停止しました。");
     }
-    // ------------------------------------------------
+   
 
     System.Collections.IEnumerator ScaleUp(Transform t, Vector3 target)
     {
@@ -255,5 +273,23 @@ public class Spawner : MonoBehaviour
             player != null ? player.position : transform.position,
             minRadius // minRadiusのバグ表示を修正
         );
+    }
+    public void ResumeSpawning()
+    {
+        isSpawningActive = true;
+        Debug.Log("Spawner: 生成を再開しました。");
+
+        // 止めていた惑星の回転（OrbitTarget）を再び動かす
+        foreach (GameObject obj in spawnedObjects)
+        {
+            if (obj != null)
+            {
+                OrbitTarget orbit = obj.GetComponent<OrbitTarget>();
+                if (orbit != null)
+                {
+                    orbit.enabled = true;
+                }
+            }
+        }
     }
 }

@@ -33,6 +33,16 @@ public class SenceChang : MonoBehaviour
     private float endTimer = 0f;
     private bool isEnding = false;
 
+    //タイマーの一時停止フラグ 
+    private bool isTimerPaused = false;
+
+    //外部からタイマーを停止・再開させるためのメソッド 
+    public void SetTimerPause(bool pause)
+    {
+        isTimerPaused = pause;
+        Debug.Log($"【タイマー】一時停止状態を変更しました: {pause}");
+    }
+
     void Awake()
     {
         // インスタンスの登録
@@ -70,14 +80,17 @@ public class SenceChang : MonoBehaviour
             return;
         }
 
+        if (isTimerPaused) return;
+       
         remainingTime -= Time.deltaTime;
 
         if (remainingTime <= 0)
         {
-            TriggerEndSequence(); // 終了処理を関数に共通化
+            TriggerEndSequence();
         }
 
         timeText.text = remainingTime.ToString("F1") + "s";
+
 
         if (remainingTime <= 2f)
         {
