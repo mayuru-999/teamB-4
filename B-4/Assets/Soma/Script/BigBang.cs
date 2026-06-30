@@ -83,29 +83,29 @@ public class BigBang : MonoBehaviour
         // パネル表示中のクリック待ち処理
         if (IsWaitingForPanelClick)
         {
-            // 左クリックが押されたらパネルを閉じて再開
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (firstClearPanel != null)
-                    firstClearPanel.SetActive(false);
+            //// 左クリックが押されたらパネルを閉じて再開
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    if (firstClearPanel != null)
+            //        firstClearPanel.SetActive(false);
 
-                // ゲームを再開する（タイマーを動かし、スポナーを再稼働する）
-                if (SenceChang.Instance != null)
-                    SenceChang.Instance.SetTimerPause(false);
+            //    // ゲームを再開する（タイマーを動かし、スポナーを再稼働する）
+            //    if (SenceChang.Instance != null)
+            //        SenceChang.Instance.SetTimerPause(false);
 
-                if (Spawner.Instance != null)
-                    Spawner.Instance.ResumeSpawning();
+            //    if (Spawner.Instance != null)
+            //        Spawner.Instance.ResumeSpawning();
 
-                IsWaitingForPanelClick = false;
+            //    IsWaitingForPanelClick = false;
 
-                // チュートリアルを閉じたら、本来出すべきだったビッグバン画像を表示する
-                if (bigBangImage != null && canUseBigBang)
-                    bigBangImage.SetActive(true);
+            //    // チュートリアルを閉じたら、本来出すべきだったビッグバン画像を表示する
+            //    if (bigBangImage != null && canUseBigBang)
+            //        bigBangImage.SetActive(true);
 
-                if (reticleCanvasObject != null)
-                    reticleCanvasObject.SetActive(true);
+            //    if (reticleCanvasObject != null)
+            //        reticleCanvasObject.SetActive(true);
 
-            }
+            //}
             return; // パネルが表示されている間は、これ以降のビッグバン長押し入力を受け付けない
         }
 
@@ -156,26 +156,26 @@ public class BigBang : MonoBehaviour
                 // 本当に「最初の1回目」の時だけパネルを出して全てを止める
                 if (!SkillManage.Instance.HasTriggeredFirstStop)
                 {
-                    // パネルを表示
-                    if (firstClearPanel != null)
-                        firstClearPanel.SetActive(true);
+                    //// パネルを表示
+                    //if (firstClearPanel != null)
+                    //    firstClearPanel.SetActive(true);
 
-                    // スポナーを止める
-                    if (Spawner.Instance != null)
-                        Spawner.Instance.StopSpawning();
+                    //// スポナーを止める
+                    //if (Spawner.Instance != null)
+                    //    Spawner.Instance.StopSpawning();
 
-                    // 画面上のタイマー（時間）もストップさせる 
-                    if (SenceChang.Instance != null)
-                        SenceChang.Instance.SetTimerPause(true);
+                    //// 画面上のタイマー（時間）もストップさせる 
+                    //if (SenceChang.Instance != null)
+                    //    SenceChang.Instance.SetTimerPause(true);
 
-                    // クリック待ち状態フラグを立てる
-                    IsWaitingForPanelClick = true;
+                    //// クリック待ち状態フラグを立てる
+                    //IsWaitingForPanelClick = true;
 
-                    if (reticleCanvasObject != null)
-                        reticleCanvasObject.SetActive(false);
+                    //if (reticleCanvasObject != null)
+                    //    reticleCanvasObject.SetActive(false);
 
-                    SkillManage.Instance.HasTriggeredFirstStop = true;
-                    Debug.Log("【演出】初回限定のパネル表示・スポナー＆タイマー停止を実行しました。");
+                    //SkillManage.Instance.HasTriggeredFirstStop = true;
+                    //Debug.Log("【演出】初回限定のパネル表示・スポナー＆タイマー停止を実行しました。");
                 }
                 else
                 {
@@ -280,5 +280,37 @@ public class BigBang : MonoBehaviour
             SkillManage.Instance.ClearSkillData();
 
         Debug.Log("全体攻撃完了");
+    }
+
+    //dekura_tuika
+    public void theWorld(bool value)
+    {
+        IsWaitingForPanelClick = value;
+
+        if (value)
+        {
+            // スポナーを止める
+            if (Spawner.Instance != null)
+                Spawner.Instance.StopSpawning();
+
+            // 画面上のタイマー（時間）もストップさせる 
+            if (SenceChang.Instance != null)
+                SenceChang.Instance.SetTimerPause(true);
+
+            Debug.Log("【演出】初回限定のパネル表示・スポナー＆タイマー停止を実行しました。");
+        }
+        else
+        {
+            if (SenceChang.Instance != null)
+                SenceChang.Instance.SetTimerPause(false);
+
+            if (Spawner.Instance != null)
+                Spawner.Instance.ResumeSpawning();
+
+            if (bigBangImage != null && canUseBigBang)
+                bigBangImage.SetActive(true);
+
+            Debug.Log("【演出】チュートリアルパネルが閉じられたため、ゲームを再開します。");
+        }
     }
 }

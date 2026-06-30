@@ -77,11 +77,22 @@ public class FirstEventWindow : MonoBehaviour
         conditions.Add(new NotifyCondition
         {
             scene = "souma.sence",
+            flagKey = "gameStart",
+            condition = () => true,
+
+            message = "マウスでレティクルを操作！\n" +
+                      "惑星を破壊し\n" +
+                      "鉱石を集めよう！",
+        });
+        conditions.Add(new NotifyCondition
+        {
+            scene = "souma.sence",
             flagKey = "firstBigbang",
             condition = () => canBigbang,
 
             message = "中央の惑星が点滅すると\n" +
-                      "左クリック長押しでビッグバンができる合図！\n" +
+                      "左クリック長押しで\n" +
+                      "ビッグバンができる合図！\n" +
                       "スキルをリセットする代わりに\n" +
                       "ボーナスをゲットできるぞ！",
         });
@@ -115,7 +126,7 @@ public class FirstEventWindow : MonoBehaviour
             flagKey= "firstVisitTree",
             condition = () => m_bigbang >= 0,
 
-            message = "鉱石ポイントでスキルを開放！\n" +
+            message = "鉱石でスキルを開放！\n" +
                     　"右のノードをクリック！\n" +
                       "どんどん強化していこう！",
         });
@@ -134,7 +145,8 @@ public class FirstEventWindow : MonoBehaviour
             flagKey= "firstResetSkill",
             condition = () => m_bigbang >= 1,
 
-            message = "ビッグバン後はスキルツリーがリセット！\n" +
+            message = "ビッグバン後は\n" +
+                      "スキルツリーがリセット！\n" +
                       "繰り返し強化して\n" +
                       "スキルツリーを完成させよう！",
         });
@@ -196,7 +208,7 @@ public class FirstEventWindow : MonoBehaviour
         shadow.DOFade(0.8f, 1f);
         descText.text = message;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         infoText.color = defaltInfoColor;
 
@@ -204,11 +216,11 @@ public class FirstEventWindow : MonoBehaviour
         yield return new WaitUntil(() => isClicked);
 
         yield return window.transform
-            .DOScale(0f, 1f)
+            .DOScale(0f, 0.5f)
             .SetEase(Ease.InBack)
             .WaitForCompletion();
 
-        yield return shadow.DOFade(0f, 1f);
+        yield return shadow.DOFade(0f, 0.5f);
 
         canvas.SetActive(false);
 

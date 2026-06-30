@@ -35,6 +35,7 @@ public class SkillManage : MonoBehaviour
     //初イベントのフラグ管理
     [System.NonSerialized] public Dictionary<string, bool> firstEventFlags = new Dictionary<string, bool>()
     {
+        {"gameStart",false },
         {"firstCreateUnlocked",false },
         {"firstVisitCreate",false },
         {"firstVisitTree",false },
