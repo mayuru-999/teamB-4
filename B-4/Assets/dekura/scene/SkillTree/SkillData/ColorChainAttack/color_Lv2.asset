@@ -15,7 +15,6 @@ MonoBehaviour:
   skillName: "\u30AB\u30E9\u30FC\u9023\u9396\u653B\u6483\u2161"
   skillDescription: "\u30AB\u30E9\u30FC\u9023\u9396\u653B\u6483\u529B+3"
   needPoint: 0
-  needSkillData: []
   effect:
     type: 3
-    value: 3
+    value: 21
